@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error-container": "#93000a",
+              "surface-container": "#f0ede9",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed-dim": "#ffb68e",
+              "tertiary": "#7a401c",
+              "surface-container-highest": "#e5e2dd",
+              "error-container": "#ffdad6",
+              "on-surface": "#1c1c19",
+              "surface": "#fcf9f4",
+              "inverse-primary": "#81d4d8",
+              "inverse-surface": "#31302d",
+              "on-surface-variant": "#3e4949",
+              "on-primary-container": "#a2f5f9",
+              "surface-variant": "#e5e2dd",
+              "secondary": "#506072",
+              "primary": "#00595c",
+              "surface-container-low": "#f6f3ee",
+              "on-error": "#ffffff",
+              "on-tertiary-fixed": "#331200",
+              "inverse-on-surface": "#f3f0eb",
+              "error": "#ba1a1a",
+              "surface-container-high": "#ebe8e3",
+              "secondary-container": "#d3e4fa",
+              "on-background": "#1c1c19",
+              "surface-container-lowest": "#ffffff",
+              "surface-bright": "#fcf9f4",
+              "on-secondary": "#ffffff",
+              "background": "#fcf9f4",
+              "primary-fixed-dim": "#81d4d8",
+              "on-tertiary-fixed-variant": "#6f3814",
+              "on-secondary-fixed": "#0c1d2c",
+              "on-primary-fixed": "#002021",
+              "tertiary-container": "#975731",
+              "surface-tint": "#00696d",
+              "primary-fixed": "#9df0f4",
+              "outline": "#6e7979",
+              "tertiary-fixed": "#ffdbca",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#566678",
+              "secondary-fixed": "#d3e4fa",
+              "outline-variant": "#bec9c9",
+              "on-tertiary-container": "#ffe1d2",
+              "on-secondary-fixed-variant": "#384859",
+              "surface-dim": "#dcdad5",
+              "secondary-fixed-dim": "#b7c8dd",
+              "primary-container": "#0d7377",
+              "on-primary-fixed-variant": "#004f52"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .custom-shadow {
+            box-shadow: 0px 24px 48px -12px rgba(26, 42, 58, 0.08);
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface min-h-screen">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#f7f4ef]/85 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center px-12 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold text-[#1a2a3a]">Elif</div>
+<div class="hidden md:flex items-center space-x-8">
+<a class="text-[#506072] hover:text-[#0d7377] transition-colors" href="#">Asistan</a>
+<a class="text-[#0d7377] border-b-2 border-[#0d7377] pb-1 font-semibold" href="#">Eczaneler</a>
+<a class="text-[#506072] hover:text-[#0d7377] transition-colors" href="#">Başvurular</a>
+<a class="text-[#506072] hover:text-[#0d7377] transition-colors" href="#">Ayarlar</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 hover:bg-[#f6f3ee] rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-[#0d7377]">notifications</span>
+</button>
+<button class="p-2 hover:bg-[#f6f3ee] rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-[#0d7377]">account_circle</span>
+</button>
+</div>
+</div>
+<div class="bg-[#e5e2dd] h-[1px] opacity-20"></div>
+</nav>
+<main class="pt-32 pb-20 px-12 max-w-[1440px] mx-auto">
+<!-- Header Section -->
+<header class="mb-12">
+<h1 class="text-[3.5rem] font-bold text-on-secondary-fixed tracking-tight leading-tight">Nöbetçi Eczaneler</h1>
+<p class="text-secondary body-lg mt-4 max-w-2xl">Size en yakın açık olan nöbetçi eczaneleri listeledik. Sağlığınız için her an yanınızdayız.</p>
+</header>
+<!-- Layout Grid: Pharmacy List and Map -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left Column: Pharmacy Cards Grid -->
+<div class="lg:col-span-7 space-y-6">
+<!-- Search & Filter Area -->
+<div class="flex flex-col md:flex-row gap-4 mb-8">
+<div class="flex-grow relative">
+<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-12 pr-4 py-4 bg-surface-container-low border-none rounded-xl focus:ring-2 focus:ring-primary/40 text-on-surface" placeholder="Eczane veya mahalle ara..." type="text"/>
+</div>
+<button class="flex items-center justify-center gap-2 px-6 py-4 bg-surface-container-highest rounded-xl text-on-surface-variant font-medium hover:bg-surface-container-high transition-all">
+<span class="material-symbols-outlined">filter_list</span>
+                        Filtrele
+                    </button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Pharmacy Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-lg custom-shadow border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xl font-bold text-on-secondary-fixed">Can Eczanesi</h3>
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">0.4 km</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex items-start gap-3 text-secondary text-sm">
+<span class="material-symbols-outlined text-sm mt-1">location_on</span>
+<p>Siyami Ersek Sk. No:12, Kadıköy</p>
+</div>
+<div class="flex items-center gap-3 text-secondary text-sm">
+<span class="material-symbols-outlined text-sm">phone</span>
+<p>(0216) 444 00 00</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-base">directions</span>
+                                Yol Tarifi
+                            </button>
+<button class="px-4 py-3 border border-primary/20 text-primary rounded-full hover:bg-primary/5 transition-all active:scale-95">
+<span class="material-symbols-outlined">call</span>
+</button>
+</div>
+</div>
+<!-- Pharmacy Card 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-lg custom-shadow border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xl font-bold text-on-secondary-fixed">Güneş Eczanesi</h3>
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">1.2 km</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex items-start gap-3 text-secondary text-sm">
+<span class="material-symbols-outlined text-sm mt-1">location_on</span>
+<p>Moda Cd. No:45/A, Kadıköy</p>
+</div>
+<div class="flex items-center gap-3 text-secondary text-sm">
+<span class="material-symbols-outlined text-sm">phone</span>
+<p>(0216) 333 11 22</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-base">directions</span>
+                                Yol Tarifi
+                            </button>
+<button class="px-4 py-3 border border-primary/20 text-primary rounded-full hover:bg-primary/5 transition-all active:scale-95">
+<span class="material-symbols-outlined">call</span>
+</button>
+</div>
+</div>
+<!-- Pharmacy Card 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-lg custom-shadow border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xl font-bold text-on-secondary-fixed">Akasya Eczanesi</h3>
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">2.8 km</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex items-start gap-3 text-secondary text-sm">
+<span class="material-symbols-outlined text-sm mt-1">location_on</span>
+<p>Fahrettin Kerim Gökay Cd. No:88</p>
+</div>
+<div class="flex items-center gap-3 text-secondary text-sm">
+<span class="material-symbols-outlined text-sm">phone</span>
+<p>(0216) 222 33 44</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-base">directions</span>
+                                Yol Tarifi
+                            </button>
+<button class="px-4 py-3 border border-primary/20 text-primary rounded-full hover:bg-primary/5 transition-all active:scale-95">
+<span class="material-symbols-outlined">call</span>
+</button>
+</div>
+</div>
+<!-- Pharmacy Card 4 -->
+<div class="bg-surface-container-lowest p-6 rounded-lg custom-shadow border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
+<div class="flex justify-between items-start mb-4">
+<h3 class="text-xl font-bold text-on-secondary-fixed">Bahar Eczanesi</h3>
+<span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">3.1 km</span>
+</div>
+<div class="space-y-3 mb-6">
+<div class="flex items-start gap-3 text-secondary text-sm">
+<span class="material-symbols-outlined text-sm mt-1">location_on</span>
+<p>Bağdat Caddesi No:112, Erenköy</p>
+</div>
+<div class="flex items-center gap-3 text-secondary text-sm">
+<span class="material-symbols-outlined text-sm">phone</span>
+<p>(0216) 555 66 77</p>
+</div>
+</div>
+<div class="flex gap-3">
+<button class="flex-1 py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-base">directions</span>
+                                Yol Tarifi
+                            </button>
+<button class="px-4 py-3 border border-primary/20 text-primary rounded-full hover:bg-primary/5 transition-all active:scale-95">
+<span class="material-symbols-outlined">call</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Column: Interactive Map -->
+<div class="lg:col-span-5 sticky top-32">
+<div class="bg-surface-container-lowest rounded-lg custom-shadow overflow-hidden h-[600px] relative border border-outline-variant/10">
+<img alt="Map" class="w-full h-full object-cover grayscale-[20%] opacity-90" data-alt="detailed aerial city map of Kadikoy Istanbul with pin icons showing pharmacy locations in soft daylight" data-location="Istanbul" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB58yuM5z_Ruh9PGCbF0RHa9YuEHVteR4HMJjRH1SiQswgoRpIdXXF2yUAJ2J4VM7HW0xjYaXQG68CLEktAtOhF88ys4G4FYz2z7MCe_dnJQPEoJOcnkDdntD0u4n9pveQWO79RmZ8tRFyQ3x3FIeEh5PxliMS23_QJFEH3I0kEZl4gsEBNSX3mfXc1vcWWsrJ7NGnSonma3Su8epP0WmKXC5tTBZtqwhPx36RF_W3vU0TMabvQmkjijXGm_GSFjTrUVXIOTFBzPE0"/>
+<!-- Map Overlay UI -->
+<div class="absolute top-4 left-4 right-4 flex justify-between items-start pointer-events-none">
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-4 rounded-xl shadow-lg pointer-events-auto border border-outline-variant/20">
+<p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">Konumunuz</p>
+<p class="text-on-secondary-fixed font-medium">Kadıköy, İstanbul</p>
+</div>
+<div class="flex flex-col gap-2 pointer-events-auto">
+<button class="w-10 h-10 bg-surface-container-lowest shadow-md rounded-full flex items-center justify-center hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-on-surface">add</span>
+</button>
+<button class="w-10 h-10 bg-surface-container-lowest shadow-md rounded-full flex items-center justify-center hover:bg-surface-container-low transition-all">
+<span class="material-symbols-outlined text-on-surface">remove</span>
+</button>
+<button class="w-10 h-10 bg-primary text-white shadow-md rounded-full flex items-center justify-center hover:shadow-xl transition-all">
+<span class="material-symbols-outlined">my_location</span>
+</button>
+</div>
+</div>
+<!-- Marker Placeholder -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<div class="bg-primary text-white p-3 rounded-full shadow-2xl animate-bounce">
+<span class="material-symbols-outlined">medical_services</span>
+</div>
+<div class="bg-black/20 w-4 h-1 rounded-full blur-[2px] mt-1"></div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="bg-[#f7f4ef] border-t border-[#e5e2dd]/20 py-12">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-[1440px] mx-auto">
+<div class="mb-6 md:mb-0">
+<span class="font-bold text-[#1a2a3a]">Elif</span>
+<p class="text-[#506072] text-sm mt-2">© 2024 Elif Civic Assistant. Tüm hakları saklıdır.</p>
+</div>
+<div class="flex gap-8">
+<a class="text-[#506072] text-sm hover:text-[#1a2a3a] transition-colors" href="#">Gizlilik Politikası</a>
+<a class="text-[#506072] text-sm hover:text-[#1a2a3a] transition-colors" href="#">Kullanım Koşulları</a>
+<a class="text-[#506072] text-sm hover:text-[#1a2a3a] transition-colors" href="#">İletişim</a>
+</div>
+</div>
+</footer>
+</body></html>

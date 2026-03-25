@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Elif Civic Assistant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error-container": "#93000a",
+              "surface-container": "#f0ede9",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed-dim": "#ffb68e",
+              "tertiary": "#7a401c",
+              "surface-container-highest": "#e5e2dd",
+              "error-container": "#ffdad6",
+              "on-surface": "#1c1c19",
+              "surface": "#fcf9f4",
+              "inverse-primary": "#81d4d8",
+              "inverse-surface": "#31302d",
+              "on-surface-variant": "#3e4949",
+              "on-primary-container": "#a2f5f9",
+              "surface-variant": "#e5e2dd",
+              "secondary": "#506072",
+              "primary": "#00595c",
+              "surface-container-low": "#f6f3ee",
+              "on-error": "#ffffff",
+              "on-tertiary-fixed": "#331200",
+              "inverse-on-surface": "#f3f0eb",
+              "error": "#ba1a1a",
+              "surface-container-high": "#ebe8e3",
+              "secondary-container": "#d3e4fa",
+              "on-background": "#1c1c19",
+              "surface-container-lowest": "#ffffff",
+              "surface-bright": "#fcf9f4",
+              "on-secondary": "#ffffff",
+              "background": "#fcf9f4",
+              "primary-fixed-dim": "#81d4d8",
+              "on-tertiary-fixed-variant": "#6f3814",
+              "on-secondary-fixed": "#0c1d2c",
+              "on-primary-fixed": "#002021",
+              "tertiary-container": "#975731",
+              "surface-tint": "#00696d",
+              "primary-fixed": "#9df0f4",
+              "outline": "#6e7979",
+              "tertiary-fixed": "#ffdbca",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#566678",
+              "secondary-fixed": "#d3e4fa",
+              "outline-variant": "#bec9c9",
+              "on-tertiary-container": "#ffe1d2",
+              "on-secondary-fixed-variant": "#384859",
+              "surface-dim": "#dcdad5",
+              "secondary-fixed-dim": "#b7c8dd",
+              "primary-container": "#0d7377",
+              "on-primary-fixed-variant": "#004f52"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #f7f4ef; }
+        .glass-nav { backdrop-filter: blur(20px); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .mic-glow { box-shadow: 0px 0px 30px rgba(129, 212, 216, 0.3); }
+        .ambient-card-shadow { box-shadow: 0px 24px 48px -12px rgba(26, 42, 58, 0.08); }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#f7f4ef]/85 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center px-12 py-4 max-w-[1440px] mx-auto">
+<div class="flex items-center gap-8">
+<span class="text-2xl font-bold text-[#1a2a3a] tracking-tight">Elif</span>
+<div class="hidden md:flex items-center gap-6">
+<a class="text-[#0d7377] border-b-2 border-[#0d7377] pb-1 font-semibold" href="#">Asistan</a>
+<a class="text-[#506072] hover:text-[#0d7377] transition-colors" href="#">Eczaneler</a>
+<a class="text-[#506072] hover:text-[#0d7377] transition-colors" href="#">Başvurular</a>
+<a class="text-[#506072] hover:text-[#0d7377] transition-colors" href="#">Ayarlar</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-[#f6f3ee] rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-[#506072]" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-[#f6f3ee] rounded-lg transition-all active:scale-95">
+<span class="material-symbols-outlined text-[#506072]" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+<div class="bg-[#e5e2dd] h-[1px] opacity-20"></div>
+</nav>
+<main class="pt-32 pb-24 px-12 max-w-[1200px] mx-auto min-h-screen flex flex-col items-center">
+<!-- Welcome Section -->
+<header class="w-full mb-16 text-left">
+<h1 class="text-[3.5rem] font-extrabold text-[#0c1d2c] tracking-tight mb-2">Günaydın</h1>
+<p class="text-[#506072] text-xl font-light">Size bugün nasıl yardımcı olabilirim?</p>
+</header>
+<!-- Main Interaction Area -->
+<div class="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- Left: Response Bubble & Assistant Personality -->
+<div class="lg:col-span-8 flex flex-col gap-6">
+<!-- Assistant Response -->
+<div class="bg-surface-container-lowest rounded-lg p-8 ambient-card-shadow border border-[#bec9c9]/15">
+<div class="flex items-start gap-4 mb-6">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" data-icon="smart_toy">smart_toy</span>
+</div>
+<div class="flex-1">
+<p class="text-on-secondary-fixed text-lg leading-relaxed mb-4">
+                                Merhaba! Bugün hava parçalı bulutlu, sıcaklık 18 derece. Yakınındaki 3 nöbetçi eczaneyi buldum ve bekleyen ulaşım başvurun onaylanmış. Başka bir şey sormak ister misin?
+                            </p>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 bg-surface-container-low hover:bg-surface-container text-secondary text-sm rounded-full transition-all border border-[#bec9c9]/20">
+                                    Nöbetçi eczaneleri göster
+                                </button>
+<button class="px-4 py-2 bg-surface-container-low hover:bg-surface-container text-secondary text-sm rounded-full transition-all border border-[#bec9c9]/20">
+                                    Başvuru detayına git
+                                </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Grid Action Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Weather Card -->
+<div class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between h-48 border border-[#bec9c9]/10 group hover:bg-surface-container-low transition-all">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label text-secondary font-medium">Detaylı Hava</p>
+<h3 class="text-2xl font-bold text-on-surface">18°C</h3>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="cloud_queue">cloud_queue</span>
+</div>
+<p class="text-sm text-secondary">İstanbul, Beşiktaş. Nem %65. Yarın yağmur bekleniyor.</p>
+</div>
+<!-- Pharmacy Card -->
+<div class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between h-48 border border-[#bec9c9]/10 group hover:bg-surface-container-low transition-all">
+<div class="flex justify-between items-start">
+<div>
+<p class="text-label text-secondary font-medium">Eczaneler</p>
+<h3 class="text-2xl font-bold text-on-surface">3 Nöbetçi</h3>
+</div>
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="medical_services">medical_services</span>
+</div>
+<div class="flex items-center gap-2 text-primary font-medium text-sm">
+<span>Görüntüle</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right: Secondary Widgets & Status -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Profile Summary -->
+<div class="bg-surface-container-low rounded-lg p-6 border border-[#bec9c9]/10">
+<div class="flex items-center gap-4 mb-6">
+<img alt="Profile" class="w-14 h-14 rounded-full object-cover" data-alt="Professional portrait of a middle-aged man with a friendly expression in a soft-lit modern office environment" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBISVlIYh9B5C70p4OhAG8GWrfKjEvHzR2bRFab4kASGkAAtIbhXErJ_-E9B1Hsyec_jriCLEvthIOEDyISbPpHWwt0ZgVyXWbBGE1v-r-ztKY8zSqF54D_umJH-qBb_gGrf20ZX9RWJZRfIY37iyg1HGSGsNj2EQoZ8T184Oo88APMLPRIsWS_H4uwzREw8l9OOFkviDPtyfvdjyJfFPmq6kIJTxkwtiZUVyEjJfxwyWgW92SJI0Przqf6Ejf5RTuX3c4gI-Uwqvw"/>
+<div>
+<h4 class="font-bold text-on-secondary-fixed">Ahmet Yılmaz</h4>
+<p class="text-sm text-secondary">Civic Puan: 1,240</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="flex justify-between text-sm">
+<span class="text-secondary">Bekleyen İşlemler</span>
+<span class="font-semibold text-primary">2 Adet</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full">
+<div class="bg-primary w-2/3 h-full rounded-full"></div>
+</div>
+</div>
+</div>
+<!-- Map Widget -->
+<div class="bg-surface-container-lowest rounded-lg overflow-hidden border border-[#bec9c9]/10 h-64 relative">
+<img alt="Map" class="w-full h-full object-cover opacity-60" data-alt="Soft aesthetic map view of Istanbul bosphorus with gentle blue and grey tones showing city layout" data-location="Istanbul" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqKwlFuBonUugkjFGwx8Y0lmcvsrn8M3TIi62wrLgnJUFh-6-oCU2iEHzjk0mswdwI8sYY7BKRRhvqlPc8GAs2e7GdMrFrwhNY3yLfheuuhFXgmkG6j33BFAcHqisM51z93-DablteuDDgYk45r3fhnCkdNVS73y8gTnJK5IoBex0cUJPa4X_gsUO_s3eaAjJmgZv9EYSYGAFfMbrrb_Vr9Mb5vtHmHiPVtBsP7cWXHsGQQO5IYJEhJD4BWmNkiVTCpoZaC7ix7pU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 to-transparent"></div>
+<div class="absolute bottom-4 left-4">
+<span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-xs font-semibold">Yakın Yerler</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Signature Microphone Controller -->
+<div class="fixed bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 w-full px-6">
+<div class="bg-surface-container-lowest/80 backdrop-blur-xl p-2 rounded-full shadow-2xl border border-[#bec9c9]/20 flex items-center gap-6 pr-8 pl-2">
+<button class="w-16 h-16 rounded-full bg-gradient-to-br from-[#00595c] to-[#0d7377] flex items-center justify-center text-white mic-glow active:scale-90 transition-transform cursor-pointer">
+<span class="material-symbols-outlined text-3xl" data-icon="mic" data-weight="fill" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+<div class="flex flex-col">
+<p class="text-on-surface font-semibold">Sormak için basılı tut</p>
+<p class="text-xs text-secondary">"Yarın yağmur yağacak mı?"</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Footer -->
+<footer class="w-full py-12 bg-[#f7f4ef] border-t border-[#e5e2dd]/20 mt-auto">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-[1440px] mx-auto gap-6">
+<div class="flex flex-col gap-2 text-center md:text-left">
+<span class="font-bold text-[#1a2a3a]">Elif</span>
+<p class="text-[#506072] text-sm tracking-wide">© 2024 Elif Civic Assistant. Tüm hakları saklıdır.</p>
+</div>
+<div class="flex gap-8 text-[#506072] text-sm tracking-wide">
+<a class="hover:text-[#1a2a3a] transition-colors" href="#">Gizlilik Politikası</a>
+<a class="hover:text-[#1a2a3a] transition-colors" href="#">Kullanım Koşulları</a>
+<a class="hover:text-[#1a2a3a] transition-colors" href="#">İletişim</a>
+</div>
+</div>
+</footer>
+</body></html>

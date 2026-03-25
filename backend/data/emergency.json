@@ -1,0 +1,39 @@
+{
+  "last_updated": "2026-03-24",
+  "source": "mock_demo",
+  "toplanma_alanlari": [
+    {
+      "id": "top_001",
+      "name": "Bahçeşehir Gölet Parkı Toplanma Alanı",
+      "address": "Bahçeşehir 1. Kısım, Gölet Parkı girişi",
+      "capacity": "5000 kişi",
+      "nearest_landmark": "Gölet Parkı ana giriş"
+    },
+    {
+      "id": "top_002",
+      "name": "Başakşehir Millet Bahçesi Toplanma Alanı",
+      "address": "Başakşehir Millet Bahçesi, ana otopark alanı",
+      "capacity": "10000 kişi",
+      "nearest_landmark": "Başakşehir Metro İstasyonu"
+    },
+    {
+      "id": "top_003",
+      "name": "Kayaşehir Merkez Toplanma Alanı",
+      "address": "Kayaşehir Merkez Camii karşısı açık alan",
+      "capacity": "3000 kişi",
+      "nearest_landmark": "Kayaşehir Merkez Camii"
+    }
+  ],
+  "emergency_numbers": {
+    "ambulans": "112",
+    "itfaiye": "110",
+    "polis": "155",
+    "jandarma": "156",
+    "afad": "122",
+    "dogalgaz_acil": "187",
+    "elektrik_ariza": "186",
+    "su_ariza": "185",
+    "beyaz_masa": "153"
+  },
+  "disclaimer": "Bu bilgiler referans amaçlıdır. Acil durumda mutlaka 112'yi arayın. Toplanma alanları AFAD tarafından belirlenmiştir."
+}

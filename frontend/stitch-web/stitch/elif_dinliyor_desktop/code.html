@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error-container": "#93000a",
+              "surface-container": "#f0ede9",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed-dim": "#ffb68e",
+              "tertiary": "#7a401c",
+              "surface-container-highest": "#e5e2dd",
+              "error-container": "#ffdad6",
+              "on-surface": "#1c1c19",
+              "surface": "#fcf9f4",
+              "inverse-primary": "#81d4d8",
+              "inverse-surface": "#31302d",
+              "on-surface-variant": "#3e4949",
+              "on-primary-container": "#a2f5f9",
+              "surface-variant": "#e5e2dd",
+              "secondary": "#506072",
+              "primary": "#00595c",
+              "surface-container-low": "#f6f3ee",
+              "on-error": "#ffffff",
+              "on-tertiary-fixed": "#331200",
+              "inverse-on-surface": "#f3f0eb",
+              "error": "#ba1a1a",
+              "surface-container-high": "#ebe8e3",
+              "secondary-container": "#d3e4fa",
+              "on-background": "#1c1c19",
+              "surface-container-lowest": "#ffffff",
+              "surface-bright": "#fcf9f4",
+              "on-secondary": "#ffffff",
+              "background": "#fcf9f4",
+              "primary-fixed-dim": "#81d4d8",
+              "on-tertiary-fixed-variant": "#6f3814",
+              "on-secondary-fixed": "#0c1d2c",
+              "on-primary-fixed": "#002021",
+              "tertiary-container": "#975731",
+              "surface-tint": "#00696d",
+              "primary-fixed": "#9df0f4",
+              "outline": "#6e7979",
+              "tertiary-fixed": "#ffdbca",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#566678",
+              "secondary-fixed": "#d3e4fa",
+              "outline-variant": "#bec9c9",
+              "on-tertiary-container": "#ffe1d2",
+              "on-secondary-fixed-variant": "#384859",
+              "surface-dim": "#dcdad5",
+              "secondary-fixed-dim": "#b7c8dd",
+              "primary-container": "#0d7377",
+              "on-primary-fixed-variant": "#004f52"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .iznik-glow {
+            box-shadow: 0px 0px 60px 10px rgba(129, 212, 216, 0.3);
+        }
+        .waveform-container {
+            mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface selection:bg-primary-fixed-dim">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full z-50 bg-[#f7f4ef]/85 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center px-12 py-4 max-w-[1440px] mx-auto">
+<div class="text-2xl font-bold text-[#1a2a3a] font-headline tracking-tight">Elif</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#0d7377] border-b-2 border-[#0d7377] pb-1 font-semibold transition-colors" href="#">Asistan</a>
+<a class="text-[#506072] hover:text-[#0d7377] transition-colors" href="#">Eczaneler</a>
+<a class="text-[#506072] hover:text-[#0d7377] transition-colors" href="#">Başvurular</a>
+<a class="text-[#506072] hover:text-[#0d7377] transition-colors" href="#">Ayarlar</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-[#f6f3ee] rounded-lg transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined text-[#0d7377]">notifications</span>
+</button>
+<button class="p-2 hover:bg-[#f6f3ee] rounded-lg transition-all duration-300 active:scale-95">
+<span class="material-symbols-outlined text-[#0d7377]">account_circle</span>
+</button>
+</div>
+</div>
+<div class="bg-[#e5e2dd] h-[1px] opacity-20"></div>
+</nav>
+<main class="min-h-screen flex flex-col items-center justify-center px-6 pt-20">
+<!-- Main Listening Interface -->
+<div class="w-full max-w-5xl flex flex-col items-center text-center">
+<!-- Greeting & Status -->
+<div class="mb-16">
+<h1 class="text-[3.5rem] font-extrabold text-on-secondary-fixed leading-tight tracking-tight mb-4 font-headline">
+                    Sizi dinliyorum...
+                </h1>
+<p class="text-secondary text-lg font-medium opacity-80">Şu an sizi duyabiliyorum, lütfen devam edin.</p>
+</div>
+<!-- Waveform Visualization -->
+<div class="w-full h-32 flex items-center justify-center gap-2 mb-12 waveform-container">
+<div class="w-2 h-16 bg-primary-container rounded-full opacity-20"></div>
+<div class="w-2 h-24 bg-primary-container rounded-full opacity-40"></div>
+<div class="w-2 h-32 bg-primary rounded-full opacity-60"></div>
+<div class="w-2 h-40 bg-primary rounded-full"></div>
+<div class="w-2 h-28 bg-primary rounded-full opacity-80"></div>
+<div class="w-2 h-36 bg-primary rounded-full"></div>
+<div class="w-2 h-20 bg-primary-container rounded-full opacity-50"></div>
+<div class="w-2 h-32 bg-primary-container rounded-full opacity-30"></div>
+<div class="w-2 h-24 bg-primary rounded-full opacity-70"></div>
+<div class="w-2 h-44 bg-primary rounded-full"></div>
+<div class="w-2 h-32 bg-primary rounded-full opacity-60"></div>
+<div class="w-2 h-16 bg-primary-container rounded-full opacity-20"></div>
+<div class="w-2 h-28 bg-primary-container rounded-full opacity-40"></div>
+<div class="w-2 h-36 bg-primary rounded-full opacity-80"></div>
+<div class="w-2 h-24 bg-primary-container rounded-full opacity-30"></div>
+</div>
+<!-- Transcription Area -->
+<div class="w-full max-w-3xl mb-16 relative">
+<div class="bg-surface-container-low p-8 rounded-lg shadow-[0px_24px_48px_-12px_rgba(26,42,58,0.08)]">
+<p class="text-2xl text-on-secondary-fixed leading-relaxed font-medium">
+                        "İstanbul'da bugün toplu taşıma..."
+                        <span class="inline-block w-1 h-8 bg-primary-container ml-1 align-middle animate-pulse"></span>
+</p>
+</div>
+</div>
+<!-- Central Microphone Action -->
+<div class="relative group cursor-pointer">
+<!-- Ambient Glow Layers -->
+<div class="absolute inset-0 bg-primary-fixed-dim rounded-full blur-[40px] opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+<!-- Main Pill Button -->
+<button class="relative z-10 w-24 h-24 rounded-full bg-gradient-to-br from-primary to-primary-container flex items-center justify-center text-white shadow-xl hover:scale-105 active:scale-90 transition-all duration-300 iznik-glow">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+<!-- Responsive Hint -->
+<div class="mt-8 text-label-md text-secondary font-semibold uppercase tracking-widest text-[0.75rem]">
+                    Durdurmak için dokunun
+                </div>
+</div>
+</div>
+</main>
+<!-- Contextual Information (Bento Style Hints) -->
+<section class="max-w-[1440px] mx-auto px-12 pb-24 grid grid-cols-1 md:grid-cols-3 gap-6">
+<div class="col-span-1 bg-surface-container-lowest p-8 rounded-lg border border-outline-variant/15 transition-all hover:bg-surface-container-low">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary-container">location_on</span>
+<h3 class="font-bold text-on-surface">Yakın Yerler</h3>
+</div>
+<p class="text-secondary text-sm">Bulunduğunuz konuma en yakın nöbetçi eczaneleri ve kamu binalarını bulabilirim.</p>
+</div>
+<div class="col-span-1 bg-surface-container-lowest p-8 rounded-lg border border-outline-variant/15 transition-all hover:bg-surface-container-low">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary-container">description</span>
+<h3 class="font-bold text-on-surface">Başvurular</h3>
+</div>
+<p class="text-secondary text-sm">Aktif başvurularınızın durumunu sorgulayabilir veya yeni talep oluşturabilirsiniz.</p>
+</div>
+<div class="col-span-1 bg-surface-container-lowest p-8 rounded-lg border border-outline-variant/15 transition-all hover:bg-surface-container-low">
+<div class="flex items-center gap-4 mb-4">
+<span class="material-symbols-outlined text-primary-container">help_outline</span>
+<h3 class="font-bold text-on-surface">Yardım</h3>
+</div>
+<p class="text-secondary text-sm">Belediye hizmetleri ve sosyal yardımlar hakkında detaylı bilgi alabilirsiniz.</p>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-12 border-t border-[#e5e2dd]/20 bg-[#f7f4ef]">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-[1440px] mx-auto font-['Plus_Jakarta_Sans'] text-sm tracking-wide">
+<div class="mb-4 md:mb-0">
+<span class="font-bold text-[#1a2a3a]">Elif Civic Assistant</span>
+<span class="text-[#506072] ml-4">© 2024 Elif Civic Assistant. Tüm hakları saklıdır.</span>
+</div>
+<div class="flex gap-8">
+<a class="text-[#506072] hover:text-[#1a2a3a] transition-colors" href="#">Gizlilik Politikası</a>
+<a class="text-[#506072] hover:text-[#1a2a3a] transition-colors" href="#">Kullanım Koşulları</a>
+<a class="text-[#506072] hover:text-[#1a2a3a] transition-colors" href="#">İletişim</a>
+</div>
+</div>
+</footer>
+</body></html>

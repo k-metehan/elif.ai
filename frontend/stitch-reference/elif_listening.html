@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcf9f4;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .iznik-glow {
+            box-shadow: 0px 0px 60px rgba(129, 212, 216, 0.4);
+        }
+        .waveform-container {
+            mask-image: radial-gradient(circle, black 30%, transparent 70%);
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "on-surface": "#1c1c19",
+                "error-container": "#ffdad6",
+                "surface-container-highest": "#e5e2dd",
+                "surface-tint": "#00696d",
+                "primary-fixed": "#9df0f4",
+                "surface-container-lowest": "#ffffff",
+                "on-surface-variant": "#3e4949",
+                "background": "#fcf9f4",
+                "outline": "#6e7979",
+                "on-secondary-fixed": "#0c1d2c",
+                "surface-dim": "#dcdad5",
+                "on-tertiary-fixed": "#331200",
+                "outline-variant": "#bec9c9",
+                "on-background": "#1c1c19",
+                "surface": "#fcf9f4",
+                "inverse-primary": "#81d4d8",
+                "tertiary-fixed-dim": "#ffb68e",
+                "surface-variant": "#e5e2dd",
+                "primary-fixed-dim": "#81d4d8",
+                "surface-container-low": "#f6f3ee",
+                "secondary-fixed": "#d3e4fa",
+                "surface-bright": "#fcf9f4",
+                "primary": "#00595c",
+                "on-primary": "#ffffff",
+                "inverse-on-surface": "#f3f0eb",
+                "on-error-container": "#93000a",
+                "on-tertiary-fixed-variant": "#6f3814",
+                "inverse-surface": "#31302d",
+                "tertiary": "#7a401c",
+                "primary-container": "#0d7377",
+                "error": "#ba1a1a",
+                "tertiary-fixed": "#ffdbca",
+                "tertiary-container": "#975731",
+                "on-tertiary": "#ffffff",
+                "on-secondary-fixed-variant": "#384859",
+                "on-tertiary-container": "#ffe1d2",
+                "on-secondary": "#ffffff",
+                "secondary-fixed-dim": "#b7c8dd",
+                "surface-container-high": "#ebe8e3",
+                "secondary": "#506072",
+                "on-primary-fixed-variant": "#004f52",
+                "on-primary-fixed": "#002021",
+                "on-primary-container": "#a2f5f9",
+                "secondary-container": "#d3e4fa",
+                "surface-container": "#f0ede9",
+                "on-error": "#ffffff",
+                "on-secondary-container": "#566678"
+              },
+              fontFamily: {
+                "headline": ["Plus Jakarta Sans"],
+                "body": ["Plus Jakarta Sans"],
+                "label": ["Plus Jakarta Sans"]
+              },
+              borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+            },
+          },
+        }
+      </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface text-on-surface min-h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar -->
+<header class="bg-[#f7f4ef]/85 backdrop-blur-md flex justify-between items-center px-8 py-4 w-full fixed top-0 z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<img alt="Elif Logo" class="w-6 h-6 invert" data-alt="minimalist geometric logo of a Turkish civic assistant brand using turquoise and deep navy tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9O612cmIpl0o-a4wi6byGCX7y0DeyhGHPB6JFFZ9Kc3W0LKmHYF2x3fQv1oajDDESAGOtriOHksuPRvqFz4q_VKQu5YG6lhsO9LGaMVg40XgAJ3lHupkt-2JEBRUWp44Fj4o3VeFQE0yFlfGjE0D_rSKqJjOtmX3TOZLEIgtIJ7FlJtvgokKhqCnGH7Qx4aMso0Kf6Id4ZX-MFVv8FLZ85IGoNDPCC8N-qNGaHNlG3iaWgJeZzVigXwiamloeUfl-muweS_stGvk"/>
+</div>
+<span class="text-[#1a2a3a] font-extrabold text-2xl">Elif</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#506072] hover:opacity-80 transition-opacity duration-300 active:scale-95">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Content: Active Listening State -->
+<main class="flex-grow flex flex-col items-center justify-center px-6 relative">
+<!-- Subtle Waveform Visualization Background -->
+<div class="absolute inset-0 flex items-center justify-center opacity-20 pointer-events-none waveform-container">
+<svg class="w-full max-w-4xl h-auto" viewbox="0 0 800 400">
+<path d="M0,200 Q100,100 200,200 T400,200 T600,200 T800,200" fill="none" stroke="#0d7377" stroke-width="2"></path>
+<path d="M0,200 Q100,300 200,200 T400,200 T600,200 T800,200" fill="none" stroke="#81d4d8" stroke-width="2"></path>
+<path d="M0,200 Q150,50 300,200 T600,200 T900,200" fill="none" stroke="#00595c" stroke-width="1.5"></path>
+</svg>
+</div>
+<!-- Listening Text -->
+<div class="z-10 text-center mb-12">
+<h1 class="text-[#1a2a3a] font-headline font-bold text-3xl tracking-tight mb-4">Sizi dinliyorum...</h1>
+<p class="text-secondary font-body text-lg opacity-70">Size nasıl yardımcı olabilirim?</p>
+</div>
+<!-- Signature Pill Microphone -->
+<div class="relative z-20 flex items-center justify-center">
+<!-- Pulsing Rings -->
+<div class="absolute w-48 h-48 bg-primary-container/10 rounded-full scale-125 opacity-40"></div>
+<div class="absolute w-64 h-64 border border-primary-container/20 rounded-full scale-110"></div>
+<!-- Main Microphone Button -->
+<button class="relative w-32 h-32 rounded-full bg-gradient-to-tr from-primary to-primary-container iznik-glow flex items-center justify-center text-white transition-all duration-500 cubic-bezier(0.4, 0, 0.2, 1) hover:scale-105 active:scale-90">
+<span class="material-symbols-outlined text-5xl" data-icon="mic" style="font-variation-settings: 'FILL' 1;">mic</span>
+</button>
+</div>
+<!-- Live Transcription Placeholder -->
+<div class="mt-16 max-w-md w-full px-8 py-6 rounded-lg bg-surface-container-lowest text-on-surface-variant font-body italic text-center opacity-60">
+            "İstanbul'da bugün toplu taşıma..."
+        </div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-6 pb-8 bg-[#ffffff] rounded-t-[2rem] shadow-[0px_-12px_24px_-12px_rgba(26,42,58,0.08)]">
+<!-- History Tab -->
+<a class="flex flex-col items-center justify-center text-[#506072] p-4 hover:text-[#0d7377] transition-all duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="history">history</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px] mt-1">Geçmiş</span>
+</a>
+<!-- Active Mic Tab (Center) -->
+<a class="flex flex-col items-center justify-center bg-gradient-to-tr from-[#00595c] to-[#0d7377] text-white rounded-full p-6 shadow-[0px_0px_30px_rgba(129,212,216,0.5)] transform -translate-y-4 transition-all duration-300 cubic-bezier(0.4, 0, 0.2, 1) active:scale-90" href="#">
+<span class="material-symbols-outlined text-3xl" data-icon="mic" style="font-variation-settings: 'FILL' 1;">mic</span>
+</a>
+<!-- Account Tab -->
+<a class="flex flex-col items-center justify-center text-[#506072] p-4 hover:text-[#0d7377] transition-all duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl" data-icon="account_circle">account_circle</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px] mt-1">Profil</span>
+</a>
+</nav>
+<!-- Aesthetic Decorative Element -->
+<div class="fixed top-1/4 -left-20 w-64 h-64 bg-primary/5 blur-[100px] rounded-full pointer-events-none"></div>
+<div class="fixed bottom-1/4 -right-20 w-80 h-80 bg-tertiary/5 blur-[120px] rounded-full pointer-events-none"></div>
+</body></html>

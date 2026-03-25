@@ -1,0 +1,39 @@
+{
+  "last_updated": "2026-03-24",
+  "source": "mock_demo",
+  "closures": [
+    {
+      "id": "cls_001",
+      "type": "road",
+      "title": "Bahçeşehir 1. Kısım Yol Çalışması",
+      "description": "Asfalt yenileme çalışması nedeniyle tek şerit trafiğe açık olacak.",
+      "location": "Bahçeşehir 1. Kısım, Hoşdere Caddesi",
+      "start_date": "2026-03-22",
+      "end_date": "2026-03-28",
+      "alternative": "Bahçeşehir 2. Kısım üzerinden alternatif güzergah kullanabilirsiniz.",
+      "severity": "medium"
+    },
+    {
+      "id": "cls_002",
+      "type": "road",
+      "title": "E-80 (TEM) Bağlantı Yolu Bakımı",
+      "description": "Gece 23:00-05:00 arası bağlantı yolu kapalı. Gündüz açık.",
+      "location": "Bahçeşehir TEM bağlantı yolu",
+      "start_date": "2026-03-25",
+      "end_date": "2026-03-27",
+      "alternative": "E-5 üzerinden ulaşabilirsiniz.",
+      "severity": "low"
+    },
+    {
+      "id": "cls_003",
+      "type": "facility",
+      "title": "Bahçeşehir Yüzme Havuzu Bakım",
+      "description": "Yıllık bakım nedeniyle kapalı.",
+      "location": "Bahçeşehir Spor Kompleksi",
+      "start_date": "2026-03-24",
+      "end_date": "2026-04-07",
+      "alternative": "Kayaşehir Yüzme Havuzu açık.",
+      "severity": "low"
+    }
+  ]
+}

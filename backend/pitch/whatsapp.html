@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gelecek Adım: WhatsApp Entegrasyonu — cityconcierge.ai</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #f7f4ef;
+            --bg-secondary: #ffffff;
+            --text-primary: #1a2a3a;
+            --text-secondary: #506072;
+            --accent: #004B93;
+            --shadow-sm: 0px 24px 48px -12px rgba(26, 42, 58, 0.05);
+            --shadow-md: 0px 24px 48px -12px rgba(26, 42, 58, 0.08);
+            --radius-lg: 24px;
+            --radius-xl: 32px;
+            --whatsapp-green: #25d366;
+            --chat-bg: #e5ddd5;
+            --user-bubble: #dcf8c6;
+            --elif-bubble: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+        }
+
+        .top-stripe {
+            height: 4px;
+            background: var(--accent);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 32px 24px;
+        }
+
+        /* Header */
+        header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .subtitle {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        /* Phone Frame */
+        .phone-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 32px;
+            position: relative;
+        }
+
+        .mockup-badge {
+            position: absolute;
+            top: -10px;
+            right: 50%;
+            transform: translateX(150px);
+            background: #dc2626;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        @media (max-width: 600px) {
+            .mockup-badge {
+                right: 10px;
+                transform: none;
+            }
+        }
+
+        .phone-frame {
+            width: 100%;
+            max-width: 360px;
+            background: #1a1a1a;
+            border-radius: var(--radius-xl);
+            padding: 12px;
+            box-shadow: var(--shadow-md), 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .phone-screen {
+            background: var(--chat-bg);
+            border-radius: calc(var(--radius-xl) - 8px);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 600px;
+        }
+
+        /* WhatsApp Header */
+        .wa-header {
+            background: #075e54;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wa-avatar {
+            width: 40px;
+            height: 40px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+
+        .wa-contact {
+            flex: 1;
+        }
+
+        .wa-name {
+            color: white;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .wa-status {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.75rem;
+        }
+
+        /* Chat Area */
+        .wa-chat {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .chat-date {
+            text-align: center;
+            font-size: 0.75rem;
+            color: rgba(0,0,0,0.4);
+            margin: 8px 0;
+        }
+
+        .message {
+            max-width: 85%;
+            padding: 10px 14px;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            position: relative;
+        }
+
+        .message-user {
+            background: var(--user-bubble);
+            align-self: flex-end;
+            border-bottom-right-radius: 2px;
+        }
+
+        .message-elif {
+            background: var(--elif-bubble);
+            align-self: flex-start;
+            border-bottom-left-radius: 2px;
+        }
+
+        .message-time {
+            font-size: 0.7rem;
+            color: rgba(0,0,0,0.4);
+            float: right;
+            margin-left: 8px;
+            margin-top: 4px;
+        }
+
+        .message-sender {
+            font-size: 0.75rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        /* Input Area */
+        .wa-input {
+            background: #f0f0f0;
+            padding: 10px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .wa-input-box {
+            flex: 1;
+            background: white;
+            border-radius: 20px;
+            padding: 10px 16px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .wa-send {
+            width: 40px;
+            height: 40px;
+            background: var(--whatsapp-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+        }
+
+        /* Features Section */
+        .features-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 24px;
+        }
+
+        .features-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .features-list {
+            list-style: none;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 14px;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+        }
+
+        .feature-bullet {
+            color: var(--whatsapp-green);
+            font-weight: 700;
+            font-size: 1.2rem;
+            line-height: 1.4;
+        }
+
+        /* Note Section */
+        .note-section {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            margin-bottom: 24px;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding-top: 24px;
+            border-top: 1px solid #e2e8f0;
+        }
+    </style>
+</head>
+<body>
+    <div class="top-stripe"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Gelecek Adım: WhatsApp Entegrasyonu</h1>
+            <p class="subtitle">Vatandaş zaten WhatsApp kullanıyor. Elif oraya da gelebilir.</p>
+        </header>
+
+        <!-- Phone Mockup -->
+        <div class="phone-container">
+            <div class="mockup-badge">Mockup</div>
+            <div class="phone-frame">
+                <div class="phone-screen">
+                    <!-- WhatsApp Header -->
+                    <div class="wa-header">
+                        <div class="wa-avatar">🤖</div>
+                        <div class="wa-contact">
+                            <div class="wa-name">Başakşehir Belediyesi</div>
+                            <div class="wa-status">çevrimiçi</div>
+                        </div>
+                    </div>
+
+                    <!-- Chat -->
+                    <div class="wa-chat">
+                        <div class="chat-date">Bugün</div>
+
+                        <div class="message message-user">
+                            Bu gece nöbetçi eczane hangisi?
+                            <span class="message-time">14:23</span>
+                        </div>
+
+                        <div class="message message-elif">
+                            <div class="message-sender">Elif</div>
+                            Bu gece Bahçeşehir'de Güneş Eczanesi nöbetçi. 🌙<br><br>
+                            📍 Adres: 1. Kısım, Hoşdere Cad. No:12<br>
+                            📞 Tel: 0212 608 00 26<br><br>
+                            Gitmeden önce aramanızı öneririm! 😊
+                            <span class="message-time">14:23 ✓✓</span>
+                        </div>
+
+                        <div class="message message-user">
+                            Yarın su kesintisi var mı?
+                            <span class="message-time">14:25</span>
+                        </div>
+
+                        <div class="message message-elif">
+                            <div class="message-sender">Elif</div>
+                            Evet, yarın Bahçeşehir 2. Kısım'da 09:00-18:00 arası su kesintisi var. 💧<br><br>
+                            Önceden su depolamanızı tavsiye ederim.
+                            <span class="message-time">14:25 ✓✓</span>
+                        </div>
+                    </div>
+
+                    <!-- Input -->
+                    <div class="wa-input">
+                        <div class="wa-input-box">Mesaj yazın...</div>
+                        <div class="wa-send">➤</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features -->
+        <div class="features-section">
+            <h3 class="features-title">WhatsApp Business API ile:</h3>
+            <ul class="features-list">
+                <li class="feature-item">
+                    <span class="feature-bullet">•</span>
+                    <span>Vatandaş numara kaydetmeden mesaj atar</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-bullet">•</span>
+                    <span>Belediye broadcast listeye duyuru gönderir</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-bullet">•</span>
+                    <span>Elif 7/24 otomatik cevap verir</span>
+                </li>
+                <li class="feature-item">
+                    <span class="feature-bullet">•</span>
+                    <span>Grup yönetimine gerek kalmaz</span>
+                </li>
+            </ul>
+        </div>
+
+        <div class="note-section">
+            Bu özellik pilot sonrası aktif edilebilir.
+        </div>
+
+        <footer>
+            cityconcierge.ai — Türkiye'nin ilk belediye sesli AI'ı
+        </footer>
+    </div>
+</body>
+</html>

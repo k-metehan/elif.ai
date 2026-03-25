@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+
+<html class="light" lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#1c1c19",
+              "error-container": "#ffdad6",
+              "surface-container-highest": "#e5e2dd",
+              "surface-tint": "#00696d",
+              "primary-fixed": "#9df0f4",
+              "surface-container-lowest": "#ffffff",
+              "on-surface-variant": "#3e4949",
+              "background": "#fcf9f4",
+              "outline": "#6e7979",
+              "on-secondary-fixed": "#0c1d2c",
+              "surface-dim": "#dcdad5",
+              "on-tertiary-fixed": "#331200",
+              "outline-variant": "#bec9c9",
+              "on-background": "#1c1c19",
+              "surface": "#fcf9f4",
+              "inverse-primary": "#81d4d8",
+              "tertiary-fixed-dim": "#ffb68e",
+              "surface-variant": "#e5e2dd",
+              "primary-fixed-dim": "#81d4d8",
+              "surface-container-low": "#f6f3ee",
+              "secondary-fixed": "#d3e4fa",
+              "surface-bright": "#fcf9f4",
+              "primary": "#00595c",
+              "on-primary": "#ffffff",
+              "inverse-on-surface": "#f3f0eb",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed-variant": "#6f3814",
+              "inverse-surface": "#31302d",
+              "tertiary": "#7a401c",
+              "primary-container": "#0d7377",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#ffdbca",
+              "tertiary-container": "#975731",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed-variant": "#384859",
+              "on-tertiary-container": "#ffe1d2",
+              "on-secondary": "#ffffff",
+              "secondary-fixed-dim": "#b7c8dd",
+              "surface-container-high": "#ebe8e3",
+              "secondary": "#506072",
+              "on-primary-fixed-variant": "#004f52",
+              "on-primary-fixed": "#002021",
+              "on-primary-container": "#a2f5f9",
+              "secondary-container": "#d3e4fa",
+              "surface-container": "#f0ede9",
+              "on-error": "#ffffff",
+              "on-secondary-container": "#566678"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-secondary-fixed min-h-screen flex flex-col">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#f7f4ef]/85 backdrop-blur-md flex justify-between items-center px-8 py-4 w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full overflow-hidden border-2 border-primary-container/20">
+<img alt="Elif assistant logo" class="w-full h-full object-cover" data-alt="Close-up professional headshot of a friendly Mediterranean woman with a warm smile, soft natural lighting, elegant corporate attire" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDJ9j1ZeeGYQMKUL2LMCgv5Krp9LDpBN62NZNf_OcQhySkgS9eNu7_79wrZJmzGMN5RTylFMiMwIsQw5Z4_FqLsL1IfyXUS66JQr8ggrzjrtNWdbpLhcK3fz87rVZ9EVx4rpuKsdLQfAIO-r5SkbJtdGacb1JJ93cKwnyZxKhn__smSFCoU2-OpFQPZ9IQkRVSyH171Vw2XDmagp4JWMlou2lymsehDxQm-eK4EwM4un9Rn85YpnZdQNYI5T7OVIIN7rZblPy8d3EA"/>
+</div>
+<span class="text-[#1a2a3a] font-extrabold text-2xl tracking-tight">Elif</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#0d7377] hover:opacity-80 transition-opacity duration-300 active:scale-95">
+<span class="material-symbols-outlined text-2xl">settings</span>
+</button>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 mt-20 mb-32 px-6 md:px-[8.5rem] max-w-7xl mx-auto w-full">
+<!-- Page Title -->
+<div class="py-10">
+<h1 class="font-headline font-bold text-4xl text-on-secondary-fixed tracking-tight">Ayarlar</h1>
+<p class="text-secondary mt-2 body-lg">Kişisel deneyiminizi ve uygulama tercihlerini buradan yönetin.</p>
+</div>
+<!-- Settings Grid -->
+<div class="space-y-6">
+<!-- Profile Info Section -->
+<section class="bg-surface-container-lowest rounded-lg p-8 shadow-[0px_24px_48px_-12px_rgba(26,42,58,0.08)]">
+<div class="flex items-center justify-between mb-8">
+<h2 class="font-headline font-bold text-xl text-primary-container">Profil Bilgileri</h2>
+<span class="material-symbols-outlined text-primary-container">edit_note</span>
+</div>
+<div class="flex flex-col md:flex-row gap-8 items-start">
+<div class="relative group">
+<div class="w-24 h-24 rounded-full overflow-hidden ring-4 ring-surface-container">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="Portrait of a modern young professional man, clean background, soft daylight, looking confidently at camera" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBNbBTBghE0LXT7bIKDS1fmaq9PEeRajdmbf1Sc1TlS6rf1MN3a9sKOUtUTfXibyKIgU9ZdceKNgvVqUSNL_A8uh8IHG9VksHCGlaEuu5M3_m-gEnvhlhz0rs3sJ5Yw5cvjoAtnqySNO389bGxkPj9ZyQldWZ9n2t0FNUEfPi_JlvoahEqX82AwvOHqZ7Uljs0zlzXOtxAKTNTvPmfm5LSW1fSwz8mneOZvzUrHE8a67hDXZ4A3YEpo1yZFpy02L6oyIsWS3REPdg4"/>
+</div>
+<div class="absolute bottom-0 right-0 bg-primary text-white p-1.5 rounded-full cursor-pointer shadow-lg">
+<span class="material-symbols-outlined text-sm">photo_camera</span>
+</div>
+</div>
+<div class="flex-1 w-full space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<div class="space-y-1">
+<label class="text-[0.75rem] font-medium text-secondary uppercase tracking-wider px-1">İsim Soyisim</label>
+<div class="bg-surface-container-low p-4 rounded-DEFAULT text-on-surface font-medium">Ahmet Yılmaz</div>
+</div>
+<div class="space-y-1">
+<label class="text-[0.75rem] font-medium text-secondary uppercase tracking-wider px-1">E-posta</label>
+<div class="bg-surface-container-low p-4 rounded-DEFAULT text-on-surface font-medium">ahmet.y@civic.ist</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Neighborhood Preferences -->
+<section class="bg-surface-container-lowest rounded-lg p-8 shadow-[0px_24px_48px_-12px_rgba(26,42,58,0.08)]">
+<h2 class="font-headline font-bold text-xl text-primary-container mb-6">Mahalle Tercihleri</h2>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-DEFAULT hover:bg-[#f0ede9] transition-all duration-300 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">location_on</span>
+</div>
+<div>
+<p class="font-bold text-on-secondary-fixed">Birincil Bölge</p>
+<p class="text-sm text-secondary">Bahçeşehir 1. Kısım</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-secondary">chevron_right</span>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-DEFAULT hover:bg-[#f0ede9] transition-all duration-300 cursor-pointer">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-primary-container">add_location_alt</span>
+</div>
+<p class="font-bold text-secondary">Ek Bölge Ekle</p>
+</div>
+<span class="material-symbols-outlined text-secondary">add</span>
+</div>
+</div>
+</section>
+<!-- Voice Settings -->
+<section class="bg-surface-container-lowest rounded-lg p-8 shadow-[0px_24px_48px_-12px_rgba(26,42,58,0.08)]">
+<h2 class="font-headline font-bold text-xl text-primary-container mb-6">Ses Ayarları</h2>
+<div class="space-y-6">
+<!-- Toggle Switch Row -->
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold text-on-secondary-fixed">Eller Serbest Modu</p>
+<p class="text-sm text-secondary">"Hey Elif" komutuyla asistanı uyandırın.</p>
+</div>
+<button class="w-12 h-6 bg-primary rounded-full relative transition-colors duration-300">
+<div class="absolute right-1 top-1 bg-white w-4 h-4 rounded-full shadow-sm"></div>
+</button>
+</div>
+<div class="h-px bg-outline-variant/15 w-full"></div>
+<div class="flex items-center justify-between">
+<div>
+<p class="font-bold text-on-secondary-fixed">Sesli Yanıt</p>
+<p class="text-sm text-secondary">Sorgularınıza sesli olarak cevap verilsin.</p>
+</div>
+<button class="w-12 h-6 bg-primary rounded-full relative transition-colors duration-300">
+<div class="absolute right-1 top-1 bg-white w-4 h-4 rounded-full shadow-sm"></div>
+</button>
+</div>
+<div class="h-px bg-outline-variant/15 w-full"></div>
+<!-- Voice Selection -->
+<div class="flex items-center justify-between group cursor-pointer">
+<div>
+<p class="font-bold text-on-secondary-fixed">Asistan Sesi</p>
+<p class="text-sm text-secondary">Tercih edilen ses: Elif (Doğal)</p>
+</div>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">chevron_right</span>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="bg-surface-container-lowest rounded-lg p-8 shadow-[0px_24px_48px_-12px_rgba(26,42,58,0.08)] mb-12">
+<h2 class="font-headline font-bold text-xl text-primary-container mb-6">Uygulama Hakkında</h2>
+<div class="space-y-4">
+<div class="flex items-center justify-between cursor-pointer group">
+<span class="font-medium text-on-secondary-fixed">Kullanım Koşulları</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">open_in_new</span>
+</div>
+<div class="h-px bg-outline-variant/15 w-full"></div>
+<div class="flex items-center justify-between cursor-pointer group">
+<span class="font-medium text-on-secondary-fixed">Gizlilik Politikası</span>
+<span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">open_in_new</span>
+</div>
+<div class="h-px bg-outline-variant/15 w-full"></div>
+<div class="flex items-center justify-between">
+<span class="font-medium text-on-secondary-fixed">Versiyon</span>
+<span class="text-sm text-secondary">v2.4.12-pro</span>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-6 pb-8 bg-[#ffffff] dark:bg-[#0c1d2c] rounded-t-[2rem] shadow-[0px_-12px_24px_-12px_rgba(26,42,58,0.08)]">
+<!-- History Tab (Inactive) -->
+<a class="flex flex-col items-center justify-center text-[#506072] dark:text-[#bec9c9] p-4 hover:text-[#0d7377] transition-all duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl">history</span>
+</a>
+<!-- Mic Tab (Inactive/Floating Logic) -->
+<a class="flex flex-col items-center justify-center text-[#506072] dark:text-[#bec9c9] p-4 hover:text-[#0d7377] transition-all duration-300 active:scale-90" href="#">
+<span class="material-symbols-outlined text-2xl">mic</span>
+</a>
+<!-- Profile Tab (Active) -->
+<a class="flex flex-col items-center justify-center bg-gradient-to-tr from-[#00595c] to-[#0d7377] text-white rounded-full p-6 shadow-[0px_0px_30px_rgba(129,212,216,0.5)] transform -translate-y-4 active:scale-90 duration-300 cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+</a>
+</nav>
+</body></html>

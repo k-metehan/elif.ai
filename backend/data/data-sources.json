@@ -1,0 +1,146 @@
+{
+  "description": "Data source registry for cityconcierge.ai nöbetçi eczane data. If the primary source fails, fall back to alternatives in priority order.",
+  "last_reviewed": "2026-03-22",
+  "target_district": "Başakşehir",
+  "target_area": "Bahçeşehir",
+
+  "sources": [
+    {
+      "id": "eczaneler_gen_tr",
+      "name": "eczaneler.gen.tr (Web Scrape)",
+      "priority": 1,
+      "status": "active",
+      "type": "scrape",
+      "url": "https://www.eczaneler.gen.tr/nobetci-istanbul-basaksehir",
+      "script": "scrape_nobetci.py",
+      "cost": "$0",
+      "update_frequency": "daily",
+      "data_coverage": "today + tomorrow night",
+      "reliability": "high — site has been stable, data sourced from İstanbul Eczacılar Odası",
+      "risks": [
+        "HTML structure change breaks parser",
+        "Site blocks scraping (403/captcha)",
+        "Data accuracy disclaimer: some pharmacies may have wrong duty status"
+      ],
+      "setup": "pip install requests beautifulsoup4 && python scrape_nobetci.py"
+    },
+    {
+      "id": "nobetecza_api",
+      "name": "NobetEcza API",
+      "priority": 2,
+      "status": "not_configured",
+      "type": "api",
+      "url": "https://api.nobetecza.com",
+      "docs": "https://api.nobetecza.com/docs",
+      "cost": "Free: 100 req/14 days | $1.99/mo: 10K req | $9.99/mo: unlimited",
+      "update_frequency": "hourly",
+      "data_coverage": "today only",
+      "reliability": "high — commercial API, 50ms response, lat/lng included",
+      "sample_endpoint": "GET /api/v1/pharmacies?city=istanbul&district=basaksehir",
+      "sample_response": {
+        "success": true,
+        "data": [
+          {
+            "id": 1234,
+            "ad": "Merkez Eczanesi",
+            "adres": "Caferağa Mah. Moda Cad. No:12",
+            "telefon": "0216 XXX XX XX",
+            "ilce": "Kadıköy",
+            "tarif": "Moda Caddesi üzeri",
+            "konum": { "lat": 40.9876, "lng": 29.0234 }
+          }
+        ]
+      },
+      "setup": "1. Sign up at api.nobetecza.com\n2. Get API key\n3. Add NOBETECZA_API_KEY to .env\n4. Create scrape_nobetecza.py adapter"
+    },
+    {
+      "id": "nosyapi",
+      "name": "NosyAPI Nöbetçi Eczane",
+      "priority": 3,
+      "status": "not_configured",
+      "type": "api",
+      "url": "https://nosyapi.com",
+      "docs": "https://nosyapi.com/apidocs",
+      "cost": "Free: 500 req/mo | $6-$35/mo for higher tiers",
+      "update_frequency": "hourly",
+      "data_coverage": "today only, location-based search available",
+      "reliability": "medium-high",
+      "sample_endpoint": "GET /locations?lat=41.07&lng=28.67",
+      "setup": "1. Sign up at nosyapi.com\n2. Get API key\n3. Add NOSYAPI_KEY to .env\n4. Create scrape_nosyapi.py adapter"
+    },
+    {
+      "id": "eczaneapi",
+      "name": "EczaneAPI",
+      "priority": 4,
+      "status": "not_configured",
+      "type": "api",
+      "url": "https://eczaneapi.com",
+      "docs": "https://eczaneapi.com/docs",
+      "cost": "Similar to NobetEcza pricing",
+      "update_frequency": "hourly",
+      "data_coverage": "today only",
+      "reliability": "medium — claims 99.9% uptime, 500+ developers",
+      "setup": "1. Sign up at eczaneapi.com\n2. Get API key\n3. Create adapter script"
+    },
+    {
+      "id": "ibb_acik_veri",
+      "name": "İBB Açık Veri (Municipality Open Data)",
+      "priority": 5,
+      "status": "not_verified",
+      "type": "api",
+      "url": "https://data.ibb.gov.tr",
+      "cost": "$0",
+      "update_frequency": "unknown",
+      "data_coverage": "unknown — may be map-only embed, not REST API",
+      "reliability": "unknown — needs investigation",
+      "risks": [
+        "May only be a JavaScript map widget, not a queryable API",
+        "Data comes from İstanbul Eczacılar Odası (same upstream as others)"
+      ],
+      "setup": "1. Check data.ibb.gov.tr for 'eczane' dataset\n2. Test if REST endpoint exists\n3. Build adapter if viable"
+    },
+    {
+      "id": "edevlet",
+      "name": "e-Devlet Kapısı (Official Government Portal)",
+      "priority": 6,
+      "status": "not_viable_for_scraping",
+      "type": "authenticated_web",
+      "url": "https://www.turkiye.gov.tr",
+      "cost": "$0",
+      "update_frequency": "daily",
+      "data_coverage": "today + tomorrow",
+      "reliability": "highest — official government source",
+      "risks": [
+        "Requires TC kimlik authentication",
+        "Cannot be scraped without login",
+        "ToS likely prohibits automated access"
+      ],
+      "notes": "This is the ultimate source of truth but not viable for automated scraping. Use as manual verification reference."
+    },
+    {
+      "id": "manual",
+      "name": "Manual Entry (Emergency Fallback)",
+      "priority": 99,
+      "status": "always_available",
+      "type": "manual",
+      "cost": "$0 + 5 min/day",
+      "update_frequency": "when you remember",
+      "data_coverage": "whatever you enter",
+      "reliability": "depends on you",
+      "setup": "1. Check any source above manually\n2. Edit pharmacies.json by hand\n3. Set verified_by to 'manual'"
+    }
+  ],
+
+  "fallback_strategy": {
+    "description": "If primary source fails, try alternatives in priority order",
+    "on_scrape_failure": [
+      "Log error",
+      "Try next source in priority order",
+      "If all fail, keep last known good data",
+      "Set 'data_stale' flag so Elif warns users"
+    ],
+    "stale_data_message": "Verilerim bugün güncellenemedi. Bilgiler dünden kalmış olabilir. Lütfen eczaneyi aramadan önce teyit edin."
+  },
+
+  "accuracy_warning": "Her kaynakta şu uyarı var: 'Nöbetçi eczane bilgileri hatalı olabilmektedir. Lütfen eczaneye gitmeden önce telefonla arayıp teyit ediniz.' Bu uyarıyı Elif her yanıtta vermelidir."
+}

@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-surface": "#1c1c19",
+              "error-container": "#ffdad6",
+              "surface-container-highest": "#e5e2dd",
+              "surface-tint": "#00696d",
+              "primary-fixed": "#9df0f4",
+              "surface-container-lowest": "#ffffff",
+              "on-surface-variant": "#3e4949",
+              "background": "#fcf9f4",
+              "outline": "#6e7979",
+              "on-secondary-fixed": "#0c1d2c",
+              "surface-dim": "#dcdad5",
+              "on-tertiary-fixed": "#331200",
+              "outline-variant": "#bec9c9",
+              "on-background": "#1c1c19",
+              "surface": "#fcf9f4",
+              "inverse-primary": "#81d4d8",
+              "tertiary-fixed-dim": "#ffb68e",
+              "surface-variant": "#e5e2dd",
+              "primary-fixed-dim": "#81d4d8",
+              "surface-container-low": "#f6f3ee",
+              "secondary-fixed": "#d3e4fa",
+              "surface-bright": "#fcf9f4",
+              "primary": "#00595c",
+              "on-primary": "#ffffff",
+              "inverse-on-surface": "#f3f0eb",
+              "on-error-container": "#93000a",
+              "on-tertiary-fixed-variant": "#6f3814",
+              "inverse-surface": "#31302d",
+              "tertiary": "#7a401c",
+              "primary-container": "#0d7377",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#ffdbca",
+              "tertiary-container": "#975731",
+              "on-tertiary": "#ffffff",
+              "on-secondary-fixed-variant": "#384859",
+              "on-tertiary-container": "#ffe1d2",
+              "on-secondary": "#ffffff",
+              "secondary-fixed-dim": "#b7c8dd",
+              "surface-container-high": "#ebe8e3",
+              "secondary": "#506072",
+              "on-primary-fixed-variant": "#004f52",
+              "on-primary-fixed": "#002021",
+              "on-primary-container": "#a2f5f9",
+              "secondary-container": "#d3e4fa",
+              "surface-container": "#f0ede9",
+              "on-error": "#ffffff",
+              "on-secondary-container": "#566678"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f7f4ef;
+            color: #1a2a3a;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-header {
+            background-color: rgba(247, 244, 239, 0.85);
+            backdrop-filter: blur(12px);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 glass-header flex justify-between items-center px-8 py-4 w-full">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest flex items-center justify-center overflow-hidden">
+<img alt="Elif Logo" data-alt="minimalist professional logo design for a digital assistant named Elif using soft geometric shapes in navy and turquoise" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0lp6m0Hh_VwTLGtTDOAGHUlrf-xvRG_MEIgCgDh6Rgooj2Tgf9O7P_Fwx9__qt4K4qAEEjCFkpWrTF7eHdwplmMkzqQ7oNdwNqI-QZjASUF-_oIuFTquwc9vVtjaXJH6tyFQTqeYmzskmOoVcU4T3uihKYkLMbtmIcT97RK32cduCmUHtrcCGvACcfwU1vuKXiIUF9_-Xr8qfFG9BlrzJ8jCsvs7Rq-oZUsnwqAuOylqCt8eFWxFArEvdZEtX8V4Z4j6jifnD1aE"/>
+</div>
+<span class="text-[#1a2a3a] font-extrabold text-2xl tracking-tight">Elif</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#506072] hover:opacity-80 transition-opacity duration-300 active:scale-95">
+<span class="material-symbols-outlined">settings</span>
+</button>
+</div>
+</header>
+<main class="pt-24 px-6 md:px-[8.5rem] max-w-7xl mx-auto">
+<!-- Headline Section -->
+<div class="mb-10">
+<h1 class="text-[1.75rem] font-bold text-on-secondary-fixed leading-tight mb-2">Nöbetçi Eczaneler</h1>
+<p class="text-secondary text-sm">Size en yakın açık eczaneleri listeliyoruz.</p>
+</div>
+<!-- Dynamic Content Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between shadow-[0px_24px_48px_-12px_rgba(26,42,58,0.08)] transition-all duration-300 hover:bg-surface-container-low group">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex flex-col">
+<h2 class="text-xl font-bold text-on-secondary-fixed">Bahçeşehir Eczanesi</h2>
+<span class="text-primary font-medium text-sm mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">near_me</span> 1.2 km uzaklıkta
+                            </span>
+</div>
+<span class="bg-primary-container/10 text-primary-container px-3 py-1 rounded-full text-xs font-bold">AÇIK</span>
+</div>
+<p class="text-secondary leading-relaxed mb-6">Bahçeşehir 1. Kısım Mah. Doğa Parkı Cad. No:14/A Başakşehir/İstanbul</p>
+</div>
+<div class="flex items-center gap-3 mt-auto">
+<button class="flex-1 bg-surface-container-high text-on-secondary-fixed py-3 px-4 rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-80 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">directions</span>
+                        Yol Tarifi
+                    </button>
+<button class="flex-1 bg-gradient-to-tr from-[#00595c] to-[#0d7377] text-white py-3 px-4 rounded-full font-semibold text-sm flex items-center justify-center gap-2 shadow-[0px_4px_12px_rgba(13,115,119,0.2)] hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">call</span>
+                        Ara
+                    </button>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between shadow-[0px_24px_48px_-12px_rgba(26,42,58,0.08)] transition-all duration-300 hover:bg-surface-container-low group">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex flex-col">
+<h2 class="text-xl font-bold text-on-secondary-fixed">Papatya Eczanesi</h2>
+<span class="text-primary font-medium text-sm mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">near_me</span> 2.8 km uzaklıkta
+                            </span>
+</div>
+<span class="bg-primary-container/10 text-primary-container px-3 py-1 rounded-full text-xs font-bold">AÇIK</span>
+</div>
+<p class="text-secondary leading-relaxed mb-6">Mevlana Mah. Sultan Ahmet Cad. No:22/B Esenyurt/İstanbul</p>
+</div>
+<div class="flex items-center gap-3 mt-auto">
+<button class="flex-1 bg-surface-container-high text-on-secondary-fixed py-3 px-4 rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-80 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">directions</span>
+                        Yol Tarifi
+                    </button>
+<button class="flex-1 bg-gradient-to-tr from-[#00595c] to-[#0d7377] text-white py-3 px-4 rounded-full font-semibold text-sm flex items-center justify-center gap-2 shadow-[0px_4px_12px_rgba(13,115,119,0.2)] hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">call</span>
+                        Ara
+                    </button>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between shadow-[0px_24px_48px_-12px_rgba(26,42,58,0.08)] transition-all duration-300 hover:bg-surface-container-low group">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="flex flex-col">
+<h2 class="text-xl font-bold text-on-secondary-fixed">Güneş Eczanesi</h2>
+<span class="text-primary font-medium text-sm mt-1 flex items-center gap-1">
+<span class="material-symbols-outlined text-[18px]">near_me</span> 3.5 km uzaklıkta
+                            </span>
+</div>
+<span class="bg-primary-container/10 text-primary-container px-3 py-1 rounded-full text-xs font-bold">AÇIK</span>
+</div>
+<p class="text-secondary leading-relaxed mb-6">Atatürk Mah. İkitelli Cad. No:154 Küçükçekmece/İstanbul</p>
+</div>
+<div class="flex items-center gap-3 mt-auto">
+<button class="flex-1 bg-surface-container-high text-on-secondary-fixed py-3 px-4 rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:opacity-80 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">directions</span>
+                        Yol Tarifi
+                    </button>
+<button class="flex-1 bg-gradient-to-tr from-[#00595c] to-[#0d7377] text-white py-3 px-4 rounded-full font-semibold text-sm flex items-center justify-center gap-2 shadow-[0px_4px_12px_rgba(13,115,119,0.2)] hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined text-[20px]">call</span>
+                        Ara
+                    </button>
+</div>
+</div>
+<!-- Map Context Card (Asymmetric Element) -->
+<div class="bg-surface-container-highest rounded-lg overflow-hidden h-full min-h-[300px] relative shadow-[0px_24px_48px_-12px_rgba(26,42,58,0.08)]">
+<div class="absolute inset-0 grayscale opacity-40 bg-cover bg-center" data-alt="clean minimal vector map of a city district with soft teal highlights on pharmacy locations and clean limestone roads" data-location="Istanbul" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAP02lbYtDE8YdVWHAa1FnlhJ1IAMgRwAnDeDZHctxOaj_rY8TwPosHBD-ZQvf3X_RBnrJ54-_faYM7DfIvDI5pt-Io54WNV2nMgJnEjbWe29Wq6P7Kmivg55-xyZ_cv3lyvmfhK0WgEgDf9dJp40bpVB9gm_cKMWo1z_A8BCBGji8tcxnk0wg-5VNZjet21af9mH2WVpq6ksJLPurRLNp5dGT4fiJi5QMDdMRQeXiRLMJS9WzAw24oUfDdCGFVWCY9KDZJ86GtHY4')"></div>
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-highest via-transparent to-transparent"></div>
+<div class="absolute bottom-6 left-6 right-6">
+<button class="w-full bg-white/90 backdrop-blur-md text-on-secondary-fixed py-4 rounded-full font-bold shadow-lg flex items-center justify-center gap-3 hover:bg-white transition-all">
+<span class="material-symbols-outlined">map</span>
+                        Haritada Görüntüle
+                    </button>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 flex justify-around items-center px-6 pb-8 bg-white dark:bg-[#0c1d2c] rounded-t-[2rem] shadow-[0px_-12px_24px_-12px_rgba(26,42,58,0.08)]">
+<!-- History -->
+<a class="flex flex-col items-center justify-center text-[#506072] dark:text-[#bec9c9] p-4 hover:text-[#0d7377] transition-all duration-300 active:scale-90 cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px] mt-1">Geçmiş</span>
+</a>
+<!-- Voice Active (Mic) -->
+<a class="flex flex-col items-center justify-center bg-gradient-to-tr from-[#00595c] to-[#0d7377] text-white rounded-full p-6 shadow-[0px_0px_30px_rgba(129,212,216,0.5)] transform -translate-y-4 transition-all duration-300 active:scale-90 cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">mic</span>
+</a>
+<!-- Account -->
+<a class="flex flex-col items-center justify-center text-[#506072] dark:text-[#bec9c9] p-4 hover:text-[#0d7377] transition-all duration-300 active:scale-90 cubic-bezier(0.4, 0, 0.2, 1)" href="#">
+<span class="material-symbols-outlined">account_circle</span>
+<span class="font-['Plus_Jakarta_Sans'] font-medium text-[12px] mt-1">Profil</span>
+</a>
+</nav>
+</body></html>

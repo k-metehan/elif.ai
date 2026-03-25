@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+
+<html lang="tr"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error-container": "#93000a",
+              "surface-container": "#f0ede9",
+              "on-tertiary": "#ffffff",
+              "tertiary-fixed-dim": "#ffb68e",
+              "tertiary": "#7a401c",
+              "surface-container-highest": "#e5e2dd",
+              "error-container": "#ffdad6",
+              "on-surface": "#1c1c19",
+              "surface": "#fcf9f4",
+              "inverse-primary": "#81d4d8",
+              "inverse-surface": "#31302d",
+              "on-surface-variant": "#3e4949",
+              "on-primary-container": "#a2f5f9",
+              "surface-variant": "#e5e2dd",
+              "secondary": "#506072",
+              "primary": "#00595c",
+              "surface-container-low": "#f6f3ee",
+              "on-error": "#ffffff",
+              "on-tertiary-fixed": "#331200",
+              "inverse-on-surface": "#f3f0eb",
+              "error": "#ba1a1a",
+              "surface-container-high": "#ebe8e3",
+              "secondary-container": "#d3e4fa",
+              "on-background": "#1c1c19",
+              "surface-container-lowest": "#ffffff",
+              "surface-bright": "#fcf9f4",
+              "on-secondary": "#ffffff",
+              "background": "#fcf9f4",
+              "primary-fixed-dim": "#81d4d8",
+              "on-tertiary-fixed-variant": "#6f3814",
+              "on-secondary-fixed": "#0c1d2c",
+              "on-primary-fixed": "#002021",
+              "tertiary-container": "#975731",
+              "surface-tint": "#00696d",
+              "primary-fixed": "#9df0f4",
+              "outline": "#6e7979",
+              "tertiary-fixed": "#ffdbca",
+              "on-primary": "#ffffff",
+              "on-secondary-container": "#566678",
+              "secondary-fixed": "#d3e4fa",
+              "outline-variant": "#bec9c9",
+              "on-tertiary-container": "#ffe1d2",
+              "on-secondary-fixed-variant": "#384859",
+              "surface-dim": "#dcdad5",
+              "secondary-fixed-dim": "#b7c8dd",
+              "primary-container": "#0d7377",
+              "on-primary-fixed-variant": "#004f52"
+            },
+            fontFamily: {
+              "headline": ["Plus Jakarta Sans"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "1rem", "lg": "2rem", "xl": "3rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #fcf9f4; color: #1c1c19; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .active-nav-border { position: relative; }
+        .active-nav-border::after { content: ''; position: absolute; bottom: -4px; left: 0; right: 0; height: 2px; background-color: #0d7377; }
+        .shadow-tonal { box-shadow: 0px 24px 48px -12px rgba(26, 42, 58, 0.08); }
+    </style>
+</head>
+<body class="min-h-screen">
+<nav class="fixed top-0 w-full z-50 bg-[#f7f4ef]/85 backdrop-blur-md shadow-sm">
+<div class="flex justify-between items-center px-12 py-4 max-w-[1440px] mx-auto font-['Plus_Jakarta_Sans'] antialiased tracking-tight">
+<div class="text-2xl font-bold text-[#1a2a3a]">Elif</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="text-[#506072] hover:text-[#0d7377] transition-colors" href="#">Asistan</a>
+<a class="text-[#506072] hover:text-[#0d7377] transition-colors" href="#">Eczaneler</a>
+<a class="text-[#506072] hover:text-[#0d7377] transition-colors" href="#">Başvurular</a>
+<a class="text-[#0d7377] border-b-2 border-[#0d7377] pb-1 font-semibold" href="#">Ayarlar</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-[#f6f3ee] rounded-lg transition-all active:scale-95 text-[#506072]">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 hover:bg-[#f6f3ee] rounded-lg transition-all active:scale-95 text-[#506072]">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+</button>
+</div>
+</div>
+<div class="bg-[#e5e2dd] h-[1px] opacity-20"></div>
+</nav>
+<div class="pt-24 min-h-screen flex max-w-[1440px] mx-auto">
+<aside class="h-[calc(100vh-6rem)] w-72 sticky top-24 flex flex-col py-8 gap-6 bg-[#f0ede9] rounded-tr-lg rounded-br-lg">
+<div class="px-8 mb-4">
+<div class="w-12 h-12 rounded-full overflow-hidden mb-4 ring-2 ring-primary-container ring-offset-2 ring-offset-surface-container">
+<img class="w-full h-full object-cover" data-alt="portrait of a professional woman with soft natural lighting and neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD0mXzDh8yoOBlqa6mBal09dvfP_ujlZH241QqU_YAxn64P6el5t9FjbA1OZig5EysmfRmi6ZwAsHR4UokmBMiHG2DsR9nAscGbVbvMfUMg5Zg44nPdfrHuzuRAV1cKg1z2GQXeCf3s6DYxWwobBoSS-uRVPVVc9OEZaR1vVsyQNmdby8S2U8vCaTK0zcqTOhG52ugCvrMJbKM9mmU4D0LgqUF7uBzsodLMTbXGDnq0jDeEvO9-9lsxoRhyB8DLNUNp7YB8Qx42Cw4"/>
+</div>
+<h2 class="text-xl font-black text-[#1a2a3a]">Ayarlar</h2>
+<p class="text-sm text-secondary">Hesap ve tercih yönetimi</p>
+</div>
+<nav class="flex flex-col gap-1 pr-4">
+<a class="flex items-center gap-3 py-3 px-8 bg-white text-[#0d7377] rounded-r-full shadow-[0px_4px_12px_rgba(26,42,58,0.04)] font-semibold transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span>Profil Bilgileri</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-8 text-[#506072] hover:pl-10 transition-all rounded-r-full hover:bg-white/50" href="#">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+<span>Mahalle Tercihleri</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-8 text-[#506072] hover:pl-10 transition-all rounded-r-full hover:bg-white/50" href="#">
+<span class="material-symbols-outlined" data-icon="mic">mic</span>
+<span>Ses Ayarları</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-8 text-[#506072] hover:pl-10 transition-all rounded-r-full hover:bg-white/50" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span>Güvenlik</span>
+</a>
+<a class="flex items-center gap-3 py-3 px-8 text-[#506072] hover:pl-10 transition-all rounded-r-full hover:bg-white/50" href="#">
+<span class="material-symbols-outlined" data-icon="description">description</span>
+<span>Belgelerim</span>
+</a>
+</nav>
+<div class="mt-auto px-8">
+<button class="w-full bg-gradient-to-br from-[#00595c] to-[#0d7377] text-white py-3 rounded-full font-semibold shadow-lg active:scale-95 transition-all">
+                    Yeni Kayıt
+                </button>
+</div>
+</aside>
+<main class="flex-1 px-12 py-8 space-y-8">
+<header>
+<h1 class="text-4xl font-extrabold text-[#1a2a3a] tracking-tight mb-2">Profil Bilgileri</h1>
+<p class="text-secondary text-lg">Kişisel bilgilerinizi ve asistan etkileşim tercihlerini buradan güncelleyebilirsiniz.</p>
+</header>
+<section class="bg-surface-container-lowest rounded-lg p-10 shadow-tonal space-y-8">
+<div class="flex items-start gap-8">
+<div class="relative group">
+<div class="w-24 h-24 rounded-full overflow-hidden ring-4 ring-surface-container">
+<img class="w-full h-full object-cover" data-alt="closeup portrait of smiling woman with soft cinematic lighting and bokeh background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgpv6JhEFAhXTFwX0fwqBkRXf_qQY-HYMUPOWmAjF_I8IhBVCwAa1l9nDuNIE_eNzJl-RV94rgavja-kr1yeAeU0ZXz6Da6Sjg9rV8KAwm_WHjWMPBHLxWuVBEfHi23no1cGwfGLf-cWzThC2wIes5B16EKSkdaM6Vd7_Xa_csZJ6LOAYG11UJYY5DRWsuA13FGjsqj95VPep8_eJVrvAIMNs2DxXJPk8oU0scKMx6Ue-JYER7sP3NfnOXPFUWjzHhafygO4MBDOE"/>
+</div>
+<button class="absolute bottom-0 right-0 bg-primary-container text-white p-2 rounded-full shadow-md hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+</button>
+</div>
+<div class="flex-1 grid grid-cols-2 gap-6">
+<div class="space-y-1">
+<label class="text-xs font-semibold uppercase tracking-wider text-secondary">Ad Soyad</label>
+<input class="w-full bg-surface-container-low border-none rounded-DEFAULT px-4 py-3 focus:ring-2 focus:ring-primary/40 transition-all" type="text" value="Elif Yılmaz"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-semibold uppercase tracking-wider text-secondary">E-posta</label>
+<input class="w-full bg-surface-container-low border-none rounded-DEFAULT px-4 py-3 focus:ring-2 focus:ring-primary/40 transition-all" type="email" value="elif.yilmaz@istanbul.gov.tr"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-semibold uppercase tracking-wider text-secondary">Telefon</label>
+<input class="w-full bg-surface-container-low border-none rounded-DEFAULT px-4 py-3 focus:ring-2 focus:ring-primary/40 transition-all" type="tel" value="+90 532 000 00 00"/>
+</div>
+<div class="space-y-1">
+<label class="text-xs font-semibold uppercase tracking-wider text-secondary">TC Kimlik No</label>
+<input class="w-full bg-surface-container-high/50 border-none rounded-DEFAULT px-4 py-3 text-secondary-fixed-variant cursor-not-allowed" disabled="" type="text" value="123******89"/>
+</div>
+</div>
+</div>
+</section>
+<section class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+<div class="bg-surface-container-lowest rounded-lg p-8 shadow-tonal space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container" data-icon="location_on" style="font-variation-settings: 'FILL' 1;">location_on</span>
+<h3 class="text-xl font-bold text-[#1a2a3a]">Mahalle Tercihleri</h3>
+</div>
+<p class="text-sm text-secondary">İlgilendiğiniz mahalleleri seçerek yerel duyurulardan anında haberdar olun.</p>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-DEFAULT">
+<div class="flex flex-col">
+<span class="font-semibold">Beşiktaş, Bebek</span>
+<span class="text-xs text-secondary">Birincil Bölge</span>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-DEFAULT opacity-60">
+<div class="flex flex-col">
+<span class="font-semibold">Kadıköy, Moda</span>
+<span class="text-xs text-secondary">İkincil Bölge</span>
+</div>
+<div class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</div>
+</div>
+<button class="text-primary-container font-semibold flex items-center gap-2 hover:translate-x-1 transition-transform">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+                        Yeni Mahalle Ekle
+                    </button>
+</div>
+<div class="bg-surface-container-lowest rounded-lg p-8 shadow-tonal space-y-6">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary-container" data-icon="volume_up" style="font-variation-settings: 'FILL' 1;">volume_up</span>
+<h3 class="text-xl font-bold text-[#1a2a3a]">Ses Ayarları</h3>
+</div>
+<p class="text-sm text-secondary">Asistan Elif'in ses tonu ve konuşma hızı tercihlerini belirleyin.</p>
+<div class="space-y-6">
+<div class="space-y-3">
+<label class="text-xs font-semibold uppercase tracking-wider text-secondary flex justify-between">
+                                Konuşma Hızı <span>1.2x</span>
+</label>
+<input class="w-full h-2 bg-surface-container-highest rounded-lg appearance-none cursor-pointer accent-primary-container" type="range"/>
+</div>
+<div class="space-y-3">
+<label class="text-xs font-semibold uppercase tracking-wider text-secondary">Asistan Sesi</label>
+<div class="grid grid-cols-2 gap-3">
+<button class="py-3 px-4 rounded-DEFAULT border-2 border-primary-container bg-primary-container/5 text-primary-container font-bold text-sm">
+                                    Yumuşak (Varsayılan)
+                                </button>
+<button class="py-3 px-4 rounded-DEFAULT border-2 border-transparent bg-surface-container-low text-secondary font-semibold text-sm hover:border-outline-variant transition-colors">
+                                    Otoriter
+                                </button>
+</div>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-sm font-semibold">Sesli Yanıt Her Zaman Açık</span>
+<div class="relative inline-flex items-center cursor-pointer">
+<input checked="" class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-surface-container-highest peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary-container"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<div class="flex justify-end gap-4 pt-4">
+<button class="px-8 py-3 rounded-full text-secondary font-semibold hover:bg-surface-container-low transition-colors">
+                    Değişiklikleri İptal Et
+                </button>
+<button class="px-10 py-3 rounded-full bg-gradient-to-br from-[#00595c] to-[#0d7377] text-white font-bold shadow-lg hover:shadow-xl transition-all active:scale-95">
+                    Ayarları Kaydet
+                </button>
+</div>
+</main>
+</div>
+<footer class="mt-12 bg-[#f7f4ef] border-t border-[#e5e2dd]/20 py-12">
+<div class="flex flex-col md:flex-row justify-between items-center px-12 max-w-[1440px] mx-auto font-['Plus_Jakarta_Sans'] text-sm tracking-wide">
+<div class="mb-4 md:mb-0">
+<span class="font-bold text-[#1a2a3a]">Elif</span>
+<span class="text-[#506072] ml-2">© 2024 Elif Civic Assistant. Tüm hakları saklıdır.</span>
+</div>
+<div class="flex gap-8">
+<a class="text-[#506072] hover:text-[#1a2a3a] transition-colors" href="#">Gizlilik Politikası</a>
+<a class="text-[#506072] hover:text-[#1a2a3a] transition-colors" href="#">Kullanım Koşulları</a>
+<a class="text-[#506072] hover:text-[#1a2a3a] transition-colors" href="#">İletişim</a>
+</div>
+</div>
+</footer>
+</body></html>
