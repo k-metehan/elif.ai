@@ -398,13 +398,81 @@ async def generate_response(user_query: str, session_id: str) -> str:
     return response.choices[0].message.content
 
 
+def numbers_to_turkish(text: str) -> str:
+    """Convert numbers to written Turkish words so TTS pronounces them correctly.
+    Handles phone numbers (digit-by-digit) and regular numbers (as words)."""
+    import re
+
+    ones = ["", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"]
+    tens = ["", "on", "yirmi", "otuz", "kırk", "elli", "altmış", "yetmiş", "seksen", "doksan"]
+    digits_tr = ["sıfır", "bir", "iki", "üç", "dört", "beş", "altı", "yedi", "sekiz", "dokuz"]
+
+    def number_to_words(n):
+        """Convert integer to Turkish words."""
+        if n == 0:
+            return "sıfır"
+        if n < 0:
+            return "eksi " + number_to_words(-n)
+
+        parts = []
+        if n >= 1000:
+            thousands = n // 1000
+            if thousands == 1:
+                parts.append("bin")
+            else:
+                parts.append(number_to_words(thousands) + " bin")
+            n %= 1000
+        if n >= 100:
+            hundreds = n // 100
+            if hundreds == 1:
+                parts.append("yüz")
+            else:
+                parts.append(ones[hundreds] + " yüz")
+            n %= 100
+        if n >= 10:
+            parts.append(tens[n // 10])
+            n %= 10
+        if n > 0:
+            parts.append(ones[n])
+
+        return " ".join(parts)
+
+    def phone_to_words(match):
+        """Read phone numbers digit by digit."""
+        phone = match.group(0)
+        # Read each digit individually with spaces
+        spoken = " ".join(digits_tr[int(d)] for d in phone if d.isdigit())
+        return spoken
+
+    # First handle phone-like patterns (sequences of digits with spaces/dashes/parens)
+    # e.g. "0212 555 1234" or "(0212) 555-1234" or "112"
+    # Phone pattern: 3+ digits possibly separated by spaces, dashes, parens
+    text = re.sub(r'[\(\)]', '', text)  # Remove parens around area codes
+    text = re.sub(r'\b(\d[\d\s\-]{6,})\b', phone_to_words, text)
+
+    # Then handle remaining standalone numbers (1-4 digits, likely quantities)
+    def standalone_number(match):
+        n = int(match.group(0))
+        if n > 9999:
+            # Very large numbers: read digit by digit
+            return " ".join(digits_tr[int(d)] for d in match.group(0))
+        return number_to_words(n)
+
+    text = re.sub(r'\b(\d{1,4})\b', standalone_number, text)
+
+    return text
+
+
 async def synthesize_speech(text: str) -> bytes:
     """Synthesize speech using OpenAI TTS"""
+
+    # Convert numbers to Turkish words to prevent TTS slurring
+    tts_text = numbers_to_turkish(text)
 
     response = await client.audio.speech.create(
         model="tts-1",
         voice="nova",
-        input=text
+        input=tts_text
     )
 
     return response.content
