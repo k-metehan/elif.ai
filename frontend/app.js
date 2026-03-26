@@ -40,6 +40,23 @@ let audioChunks = [];
 let isRecording = false;
 let sessionId = null;
 
+// Safari audio workaround: pre-create Audio element during user gesture
+// Safari blocks audio.play() unless it's tied to a user interaction.
+// We "unlock" the audio element during the mic button press (a user gesture),
+// then reuse it to play the TTS response later.
+let safariAudio = null;
+function unlockAudioForSafari() {
+    safariAudio = new Audio();
+    // Play a silent audio to unlock the audio context on Safari
+    safariAudio.src = 'data:audio/wav;base64,UklGRiQAAABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQAAAAA=';
+    safariAudio.play().then(() => {
+        safariAudio.pause();
+        console.log("Safari audio unlocked");
+    }).catch(() => {
+        console.log("Audio unlock failed (non-Safari or already unlocked)");
+    });
+}
+
 // Initialize
 async function init() {
     console.log("Init running");
@@ -111,7 +128,10 @@ async function startRecording() {
         console.log("Already recording, ignoring");
         return;
     }
-    
+
+    // Unlock audio playback on Safari (must happen during user gesture)
+    unlockAudioForSafari();
+
     console.log("Starting recording...");
     
     try {
@@ -314,10 +334,16 @@ async function sendToBackend(audioBlob) {
 function playAudioResponse(audioUrl) {
     const fullUrl = `${VOICE_API}${audioUrl}`;
     console.log("Playing audio from:", fullUrl);
-    const audio = new Audio(fullUrl);
-    
+
+    // Reuse the Safari-unlocked audio element if available
+    const audio = safariAudio || new Audio();
+    audio.src = fullUrl;
+
     audio.play().catch(err => {
         console.error('Error playing audio:', err);
+        // Fallback: try with a fresh Audio element
+        const fallback = new Audio(fullUrl);
+        fallback.play().catch(e => console.error('Fallback audio also failed:', e));
     });
 }
 
