@@ -2,154 +2,17 @@
   "mahalle": "Bahçeşehir",
   "ilce": "Başakşehir",
   "il": "İstanbul",
-  "last_updated": "2026-03-22",
+  "last_updated": "2026-03-26",
   "verified_by": "auto_scrape",
-  "note": "Otomatik güncelleme: 22 Mart Pazar gün boyu ve 23 Mart P.tesi sabahına kadar.",
+  "scrape_source": "https://www.eczaneler.gen.tr/nobetci-istanbul-basaksehir",
+  "scrape_period": "26 Mart Perşembe akşamından 27 Mart Cuma sabahına kadar.",
+  "note": "Bugünün nöbetçi eczaneleri: 26 Mart Perşembe akşamından 27 Mart Cuma sabahına kadar.",
   "pharmacies": [
     {
       "id": "bah_001",
-      "name": "3.Cadde Eczanesi",
-      "address": "Bahçeşehir 2. Kısım Mahallesi, Şehit Polis Gaffar Okkan Caddesi, No:20/C, Başakşehir",
-      "phone": "0212 608 00 26",
-      "lat": 41.0745,
-      "lng": 28.6742,
-      "is_duty_today": false,
-      "duty_type": null,
-      "duty_hours": {
-        "start": "19:00",
-        "end": "08:30"
-      },
-      "notes": "Bahçeşehir-Esenkent Yolu üzeri, Başakşehir Semt Polikliniği 50m ilerisi, BİM Market Yanı. Gece nöbetinde kapı kapalı olabilir, zili çalın.",
-      "verified_at": "2026-03-22T10:00:00"
-    },
-    {
-      "id": "bah_002",
-      "name": "Bahçeşehir Eczanesi",
-      "address": "Bahçeşehir 1. Kısım Mahallesi, Süzer Bulvarı, No:4, Başakşehir",
-      "phone": "0212 669 34 34",
-      "lat": 41.0698,
-      "lng": 28.6823,
-      "is_duty_today": false,
-      "duty_type": null,
-      "duty_hours": null,
-      "notes": "Bahçeşehir 1. Kısım merkez eczanesi. Normal mesai: 09:00-19:00",
-      "verified_at": "2026-03-22T10:00:00"
-    },
-    {
-      "id": "bah_003",
-      "name": "Flora Eczanesi",
-      "address": "Bahçeşehir 2. Kısım Mahallesi, Mercedes Bulvarı, No:30A, Başakşehir",
-      "phone": "0212 999 56 84",
-      "lat": 41.0723,
-      "lng": 28.6798,
-      "is_duty_today": false,
-      "duty_type": null,
-      "duty_hours": null,
-      "notes": "Bahçeşehir 2. Kısım bölgesinde. Normal mesai: 09:00-19:00",
-      "verified_at": "2026-03-22T10:00:00"
-    },
-    {
-      "id": "bah_004",
-      "name": "Defne Eczanesi",
-      "address": "Bahçeşehir Mahallesi, Başakşehir",
-      "phone": "0212 669 96 59",
-      "lat": 41.0705,
-      "lng": 28.6815,
-      "is_duty_today": false,
-      "duty_type": null,
-      "duty_hours": null,
-      "notes": "Bahçeşehir bölgesi. Normal mesai: 09:00-19:00",
-      "verified_at": "2026-03-22T10:00:00"
-    },
-    {
-      "id": "bah_005",
-      "name": "Mavi Eczanesi",
-      "address": "Bahçeşehir Mahallesi, Başakşehir",
-      "phone": "0212 669 59 51",
-      "lat": 41.0712,
-      "lng": 28.6789,
-      "is_duty_today": false,
-      "duty_type": null,
-      "duty_hours": null,
-      "notes": "Bahçeşehir bölgesi. Normal mesai: 09:00-19:00",
-      "verified_at": "2026-03-22T10:00:00"
-    },
-    {
-      "id": "bah_006",
-      "name": "Boğazköy Eczanesi",
-      "address": "Bahçeşehir 2. Kısım Mahallesi, 1. Cadde, No:1/A, Başakşehir",
-      "phone": "0212 607 06 07",
-      "lat": 41.0789,
-      "lng": 28.6654,
-      "is_duty_today": false,
-      "duty_type": null,
-      "duty_hours": null,
-      "notes": "Boğazköy bölgesi. Normal mesai: 09:00-19:00",
-      "verified_at": "2026-03-22T10:00:00"
-    },
-    {
-      "id": "bah_007",
-      "name": "Han Eczanesi",
-      "address": "Bahçeşehir 1. Kısım Mahallesi, 2801. Sokak, Başakşehir",
-      "phone": "0212 809 00 82",
-      "lat": 41.0689,
-      "lng": 28.6834,
-      "is_duty_today": false,
-      "duty_type": null,
-      "duty_hours": null,
-      "notes": "Bahçeşehir 1. Kısım bölgesi. Normal mesai: 09:00-19:00",
-      "verified_at": "2026-03-22T10:00:00"
-    },
-    {
-      "id": "bah_008",
-      "name": "24. Bölge Eczanesi (Kayabaşı)",
-      "address": "Kayabaşı Mahallesi, Gökçeada Caddesi, R24 Blok No:3AKA, Başakşehir",
-      "phone": "0212 890 90 98",
-      "lat": 41.1123,
-      "lng": 28.6945,
-      "is_duty_today": false,
-      "duty_type": null,
-      "duty_hours": {
-        "start": "19:00",
-        "end": "08:30"
-      },
-      "notes": "TOKİ 24. Bölge, Hz.Osman Cami çaprazı, ŞOK Market karşısı. Bahçeşehir'e yakın nöbetçi alternatifi.",
-      "verified_at": "2026-03-22T10:00:00"
-    },
-    {
-      "id": "bah_009",
-      "name": "Şamlar Eczanesi",
-      "address": "Başakşehir Mahallesi, Başakşehir",
-      "phone": "0212 924 81 76",
-      "lat": 41.0823,
-      "lng": 28.7123,
-      "is_duty_today": false,
-      "duty_type": null,
-      "duty_hours": null,
-      "notes": "Başakşehir merkez bölgesi. Normal mesai: 09:00-19:00",
-      "verified_at": "2026-03-22T10:00:00"
-    },
-    {
-      "id": "bah_010",
-      "name": "Taha Eczanesi",
-      "address": "Başakşehir Mahallesi, Süleyman Çelebi Caddesi, B Blok No:13F, Başakşehir",
-      "phone": "0212 485 04 34",
-      "lat": 41.0856,
-      "lng": 28.7089,
-      "is_duty_today": false,
-      "duty_type": null,
-      "duty_hours": {
-        "start": "19:00",
-        "end": "08:30"
-      },
-      "notes": "ARTERİUM 2. Kısım Sitesi, A101 YANI. Alternatif nöbetçi eczane.",
-      "verified_at": "2026-03-22T10:00:00"
-    },
-    {
-      "id": "bah_011",
-      "name": "Belgin Eczanesi",
-      "address": "Başakşehir Mahallesi, Erdem Beyazıt Caddesi, Olimpa Konutları No:10/B-56 Başakşehir / İstanbul",
-      "phone": "0212 487 68 06",
+      "name": "Olimpa Eczanesi",
+      "address": "Başakşehir Mahallesi, Şair Sokak No:5 Başakşehir / İstanbul",
+      "phone": "0212 488 62 06",
       "lat": null,
       "lng": null,
       "is_duty_today": true,
@@ -158,15 +21,15 @@
         "start": "08:30",
         "end": "08:30"
       },
-      "notes": "Olimpa AVM'nin karşısındaki BİM Mağazasının yanı",
+      "notes": "Olimpa AVM içi",
       "semt": "",
-      "verified_at": "2026-03-22T22:36:39.480402"
+      "verified_at": "2026-03-26T22:58:31.064060"
     },
     {
-      "id": "bah_012",
-      "name": "Tekin Eczanesi",
-      "address": "Güvercintepe Mahallesi, Ahmet Yesevi Caddesi No:141/A-B Altınşehir / Başakşehir / İstanbul",
-      "phone": "0212 687 00 30",
+      "id": "bah_002",
+      "name": "Halise Eczanesi",
+      "address": "Güvercintepe Mahallesi, Ahmet Yesevi Caddesi No:139 Altınşehir / Başakşehir / İstanbul",
+      "phone": "0212 687 34 26",
       "lat": null,
       "lng": null,
       "is_duty_today": true,
@@ -177,13 +40,13 @@
       },
       "notes": "",
       "semt": "Altınşehir",
-      "verified_at": "2026-03-22T22:36:39.480411"
+      "verified_at": "2026-03-26T22:58:31.064064"
     },
     {
-      "id": "bah_013",
-      "name": "Su Eczanesi",
-      "address": "Bahçeşehir 2.Kısım Mahallesi, Şelale Caddesi No:1/D Başakşehir / İstanbul",
-      "phone": "0212 669 97 97",
+      "id": "bah_003",
+      "name": "Şelale Eczanesi",
+      "address": "Bahçeşehir 2.Kısım Mahallesi, Şelale Caddesi No:15/U Başakşehir / İstanbul",
+      "phone": "0212 669 09 11",
       "lat": null,
       "lng": null,
       "is_duty_today": true,
@@ -192,15 +55,15 @@
         "start": "08:30",
         "end": "08:30"
       },
-      "notes": "Onur Hipermaketin 200 metre yukarısı, Manolya Evlerinin içinde",
+      "notes": "Bahçeşehir Camii ve Bahçeşehir PTT'yi geçtikten sonra Abdi İbrahim İlköğretim Okulu üstü, Onur Hipermarket yanı",
       "semt": "Bahçeşehir",
-      "verified_at": "2026-03-22T22:36:39.480417"
+      "verified_at": "2026-03-26T22:58:31.064067"
     },
     {
-      "id": "bah_014",
-      "name": "Bizim Evler Eczanesi",
-      "address": "Tahtakale Mahallesi, Ayçiçeği Sokak No:8/10-A Avcılar / İstanbul",
-      "phone": "0212 397 34 34",
+      "id": "bah_004",
+      "name": "Lotus Eczanesi",
+      "address": "Kayabaşı Mahallesi, Veysel Karani Caddesi, Mavera-3 Sitesi A1 Blok No:7AG Kayaşehir Başakşehir / İstanbul",
+      "phone": "0532 479 01 71",
       "lat": null,
       "lng": null,
       "is_duty_today": true,
@@ -209,45 +72,9 @@
         "start": "08:30",
         "end": "08:30"
       },
-      "notes": "Ispartakule Mevki Bizimevler 2 Sitesi Çarşı-Happy Market yanı",
-      "semt": "Ispartakule",
-      "verified_at": "2026-03-22T22:36:39.480423"
-    },
-    {
-      "id": "bah_015",
-      "name": "Fenertepe Eczanesi",
-      "address": "Kayabaşı Mahallesi, Botanik Sokak No:17/2 Kayaşehir Başakşehir / İstanbul",
-      "phone": "0212 892 97 63",
-      "lat": null,
-      "lng": null,
-      "is_duty_today": true,
-      "duty_type": "nobetci",
-      "duty_hours": {
-        "start": "08:30",
-        "end": "08:30"
-      },
-      "notes": "Başakşehir 17 Nolu Aile Sağlığı Merkezi yanındaki 23. Bölge Sitesi içerisinde",
+      "notes": "Güneli Fırın yanı",
       "semt": "Kayaşehir",
-      "verified_at": "2026-03-22T22:36:39.480429"
-    },
-    {
-      "id": "bah_016",
-      "name": "Zübeyde Eczanesi",
-      "address": "Kayabaşı Mahallesi, Kayaşehir Bulvarı B3 Blok No:28/A Başakşehir / İstanbul",
-      "phone": "0212 823 82 24",
-      "lat": null,
-      "lng": null,
-      "is_duty_today": true,
-      "duty_type": "nobetci",
-      "duty_hours": {
-        "start": "08:30",
-        "end": "08:30"
-      },
-      "notes": "Başakşehir Evleri 1. Etap 1.Kısım altı, Sıralı Dükkanlar Migros yanı",
-      "semt": "Kayaşehir",
-      "verified_at": "2026-03-22T22:36:39.480437"
+      "verified_at": "2026-03-26T22:58:31.064068"
     }
-  ],
-  "scrape_source": "https://www.eczaneler.gen.tr/nobetci-istanbul-basaksehir",
-  "scrape_period": "22 Mart Pazar gün boyu ve 23 Mart P.tesi sabahına kadar."
+  ]
 }

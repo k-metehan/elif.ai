@@ -1,5 +1,5 @@
 {
-  "description": "Data source registry for cityconcierge.ai nöbetçi eczane data. If the primary source fails, fall back to alternatives in priority order.",
+  "description": "Data source registry for cityconcierge.io nöbetçi eczane data. If the primary source fails, fall back to alternatives in priority order.",
   "last_reviewed": "2026-03-22",
   "target_district": "Başakşehir",
   "target_area": "Bahçeşehir",

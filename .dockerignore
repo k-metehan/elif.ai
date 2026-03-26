@@ -1,0 +1,12 @@
+backend/venv/
+backend/audio_responses/
+backend/.env
+backend/__pycache__/
+frontend/stitch-reference/
+frontend/stitch-web/
+frontend/node_modules/
+pitch/
+.git/
+*.pyc
+*.pyo
+__pycache__/

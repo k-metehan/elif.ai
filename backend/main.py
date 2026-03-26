@@ -1,5 +1,5 @@
 """
-cityconcierge.ai MVP Backend
+cityconcierge.io MVP Backend
 Voice-in, voice-out nöbetçi eczane assistant for Bahçeşehir
 """
 
@@ -74,9 +74,16 @@ conversation_history: Dict[str, List[Dict]] = {}
 app = FastAPI(title="CityConcierge", version="0.1.0")
 
 # CORS for frontend
+ALLOWED_ORIGINS = [
+    "https://elif.cityconcierge.io",
+    "https://cityconcierge.io",
+    "http://localhost:8080",
+    "http://localhost:8000",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Restrict this in production
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -483,6 +490,20 @@ async def data_sources():
     return {"data_sources": sources, "total": len(sources)}
 
 
+# ===== STATIC FILE SERVING =====
+from fastapi.staticfiles import StaticFiles
+
+FRONTEND_DIR = Path(__file__).parent.parent / "frontend"
+if FRONTEND_DIR.exists():
+    PITCH_DIR = Path(__file__).parent / "pitch"
+    if PITCH_DIR.exists():
+        app.mount("/pitch", StaticFiles(directory=str(PITCH_DIR), html=True), name="pitch")
+    app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="frontend")
+    print(f"Serving frontend from: {FRONTEND_DIR}")
+else:
+    print(f"WARNING: Frontend directory not found at {FRONTEND_DIR}")
+
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000, reload=True)
+    port = int(os.getenv("PORT", "8000"))
+    uvicorn.run("main:app", host="0.0.0.0", port=port, reload=True)

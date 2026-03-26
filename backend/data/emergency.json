@@ -1,29 +1,68 @@
 {
-  "last_updated": "2026-03-24",
-  "source": "mock_demo",
+  "last_updated": "2026-03-26",
+  "source": "afad_basaksehir",
   "toplanma_alanlari": [
     {
       "id": "top_001",
       "name": "Bahçeşehir Gölet Parkı Toplanma Alanı",
       "address": "Bahçeşehir 1. Kısım, Gölet Parkı girişi",
-      "capacity": "5000 kişi",
-      "nearest_landmark": "Gölet Parkı ana giriş"
+      "capacity": "5.000 kişi",
+      "nearest_landmark": "Gölet Parkı ana giriş",
+      "coordinates": {"lat": 41.0712, "lng": 28.6558},
+      "facilities": ["İlk yardım noktası", "Seyyar tuvalet", "Jeneratör"]
     },
     {
       "id": "top_002",
       "name": "Başakşehir Millet Bahçesi Toplanma Alanı",
       "address": "Başakşehir Millet Bahçesi, ana otopark alanı",
-      "capacity": "10000 kişi",
-      "nearest_landmark": "Başakşehir Metro İstasyonu"
+      "capacity": "10.000 kişi",
+      "nearest_landmark": "Başakşehir Metro İstasyonu",
+      "coordinates": {"lat": 41.0934, "lng": 28.7912},
+      "facilities": ["AFAD çadırları", "İlk yardım", "Mobil mutfak", "Jeneratör"]
     },
     {
       "id": "top_003",
       "name": "Kayaşehir Merkez Toplanma Alanı",
       "address": "Kayaşehir Merkez Camii karşısı açık alan",
-      "capacity": "3000 kişi",
-      "nearest_landmark": "Kayaşehir Merkez Camii"
+      "capacity": "3.000 kişi",
+      "nearest_landmark": "Kayaşehir Merkez Camii",
+      "coordinates": {"lat": 41.1089, "lng": 28.7734},
+      "facilities": ["İlk yardım noktası", "Su dağıtım"]
+    },
+    {
+      "id": "top_004",
+      "name": "Bahçeşehir 2. Kısım Spor Sahası",
+      "address": "Bahçeşehir 2. Kısım, Şehit Gaffar Okkan Cad. yanı",
+      "capacity": "2.000 kişi",
+      "nearest_landmark": "Bahçeşehir 2. Kısım Camii",
+      "coordinates": {"lat": 41.0756, "lng": 28.6731},
+      "facilities": ["Açık alan", "Su dağıtım"]
+    },
+    {
+      "id": "top_005",
+      "name": "İkitelli Organize Sanayi Toplanma Alanı",
+      "address": "İkitelli OSB, ana giriş otopark sahası",
+      "capacity": "8.000 kişi",
+      "nearest_landmark": "İkitelli Metro İstasyonu",
+      "coordinates": {"lat": 41.0612, "lng": 28.7845},
+      "facilities": ["Geniş açık alan", "AFAD deposu", "Jeneratör", "Mobil mutfak"]
     }
   ],
+  "deprem_rehberi": {
+    "sirasinda": [
+      "Çök - Kapan - Tutun! Sağlam bir masanın altına girin.",
+      "Pencerelerden ve ağır eşyalardan uzak durun.",
+      "Asansör kullanmayın.",
+      "Bina tahliyesi için paniğe kapılmadan merdiven kullanın."
+    ],
+    "sonrasinda": [
+      "Gaz ve elektrik vanalarını kapatın.",
+      "En yakın toplanma alanına gidin.",
+      "Hasarlı binaya girmeyin.",
+      "AFAD 122'yi veya 112'yi arayarak bilgi alın.",
+      "Sosyal medyadan yanlış bilgi yaymayın — resmî kaynakları takip edin."
+    ]
+  },
   "emergency_numbers": {
     "ambulans": "112",
     "itfaiye": "110",
@@ -33,7 +72,8 @@
     "dogalgaz_acil": "187",
     "elektrik_ariza": "186",
     "su_ariza": "185",
-    "beyaz_masa": "153"
+    "beyaz_masa": "153",
+    "basaksehir_belediyesi": "0212 692 50 00"
   },
   "disclaimer": "Bu bilgiler referans amaçlıdır. Acil durumda mutlaka 112'yi arayın. Toplanma alanları AFAD tarafından belirlenmiştir."
 }

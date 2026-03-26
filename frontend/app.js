@@ -11,7 +11,7 @@ window.onerror = function(msg, url, line) {
 // API_BASE_URL is now in shared.js, but we need it here too for voice calls
 const VOICE_API = window.location.hostname === 'localhost'
     ? 'http://localhost:8000'
-    : `${window.location.protocol}//${window.location.hostname}:8000`;
+    : '';
 
 // DOM Elements — Desktop Stitch layout
 const micButton = document.getElementById('mic-button');
