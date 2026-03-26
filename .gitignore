@@ -1,0 +1,36 @@
+# Environment variables - NEVER commit this!
+.env
+backend/.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+
+# Audio responses (generated files)
+backend/audio_responses/
+
+# Database (ephemeral)
+backend/data/analytics.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Stitch reference files (not needed for deploy)
+frontend/stitch-reference/
+frontend/stitch-web/
+node_modules/
+pitch/
