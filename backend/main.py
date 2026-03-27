@@ -67,6 +67,10 @@ EVENTS_DATA = load_data_file("events.json")
 CLOSURES_DATA = load_data_file("closures.json")
 WATER_DATA = load_data_file("water.json")
 EMERGENCY_DATA = load_data_file("emergency.json")
+ELECTRICITY_DATA = load_data_file("electricity.json")
+WEATHER_DATA = load_data_file("weather.json")
+EARTHQUAKES_DATA = load_data_file("earthquakes.json")
+GAS_DATA = load_data_file("gas.json")
 
 # In-memory conversation storage (per session)
 conversation_history: Dict[str, List[Dict]] = {}
@@ -142,6 +146,14 @@ ACİL DURUM KURALLARI:
   3. İlgili acil numarayı ver (112 genel acil)
   4. Şu uyarıyı MUTLAKA ekle: "Bu bilgiler referans amaçlıdır. Acil durumda mutlaka 112'yi arayın."
 - Asla "panik yapmayın" deme. Bunun yerine: "Sakin olun, size yardımcı olayım."
+- Hava durumu sorulursa: güncel sıcaklık, hissedilen sıcaklık ve yarının tahminini ver.
+- Elektrik kesintisi sorulursa: etkilenen bölge ve süreyi söyle. BEDAŞ arıza: 186.
+- Doğalgaz kesintisi sorulursa: İGDAŞ acil hat: 187.
+- Deprem sorulursa: son 24 saatteki yakın depremleri söyle.
+  Küçük (< 4.0): "hissedilmeyecek büyüklükte" de.
+  Büyük (>= 4.0): acil durum protokolüne geç.
+- Başka bir konuda bilgi verirken, o gün vatandaşı etkileyen bir kesinti varsa
+  (su, elektrik, gaz) proaktif olarak bahset.
 
 Bugünün tarihi: {today}
 {freshness_warnings}
@@ -160,6 +172,18 @@ Bugünün tarihi: {today}
 
 === ACİL DURUM BİLGİLERİ ===
 {emergency_data}
+
+=== HAVA DURUMU ===
+{weather_data}
+
+=== ELEKTRİK KESİNTİLERİ ===
+{electricity_data}
+
+=== DOĞALGAZ KESİNTİLERİ ===
+{gas_data}
+
+=== SON DEPREMLER ===
+{earthquakes_data}
 """
 
 
@@ -354,6 +378,10 @@ async def generate_response(user_query: str, session_id: str) -> str:
     closures_info = json.dumps(CLOSURES_DATA, ensure_ascii=False, indent=2)
     water_info = json.dumps(WATER_DATA, ensure_ascii=False, indent=2)
     emergency_info = json.dumps(EMERGENCY_DATA, ensure_ascii=False, indent=2)
+    weather_info = json.dumps(WEATHER_DATA, ensure_ascii=False, indent=2) if WEATHER_DATA else "Hava durumu verisi yok."
+    electricity_info = json.dumps(ELECTRICITY_DATA, ensure_ascii=False, indent=2) if ELECTRICITY_DATA else "Elektrik kesintisi verisi yok."
+    gas_info = json.dumps(GAS_DATA, ensure_ascii=False, indent=2) if GAS_DATA else "Doğalgaz verisi yok."
+    earthquakes_info = json.dumps(EARTHQUAKES_DATA, ensure_ascii=False, indent=2) if EARTHQUAKES_DATA else "Deprem verisi yok."
 
     # Check data freshness
     warnings = []
@@ -362,10 +390,19 @@ async def generate_response(user_query: str, session_id: str) -> str:
         (EVENTS_DATA, "Etkinlik"),
         (CLOSURES_DATA, "Yol kapanışı"),
         (WATER_DATA, "Su kesintisi"),
+        (ELECTRICITY_DATA, "Elektrik kesintisi"),
+        (GAS_DATA, "Doğalgaz kesintisi"),
     ]:
         w = check_data_freshness(data, name)
         if w:
             warnings.append(w)
+    # Weather and earthquake freshness use tighter thresholds
+    w = check_data_freshness(WEATHER_DATA, "Hava durumu", max_age_days=1)
+    if w:
+        warnings.append(w)
+    w = check_data_freshness(EARTHQUAKES_DATA, "Deprem", max_age_days=1)
+    if w:
+        warnings.append(w)
     freshness_warnings = "\n".join(warnings) if warnings else ""
 
     system_message = SYSTEM_PROMPT.format(
@@ -376,6 +413,10 @@ async def generate_response(user_query: str, session_id: str) -> str:
         closures_data=closures_info,
         water_data=water_info,
         emergency_data=emergency_info,
+        weather_data=weather_info,
+        electricity_data=electricity_info,
+        gas_data=gas_info,
+        earthquakes_data=earthquakes_info,
     )
 
     # Build messages with conversation history

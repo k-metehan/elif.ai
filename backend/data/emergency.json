@@ -4,48 +4,75 @@
   "toplanma_alanlari": [
     {
       "id": "top_001",
-      "name": "Bahçeşehir Gölet Parkı Toplanma Alanı",
-      "address": "Bahçeşehir 1. Kısım, Gölet Parkı girişi",
+      "name": "Bahçeşehir Gölet Parkı",
+      "address": "Bahçeşehir 1. Kısım, Gölet Parkı ana giriş",
       "capacity": "5.000 kişi",
-      "nearest_landmark": "Gölet Parkı ana giriş",
-      "coordinates": {"lat": 41.0712, "lng": 28.6558},
+      "nearest_landmark": "Bahçeşehir Gölet",
+      "coordinates": {"lat": 41.064016, "lng": 28.697409},
       "facilities": ["İlk yardım noktası", "Seyyar tuvalet", "Jeneratör"]
     },
     {
       "id": "top_002",
-      "name": "Başakşehir Millet Bahçesi Toplanma Alanı",
-      "address": "Başakşehir Millet Bahçesi, ana otopark alanı",
-      "capacity": "10.000 kişi",
-      "nearest_landmark": "Başakşehir Metro İstasyonu",
-      "coordinates": {"lat": 41.0934, "lng": 28.7912},
-      "facilities": ["AFAD çadırları", "İlk yardım", "Mobil mutfak", "Jeneratör"]
+      "name": "Badem 16 Parkı",
+      "address": "Bahçeşehir 1. Kısım, Papağan Çıkmazı Sokak",
+      "capacity": "1.000 kişi",
+      "nearest_landmark": "Badem Sokak girişi",
+      "coordinates": {"lat": 41.0712, "lng": 28.6558},
+      "facilities": ["Açık alan"]
     },
     {
       "id": "top_003",
-      "name": "Kayaşehir Merkez Toplanma Alanı",
-      "address": "Kayaşehir Merkez Camii karşısı açık alan",
-      "capacity": "3.000 kişi",
-      "nearest_landmark": "Kayaşehir Merkez Camii",
-      "coordinates": {"lat": 41.1089, "lng": 28.7734},
+      "name": "Atatürk Parkı",
+      "address": "Bahçeşehir 2. Kısım, Belediye Hizmet Binası karşısı",
+      "capacity": "2.000 kişi",
+      "nearest_landmark": "Başakşehir Belediyesi Hizmet Binası",
+      "coordinates": {"lat": 41.0756, "lng": 28.6731},
       "facilities": ["İlk yardım noktası", "Su dağıtım"]
     },
     {
       "id": "top_004",
-      "name": "Bahçeşehir 2. Kısım Spor Sahası",
-      "address": "Bahçeşehir 2. Kısım, Şehit Gaffar Okkan Cad. yanı",
-      "capacity": "2.000 kişi",
-      "nearest_landmark": "Bahçeşehir 2. Kısım Camii",
-      "coordinates": {"lat": 41.0756, "lng": 28.6731},
-      "facilities": ["Açık alan", "Su dağıtım"]
+      "name": "Şelale Parkı",
+      "address": "Bahçeşehir 2. Kısım, Şelale Caddesi",
+      "capacity": "1.500 kişi",
+      "nearest_landmark": "Şelale Caddesi üzeri",
+      "coordinates": {"lat": 41.076, "lng": 28.674},
+      "facilities": ["Açık alan", "Çocuk oyun alanı"]
     },
     {
       "id": "top_005",
-      "name": "İkitelli Organize Sanayi Toplanma Alanı",
-      "address": "İkitelli OSB, ana giriş otopark sahası",
-      "capacity": "8.000 kişi",
-      "nearest_landmark": "İkitelli Metro İstasyonu",
-      "coordinates": {"lat": 41.0612, "lng": 28.7845},
-      "facilities": ["Geniş açık alan", "AFAD deposu", "Jeneratör", "Mobil mutfak"]
+      "name": "Gül 12 Parkı",
+      "address": "Bahçeşehir 2. Kısım, Gül Sokak",
+      "capacity": "1.000 kişi",
+      "nearest_landmark": "Gül Sokak 12",
+      "coordinates": {"lat": 41.066685, "lng": 28.679272},
+      "facilities": ["Açık alan"]
+    },
+    {
+      "id": "top_006",
+      "name": "Başakşehir Millet Bahçesi",
+      "address": "Kayabaşı Mahallesi, Olimpiyat Caddesi",
+      "capacity": "10.000 kişi",
+      "nearest_landmark": "Başakşehir Metro İstasyonu",
+      "coordinates": {"lat": 41.0934, "lng": 28.7912},
+      "facilities": ["AFAD çadırları", "İlk yardım", "Mobil mutfak", "Jeneratör", "Sığınak"]
+    },
+    {
+      "id": "top_007",
+      "name": "Fatih Terim Stadyumu",
+      "address": "Altınşehir Mahallesi, 2. Etap",
+      "capacity": "17.319 kişi (en büyük kapasite)",
+      "nearest_landmark": "Başakşehir Fatih Terim Stadyumu",
+      "coordinates": {"lat": 41.095, "lng": 28.785},
+      "facilities": ["Tribünler", "Jeneratör", "İlk yardım", "Sığınak", "Otopark"]
+    },
+    {
+      "id": "top_008",
+      "name": "Hoşdere Millet Parkı",
+      "address": "Bahçeşehir 2. Kısım, Hoşdere Caddesi",
+      "capacity": "2.000 kişi",
+      "nearest_landmark": "Hoşdere Caddesi üzeri",
+      "coordinates": {"lat": 41.077, "lng": 28.675},
+      "facilities": ["Açık alan", "Yürüyüş yolu"]
     }
   ],
   "deprem_rehberi": {
@@ -53,14 +80,28 @@
       "Çök - Kapan - Tutun! Sağlam bir masanın altına girin.",
       "Pencerelerden ve ağır eşyalardan uzak durun.",
       "Asansör kullanmayın.",
-      "Bina tahliyesi için paniğe kapılmadan merdiven kullanın."
+      "Bina tahliyesi için paniğe kapılmadan merdiven kullanın.",
+      "Sarsıntı bitene kadar sakin olun ve güvenli bir yerde bekleyin."
     ],
     "sonrasinda": [
       "Gaz ve elektrik vanalarını kapatın.",
       "En yakın toplanma alanına gidin.",
       "Hasarlı binaya girmeyin.",
       "AFAD 122'yi veya 112'yi arayarak bilgi alın.",
-      "Sosyal medyadan yanlış bilgi yaymayın — resmî kaynakları takip edin."
+      "Sosyal medyadan yanlış bilgi yaymayın — resmî kaynakları takip edin.",
+      "Radyo/TV'den resmi açıklamaları dinleyin.",
+      "Artçı sarsıntılara karşı dikkatli olun."
+    ],
+    "acil_canta": [
+      "Su (kişi başı 3 litre)",
+      "Kuru gıda ve konserve",
+      "İlk yardım çantası",
+      "El feneri ve yedek pil",
+      "Düdük (yardım çağrısı için)",
+      "Önemli belgelerin fotokopisi (kimlik, tapu, sigorta)",
+      "Powerbank ve şarj aletleri",
+      "Battaniye veya uyku tulumu",
+      "Çocuklar için oyuncak/kitap (morali yüksek tutmak için)"
     ]
   },
   "emergency_numbers": {
@@ -69,11 +110,15 @@
     "polis": "155",
     "jandarma": "156",
     "afad": "122",
+    "sahil_guvenlik": "158",
+    "orman_yangin": "177",
     "dogalgaz_acil": "187",
-    "elektrik_ariza": "186",
+    "elektrik_ariza_bedas": "186",
+    "elektrik_ariza_ayedas": "186",
     "su_ariza": "185",
     "beyaz_masa": "153",
-    "basaksehir_belediyesi": "0212 692 50 00"
+    "basaksehir_belediyesi": "0212 692 50 00",
+    "alosabiha": "444 77 01"
   },
-  "disclaimer": "Bu bilgiler referans amaçlıdır. Acil durumda mutlaka 112'yi arayın. Toplanma alanları AFAD tarafından belirlenmiştir."
+  "disclaimer": "Bu bilgiler referans amaçlıdır. Acil durumda mutlaka 112'yi arayın. Toplanma alanları AFAD ve belediye verilerinden derlenmiştir."
 }

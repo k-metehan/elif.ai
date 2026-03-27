@@ -174,6 +174,14 @@ def classify_topic_local(query: str) -> tuple:
         return "su_kesintisi", False
     if any(kw in q for kw in ["yol", "kapalı", "kapali", "trafik", "çalışma", "calisma", "kapanış", "kapanis"]):
         return "yol_kapanisi", False
+    if any(kw in q for kw in ["elektrik", "işık", "ışık", "karanlık", "bedaş", "bedas"]):
+        return "elektrik_kesintisi", False
+    if any(kw in q for kw in ["hava", "yağmur", "yagmur", "sıcak", "sicak", "soğuk", "soguk", "rüzgâr", "rüzgar", "ruzgar", "kar"]):
+        return "hava_durumu", False
+    if any(kw in q for kw in ["doğalgaz", "dogalgaz", "doğal gaz", "gaz", "igdaş", "igdas"]):
+        return "dogalgaz", False
+    if any(kw in q for kw in ["deprem", "sarsıntı", "sarsinti", "zelzele"]):
+        return "deprem", False
 
     return "genel", False
 

@@ -1,0 +1,37 @@
+name: Scrape Data
+on:
+  schedule:
+    - cron: '30 5 * * *'    # Pharmacies — 08:30 Istanbul (daily)
+    - cron: '0 */2 * * *'   # Weather — every 2 hours
+    - cron: '*/15 * * * *'  # Earthquakes — every 15 minutes
+    - cron: '15 */4 * * *'  # Water — every 4 hours
+    - cron: '30 */6 * * *'  # Electricity — every 6 hours
+    - cron: '0 6 * * *'     # Events — daily 09:00 Istanbul
+    - cron: '45 */6 * * *'  # Gas — every 6 hours
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install requests beautifulsoup4
+      - run: |
+          cd backend
+          python scrape_nobetci.py || true
+          python scrape_weather.py || true
+          python scrape_earthquakes.py || true
+          python scrape_water.py || true
+          python scrape_electricity.py || true
+          python scrape_events.py || true
+          python scrape_gas.py || true
+      - name: Commit if changed
+        run: |
+          git config user.name "Data Bot"
+          git config user.email "bot@cityconcierge.io"
+          git add backend/data/
+          git diff --staged --quiet || git commit -m "chore: auto-update data $(date -u +%Y-%m-%dT%H:%M)"
+          git push
