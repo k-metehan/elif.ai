@@ -218,7 +218,10 @@
                         </div>
                         <span id="weather-icon" class="material-symbols-outlined text-primary text-3xl">cloud_queue</span>
                     </div>
-                    <p id="weather-desc" class="text-sm text-secondary">Yükleniyor...</p>
+                    <div>
+                        <p id="weather-desc" class="text-sm text-secondary">Yükleniyor...</p>
+                        <p id="weather-freshness" class="text-xs text-outline mt-1"></p>
+                    </div>
                 </div>
                 <!-- Pharmacy card -->
                 <a href="eczaneler.html" class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between h-48 border border-[#bec9c9]/10 group hover:bg-surface-container-low transition-all">
@@ -239,25 +242,32 @@
 
         <!-- Right sidebar (4 cols) — hidden on mobile -->
         <div class="lg:col-span-4 flex flex-col gap-6">
-            <!-- Daily Summary -->
-            <div class="bg-surface-container-low rounded-lg p-6 border border-[#bec9c9]/10">
-                <h4 class="font-bold text-on-secondary-fixed mb-4">📋 Bugünkü Durum</h4>
-                <div id="daily-summary" class="space-y-2 text-sm">
-                    <div class="flex items-center gap-2 text-secondary">
-                        <span class="material-symbols-outlined text-base">refresh</span>
-                        <span>Yükleniyor...</span>
+            <!-- Alerts: Only shows when there's an actual problem -->
+            <div id="alerts-container" class="hidden">
+                <!-- Alerts will be injected here by JS -->
+            </div>
+            
+            <!-- Nearby Pharmacy Quick Link -->
+            <a href="eczaneler.html" class="bg-surface-container-lowest rounded-lg p-6 border border-[#bec9c9]/10 hover:bg-surface-container-low transition-all group">
+                <div class="flex items-center justify-between mb-2">
+                    <span class="material-symbols-outlined text-primary text-2xl">local_pharmacy</span>
+                    <span class="material-symbols-outlined text-secondary group-hover:translate-x-1 transition-transform">arrow_forward</span>
+                </div>
+                <h4 class="font-bold text-on-secondary-fixed">Nöbetçi Eczaneler</h4>
+                <p class="text-sm text-secondary mt-1">Size en yakın açık eczaneler</p>
+                <p id="pharma-freshness" class="text-xs text-outline mt-2"></p>
+            </a>
+            
+            <!-- Emergency Quick Link -->
+            <a href="tel:112" class="bg-error-container/10 rounded-lg p-6 border border-error/20 hover:bg-error-container/20 transition-all">
+                <div class="flex items-center gap-3">
+                    <span class="material-symbols-outlined text-error text-2xl">emergency</span>
+                    <div>
+                        <h4 class="font-bold text-error">Acil Durum</h4>
+                        <p class="text-sm text-error/80">112 - Ambulans, İtfaiye, Polis</p>
                     </div>
                 </div>
-            </div>
-            <!-- Map widget -->
-            <div class="bg-surface-container-lowest rounded-lg overflow-hidden border border-[#bec9c9]/10 h-64 relative">
-                <img alt="Map" class="w-full h-full object-cover opacity-60"
-                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuDqKwlFuBonUugkjFGwx8Y0lmcvsrn8M3TIi62wrLgnJUFh-6-oCU2iEHzjk0mswdwI8sYY7BKRRhvqlPc8GAs2e7GdMrFrwhNY3yLfheuuhFXgmkG6j33BFAcHqisM51z93-DablteuDDgYk45r3fhnCkdNVS73y8gTnJK5IoBex0cUJPa4X_gsUO_s3eaAjJmgZv9EYSYGAFfMbrrb_Vr9Mb5vtHmHiPVtBsP7cWXHsGQQO5IYJEhJD4BWmNkiVTCpoZaC7ix7pU">
-                <div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest/80 to-transparent"></div>
-                <div class="absolute bottom-4 left-4">
-                    <span class="bg-primary-container text-on-primary-container px-3 py-1 rounded-full text-xs font-semibold">Yakın Yerler</span>
-                </div>
-            </div>
+            </a>
         </div>
     </div>
 
@@ -401,89 +411,130 @@ async function loadWeather() {
             desc += " Yarın yağmur bekleniyor.";
         }
         document.getElementById('weather-desc').textContent = desc;
+        
+        // Add freshness label
+        const freshness = formatFreshness(data._meta?.updated_at || data.last_updated);
+        const freshnessEl = document.getElementById('weather-freshness');
+        if (freshnessEl && freshness) {
+            freshnessEl.textContent = freshness;
+        }
     } catch (e) {
         console.log('Weather load failed:', e);
         // Keep default/placeholder values
     }
 }
 
-// Load daily summary
-async function loadDailySummary() {
-    const container = document.getElementById('daily-summary');
+// Format date for freshness labels
+function formatFreshness(dateStr) {
+    if (!dateStr) return '';
+    try {
+        const date = new Date(dateStr);
+        const now = new Date();
+        const hoursDiff = Math.floor((now - date) / (1000 * 60 * 60));
+        
+        if (hoursDiff < 1) return 'Az önce güncellendi';
+        if (hoursDiff < 24) return `${hoursDiff} saat önce`;
+        const daysDiff = Math.floor(hoursDiff / 24);
+        return `${daysDiff} gün önce`;
+    } catch (e) {
+        return dateStr;
+    }
+}
+
+// Load alerts: Only shows when something is actually broken
+async function loadAlerts() {
+    const container = document.getElementById('alerts-container');
+    if (!container) return;
+    
     try {
         const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:8000' : '';
         
-        // Fetch all data in parallel with timeout
-        const [weatherRes, pharmaRes, waterRes, eqRes] = await Promise.allSettled([
-            fetchWithTimeout(`${API_BASE_URL}/api/weather`, 5000).catch(() => null),
-            fetchWithTimeout(`${API_BASE_URL}/api/pharmacies`, 5000).catch(() => null),
+        // Only fetch outage data
+        const [waterRes, elecRes] = await Promise.allSettled([
             fetchWithTimeout(`${API_BASE_URL}/api/water`, 5000).catch(() => null),
-            fetchWithTimeout(`${API_BASE_URL}/api/earthquakes`, 5000).catch(() => null),
+            fetchWithTimeout(`${API_BASE_URL}/api/electricity`, 5000).catch(() => null),
         ]);
         
-        const weather = weatherRes.status === 'fulfilled' && weatherRes.value ? await weatherRes.value.json().catch(() => null) : null;
-        const pharma = pharmaRes.status === 'fulfilled' && pharmaRes.value ? await pharmaRes.value.json().catch(() => null) : null;
         const water = waterRes.status === 'fulfilled' && waterRes.value ? await waterRes.value.json().catch(() => null) : null;
-        const eq = eqRes.status === 'fulfilled' && eqRes.value ? await eqRes.value.json().catch(() => null) : null;
+        const elec = elecRes.status === 'fulfilled' && elecRes.value ? await elecRes.value.json().catch(() => null) : null;
         
-        let html = '';
+        let alertsHtml = '';
+        let hasAlerts = false;
         
-        // Weather
-        if (weather && weather.current) {
-            html += `<div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-primary text-base">thermostat</span>
-                <span class="text-secondary">${weather.current.temperature}°C, ${weather.current.weather_description}</span>
-            </div>`;
-        }
-        
-        // Pharmacies
-        if (pharma && pharma.pharmacies) {
-            const count = pharma.pharmacies.length;
-            html += `<div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-primary text-base">local_pharmacy</span>
-                <span class="text-secondary">${count} nöbetçi eczane</span>
-            </div>`;
-        }
-        
-        // Water outages
+        // Water outage alert (only if there are actual outages)
         if (water && water.outages && water.outages.length > 0) {
             const outage = water.outages[0];
-            html += `<div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-error text-base">water_drop</span>
-                <span class="text-error text-xs">Su kesintisi: ${outage.neighborhoods?.[0] || 'Bazı bölgeler'}</span>
-            </div>`;
-        } else {
-            html += `<div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-success text-base text-green-600">check_circle</span>
-                <span class="text-secondary text-xs">Su kesintisi yok</span>
-            </div>`;
+            const freshness = formatFreshness(water._meta?.updated_at || water.last_updated);
+            alertsHtml += `
+                <div class="bg-error-container/20 rounded-lg p-4 border border-error/30 mb-3">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-error">water_drop</span>
+                        <div>
+                            <h5 class="font-semibold text-error text-sm">Su Kesintisi</h5>
+                            <p class="text-error/80 text-sm mt-1">${outage.neighborhoods?.join(', ') || 'Bazı bölgeler'} - ${outage.date || 'Bugün'} ${outage.start_time || ''}</p>
+                            <p class="text-error/60 text-xs mt-1">${freshness}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            hasAlerts = true;
         }
         
-        // Earthquakes
-        if (eq && eq.earthquakes && eq.earthquakes.length > 0) {
-            const count = eq.earthquakes.length;
-            html += `<div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-warning text-base text-orange-500">vibration</span>
-                <span class="text-secondary text-xs">${count} deprem kaydı (son 24s)</span>
-            </div>`;
-        } else {
-            html += `<div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-success text-base text-green-600">check_circle</span>
-                <span class="text-secondary text-xs">Deprem kaydı yok</span>
-            </div>`;
+        // Electricity outage alert (only if there are actual outages)
+        if (elec && elec.outages && elec.outages.length > 0) {
+            const outage = elec.outages[0];
+            const freshness = formatFreshness(elec._meta?.updated_at || elec.last_updated);
+            alertsHtml += `
+                <div class="bg-warning-container/20 rounded-lg p-4 border border-warning/30 mb-3">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-warning">bolt</span>
+                        <div>
+                            <h5 class="font-semibold text-warning text-sm">Elektrik Kesintisi</h5>
+                            <p class="text-warning/80 text-sm mt-1">${outage.affected_area || 'Bazı bölgeler'} - ${outage.date || 'Bugün'} ${outage.start_time || ''}</p>
+                            <p class="text-warning/60 text-xs mt-1">${freshness}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            hasAlerts = true;
         }
         
-        container.innerHTML = html || '<p class="text-secondary">Veri alınamadı</p>';
+        // Only show container if there are actual alerts
+        if (hasAlerts) {
+            container.innerHTML = alertsHtml;
+            container.classList.remove('hidden');
+        }
+        
     } catch (e) {
-        console.log('Daily summary load failed:', e);
-        container.innerHTML = '<p class="text-secondary text-xs">Durum bilgisi yüklenemedi</p>';
+        console.log('Alerts load failed:', e);
+        // Silently fail - no alerts shown if we can't check
+    }
+}
+
+// Load freshness labels for sidebar items
+async function loadFreshnessLabels() {
+    try {
+        const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:8000' : '';
+        
+        // Pharmacy freshness
+        const pharmaRes = await fetchWithTimeout(`${API_BASE_URL}/api/pharmacies`, 5000).catch(() => null);
+        if (pharmaRes && pharmaRes.ok) {
+            const pharma = await pharmaRes.json();
+            const freshness = formatFreshness(pharma._meta?.updated_at || pharma.last_updated);
+            const el = document.getElementById('pharma-freshness');
+            if (el) el.textContent = freshness ? `Güncellendi: ${freshness}` : '';
+        }
+        
+    } catch (e) {
+        console.log('Freshness labels load failed:', e);
     }
 }
 
 // Load on page load
 document.addEventListener('DOMContentLoaded', () => {
     loadWeather();
-    loadDailySummary();
+    loadAlerts();
+    loadFreshnessLabels();
 });
 </script>
 </body>

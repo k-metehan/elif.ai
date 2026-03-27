@@ -1,20 +1,23 @@
-name: Scrape Data
+name: Refresh Fallback Data
+
+# Weather and earthquakes are now fetched LIVE at runtime.
+# This workflow only updates the static fallback JSON files
+# so cold starts have recent data. It's NOT critical path.
 
 on:
   schedule:
-    - cron: '0 */2 * * *'   # Weather: every 2 hours
-    - cron: '*/15 * * * *'  # Earthquakes: every 15 minutes
-  workflow_dispatch:
+    - cron: '0 6 * * *'   # Once daily at 06:00 UTC (09:00 Istanbul)
+  workflow_dispatch:       # Manual trigger
 
 permissions:
   contents: write
 
 concurrency:
-  group: scrape-data
+  group: refresh-data
   cancel-in-progress: true
 
 jobs:
-  scrape:
+  refresh:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -23,40 +26,29 @@ jobs:
         with:
           python-version: '3.12'
 
-      - name: Install scraper dependencies
-        run: pip install requests
+      - name: Install dependencies
+        run: pip install requests beautifulsoup4
 
-      - name: Run scheduled scraper
+      - name: Refresh weather fallback
         working-directory: backend
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "Manual run: updating weather and earthquakes"
-            python scrape_weather.py
-            python scrape_earthquakes.py
-          elif [ "${{ github.event.schedule }}" = "0 */2 * * *" ]; then
-            echo "Scheduled run: updating weather"
-            python scrape_weather.py
-          elif [ "${{ github.event.schedule }}" = "*/15 * * * *" ]; then
-            echo "Scheduled run: updating earthquakes"
-            python scrape_earthquakes.py
-          else
-            echo "No scraper configured for schedule '${{ github.event.schedule }}'"
-            exit 1
-          fi
+        run: python scrape_weather.py || echo "Weather scrape failed (non-critical)"
 
-      - name: Check what changed
-        run: |
-          git status --short
-          git diff --stat
+      - name: Refresh earthquakes fallback
+        working-directory: backend
+        run: python scrape_earthquakes.py || echo "Earthquake scrape failed (non-critical)"
 
-      - name: Commit and push if data changed
+      - name: Refresh pharmacies
+        working-directory: backend
+        run: python scrape_nobetci.py || echo "Pharmacy scrape failed (non-critical)"
+
+      - name: Commit if data changed
         run: |
           git config user.name "Data Bot"
           git config user.email "bot@cityconcierge.io"
-          git add backend/data/weather.json backend/data/earthquakes.json
+          git add backend/data/*.json
           if git diff --staged --quiet; then
-            echo "No data changes to commit"
+            echo "No data changes"
           else
-            git commit -m "chore: auto-update data $(date -u +%Y-%m-%dT%H:%M)"
+            git commit -m "chore: daily data refresh $(date -u +%Y-%m-%d)"
             git push
           fi

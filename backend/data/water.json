@@ -1,26 +1,6 @@
 {
-  "last_updated": "2026-03-26",
-  "source": "mock_demo",
-  "outages": [
-    {
-      "id": "wtr_001",
-      "type": "planned",
-      "title": "Bahçeşehir 2. Kısım Su Kesintisi",
-      "description": "Şebeke bakım çalışması nedeniyle su kesintisi yapılacaktır.",
-      "affected_area": "Bahçeşehir 2. Kısım, Camii Mahallesi",
-      "start_time": "2026-03-26T09:00:00",
-      "end_time": "2026-03-26T18:00:00",
-      "tip": "Önceden su depolamanızı tavsiye ederiz."
-    },
-    {
-      "id": "wtr_002",
-      "type": "planned",
-      "title": "Ispartakule Bölgesi Su Arızası",
-      "description": "Ana boru hattı tamiratı.",
-      "affected_area": "Ispartakule, Kayaşehir kavşağı civarı",
-      "start_time": "2026-03-27T08:00:00",
-      "end_time": "2026-03-27T14:00:00",
-      "tip": "Alternatif olarak çeşme suyu kullanabilirsiniz."
-    }
-  ]
+  "last_updated": null,
+  "source": "manual",
+  "outages": [],
+  "note": "Su kesintisi verisi şu an alınamıyor. İSKİ arıza hattı: 185"
 }

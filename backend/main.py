@@ -8,6 +8,7 @@ import os
 import time
 import uuid
 import secrets
+import threading
 from datetime import datetime
 from pathlib import Path
 from typing import Optional, List, Dict
@@ -20,6 +21,8 @@ from fastapi.responses import FileResponse, JSONResponse, HTMLResponse
 from fastapi.security import HTTPBasic, HTTPBasicCredentials
 
 from analytics import log_query, classify_topic_local, get_stats
+from scrape_weather import fetch_weather
+from scrape_earthquakes import fetch_earthquakes
 
 # Load environment variables
 load_dotenv()
@@ -68,9 +71,59 @@ CLOSURES_DATA = load_data_file("closures.json")
 WATER_DATA = load_data_file("water.json")
 EMERGENCY_DATA = load_data_file("emergency.json")
 ELECTRICITY_DATA = load_data_file("electricity.json")
-WEATHER_DATA = load_data_file("weather.json")
-EARTHQUAKES_DATA = load_data_file("earthquakes.json")
 GAS_DATA = load_data_file("gas.json")
+
+# --- Live API cache for weather & earthquakes ---
+# These are fetched live from public APIs, not from static files.
+# Cache prevents hammering the APIs on every voice request.
+_cache: Dict[str, tuple] = {}  # key -> (data, timestamp)
+_cache_lock = threading.Lock()
+
+WEATHER_TTL = 7200       # 2 hours
+EARTHQUAKE_TTL = 900     # 15 minutes
+
+
+def get_cached(key: str, fetcher, ttl_seconds: int, fallback_file: str = "") -> dict:
+    """Return cached data, refresh if stale. Falls back to static file on error."""
+    now = time.time()
+    with _cache_lock:
+        if key in _cache:
+            data, ts = _cache[key]
+            if now - ts < ttl_seconds:
+                return data
+
+    # Cache miss or expired — fetch live
+    try:
+        data = fetcher()
+        with _cache_lock:
+            _cache[key] = (data, now)
+        # Also persist to disk so next cold start has recent data
+        if fallback_file:
+            try:
+                (DATA_DIR / fallback_file).write_text(
+                    json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8"
+                )
+            except Exception:
+                pass  # disk write is best-effort
+        return data
+    except Exception as e:
+        print(f"WARNING: Live fetch for {key} failed: {e}")
+        # Return stale cache if available
+        with _cache_lock:
+            if key in _cache:
+                return _cache[key][0]
+        # Last resort: load from static file
+        if fallback_file:
+            return load_data_file(fallback_file)
+        return {}
+
+
+def get_weather() -> dict:
+    return get_cached("weather", fetch_weather, WEATHER_TTL, "weather.json")
+
+
+def get_earthquakes() -> dict:
+    return get_cached("earthquakes", fetch_earthquakes, EARTHQUAKE_TTL, "earthquakes.json")
 
 # In-memory conversation storage (per session)
 conversation_history: Dict[str, List[Dict]] = {}
@@ -132,11 +185,16 @@ Samimi, sıcak ve yardımseversin. Kısa cevap ver — 2-3 cümle yeter.
 
 Kurallar:
 - SADECE sana verilen verileri kullan. Tahmin yapma, uydurma.
+- Veride "note" alanı varsa ve veri listesi boşsa, o verinin henüz mevcut olmadığını dürüstçe söyle.
+  Örnek: "Su kesintisi bilgim şu an yok, ama İSKİ arıza hattını arayabilirsin: 185"
+- Veri "last_updated" tarihi 2 günden eskiyse, "bu bilgi X gün önce güncellenmiş, değişmiş olabilir" de.
 - Her eczane cevabında telefon numarasını söyle.
 - Her zaman "gitmeden önce bir arayın" de — nöbetçi değişebiliyor.
 - Gece nöbetinde kapı kapalı olabilir, zili çalmalarını hatırlat.
-- Su kesintisi veya yol kapanışı sorulursa, etkilenen bölgeyi ve süreyi söyle.
-- Etkinlik sorulursa, tarih, saat ve yer bilgisini ver.
+- Su kesintisi veya yol kapanışı sorulursa ve verin varsa, etkilenen bölgeyi ve süreyi söyle.
+  Verin yoksa: ilgili acil hattı ver (İSKİ: 185, BEDAŞ: 186, İGDAŞ: 187, Beyaz Masa: 153).
+- Etkinlik sorulursa ve verin varsa, tarih, saat ve yer bilgisini ver.
+  Verin yoksa: "Şu an elimde güncel etkinlik listesi yok, basaksehir.bel.tr'ye bakmanı öneririm." de.
 - Bilmiyorsan: "Hmm, bunu bilmiyorum ama Beyaz Masa'yı arayabilirsin: 153"
 - İstanbul Türkçesi kullan: "şurada", "hemen", "bir bakayım"
 
@@ -148,13 +206,15 @@ ACİL DURUM KURALLARI:
   4. Şu uyarıyı MUTLAKA ekle: "Bu bilgiler referans amaçlıdır. Acil durumda mutlaka 112'yi arayın."
 - Asla "panik yapmayın" deme. Bunun yerine: "Sakin olun, size yardımcı olayım."
 - Hava durumu sorulursa: güncel sıcaklık, hissedilen sıcaklık ve yarının tahminini ver.
-- Elektrik kesintisi sorulursa: etkilenen bölge ve süreyi söyle. BEDAŞ arıza: 186.
-- Doğalgaz kesintisi sorulursa: İGDAŞ acil hat: 187.
+- Elektrik kesintisi sorulursa ve verin varsa: etkilenen bölge ve süreyi söyle.
+  Verin yoksa: "Elimde güncel elektrik kesintisi bilgisi yok. BEDAŞ arıza: 186."
+- Doğalgaz kesintisi sorulursa ve verin varsa: etkilenen bölge ve süreyi söyle.
+  Verin yoksa: "Elimde güncel doğalgaz bilgisi yok. İGDAŞ acil hat: 187."
 - Deprem sorulursa: son 24 saatteki yakın depremleri söyle.
   Küçük (< 4.0): "hissedilmeyecek büyüklükte" de.
   Büyük (>= 4.0): acil durum protokolüne geç.
 - Başka bir konuda bilgi verirken, o gün vatandaşı etkileyen bir kesinti varsa
-  (su, elektrik, gaz) proaktif olarak bahset.
+  (su, elektrik, gaz) proaktif olarak bahset. Verin yoksa bahsetme.
 
 Bugünün tarihi: {today}
 {freshness_warnings}
@@ -188,6 +248,34 @@ Bugünün tarihi: {today}
 """
 
 
+def with_freshness(data: dict, name: str, max_age_days: int = 2) -> dict:
+    """Add _meta field with freshness info to API response."""
+    last_updated = data.get("last_updated")
+    note = data.get("note")
+    status = "unavailable"
+    age_days = None
+
+    if last_updated:
+        try:
+            updated_date = datetime.strptime(last_updated, "%Y-%m-%d")
+            age_days = (datetime.now() - updated_date).days
+            status = "fresh" if age_days <= max_age_days else "stale"
+        except ValueError:
+            status = "unknown"
+    elif not note:
+        status = "unknown"
+
+    meta = {
+        "last_updated": last_updated,
+        "age_days": age_days,
+        "status": status,
+    }
+    if note:
+        meta["note"] = note
+
+    return {**data, "_meta": meta}
+
+
 @app.get("/health")
 async def health_check():
     """Health check endpoint"""
@@ -195,45 +283,47 @@ async def health_check():
 
 
 @app.get("/api/pharmacies")
-async def get_pharmacies():
-    """Get all pharmacy data (for debugging)"""
-    return PHARMACY_DATA
+async def api_pharmacies():
+    """Get pharmacy data with freshness info."""
+    return with_freshness(PHARMACY_DATA, "Eczane", max_age_days=1)
 
 
 @app.get("/api/weather")
-async def get_weather():
-    """Get weather data"""
-    return WEATHER_DATA
+async def api_weather():
+    """Get live weather data (cached 2h)."""
+    data = get_weather()
+    return {**data, "_meta": {"status": "live", "cache_ttl_seconds": WEATHER_TTL}}
 
 
 @app.get("/api/earthquakes")
-async def get_earthquakes():
-    """Get earthquake data"""
-    return EARTHQUAKES_DATA
+async def api_earthquakes():
+    """Get live earthquake data (cached 15min)."""
+    data = get_earthquakes()
+    return {**data, "_meta": {"status": "live", "cache_ttl_seconds": EARTHQUAKE_TTL}}
 
 
 @app.get("/api/events")
-async def get_events():
-    """Get events data"""
-    return EVENTS_DATA
+async def api_events():
+    """Get events data with freshness info."""
+    return with_freshness(EVENTS_DATA, "Etkinlik")
 
 
 @app.get("/api/water")
-async def get_water():
-    """Get water outage data"""
-    return WATER_DATA
+async def api_water():
+    """Get water outage data with freshness info."""
+    return with_freshness(WATER_DATA, "Su Kesintisi")
 
 
 @app.get("/api/electricity")
-async def get_electricity():
-    """Get electricity outage data"""
-    return ELECTRICITY_DATA
+async def api_electricity():
+    """Get electricity outage data with freshness info."""
+    return with_freshness(ELECTRICITY_DATA, "Elektrik Kesintisi")
 
 
 @app.get("/api/gas")
-async def get_gas():
-    """Get gas outage data"""
-    return GAS_DATA
+async def api_gas():
+    """Get gas outage data with freshness info."""
+    return with_freshness(GAS_DATA, "Doğalgaz")
 
 
 @app.post("/api/voice")
@@ -409,18 +499,22 @@ async def generate_response(user_query: str, session_id: str) -> str:
 
     today = datetime.now().strftime("%Y-%m-%d")
 
+    # Fetch live data for weather and earthquakes
+    weather_live = get_weather()
+    earthquakes_live = get_earthquakes()
+
     # Format all data for the prompt
     pharmacy_info = json.dumps(PHARMACY_DATA, ensure_ascii=False, indent=2)
     events_info = json.dumps(EVENTS_DATA, ensure_ascii=False, indent=2)
     closures_info = json.dumps(CLOSURES_DATA, ensure_ascii=False, indent=2)
     water_info = json.dumps(WATER_DATA, ensure_ascii=False, indent=2)
     emergency_info = json.dumps(EMERGENCY_DATA, ensure_ascii=False, indent=2)
-    weather_info = json.dumps(WEATHER_DATA, ensure_ascii=False, indent=2) if WEATHER_DATA else "Hava durumu verisi yok."
+    weather_info = json.dumps(weather_live, ensure_ascii=False, indent=2) if weather_live else "Hava durumu verisi yok."
     electricity_info = json.dumps(ELECTRICITY_DATA, ensure_ascii=False, indent=2) if ELECTRICITY_DATA else "Elektrik kesintisi verisi yok."
     gas_info = json.dumps(GAS_DATA, ensure_ascii=False, indent=2) if GAS_DATA else "Doğalgaz verisi yok."
-    earthquakes_info = json.dumps(EARTHQUAKES_DATA, ensure_ascii=False, indent=2) if EARTHQUAKES_DATA else "Deprem verisi yok."
+    earthquakes_info = json.dumps(earthquakes_live, ensure_ascii=False, indent=2) if earthquakes_live else "Deprem verisi yok."
 
-    # Check data freshness
+    # Check data freshness — only for static file data (weather/earthquakes are live now)
     warnings = []
     for data, name in [
         (PHARMACY_DATA, "Eczane"),
@@ -433,13 +527,6 @@ async def generate_response(user_query: str, session_id: str) -> str:
         w = check_data_freshness(data, name)
         if w:
             warnings.append(w)
-    # Weather and earthquake freshness use tighter thresholds
-    w = check_data_freshness(WEATHER_DATA, "Hava durumu", max_age_days=1)
-    if w:
-        warnings.append(w)
-    w = check_data_freshness(EARTHQUAKES_DATA, "Deprem", max_age_days=1)
-    if w:
-        warnings.append(w)
     freshness_warnings = "\n".join(warnings) if warnings else ""
 
     system_message = SYSTEM_PROMPT.format(
@@ -616,21 +703,40 @@ async def pitch_whatsapp():
 async def data_sources():
     """Show what data sources are loaded — useful for demo transparency."""
     sources = []
+
+    # Live API sources (always fresh)
+    weather_live = get_weather()
+    earthquakes_live = get_earthquakes()
+    for name, data, mode in [
+        ("Hava Durumu", weather_live, "live"),
+        ("Deprem", earthquakes_live, "live"),
+    ]:
+        sources.append({
+            "name": name,
+            "source": data.get("source", "unknown"),
+            "last_updated": data.get("last_updated", "unknown"),
+            "status": "live",
+            "mode": mode,
+            "warning": None,
+        })
+
+    # Static file sources (may be stale)
     for name, data in [
         ("Eczane", PHARMACY_DATA),
         ("Etkinlik", EVENTS_DATA),
         ("Yol Kapanışı", CLOSURES_DATA),
         ("Su Kesintisi", WATER_DATA),
+        ("Elektrik Kesintisi", ELECTRICITY_DATA),
+        ("Doğalgaz", GAS_DATA),
         ("Acil Durum", EMERGENCY_DATA),
     ]:
-        source = data.get("source", "unknown")
-        updated = data.get("last_updated", "unknown")
         freshness = check_data_freshness(data, name)
         sources.append({
             "name": name,
-            "source": source,
-            "last_updated": updated,
-            "status": "stale" if freshness else "fresh",
+            "source": data.get("source", "unknown"),
+            "last_updated": data.get("last_updated", "unknown"),
+            "status": "stale" if freshness else "ok",
+            "mode": "static",
             "warning": freshness or None,
         })
     return {"data_sources": sources, "total": len(sources)}
