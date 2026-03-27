@@ -371,7 +371,11 @@ function showFallback(container, periodEl) {
 }
 
 // Load on page load
-document.addEventListener('DOMContentLoaded', loadPharmacies);
+document.addEventListener('DOMContentLoaded', () => {
+    console.log('Page loaded, API_BASE_URL:', API_BASE_URL);
+    console.log('Hostname:', window.location.hostname);
+    loadPharmacies();
+});
 </script>
 </body>
 </html>

@@ -19,19 +19,45 @@ jobs:
         with:
           python-version: '3.12'
       - run: pip install requests beautifulsoup4
-      - run: |
+      
+      - name: Run scrapers
+        run: |
           cd backend
-          python scrape_nobetci.py || true
-          python scrape_weather.py || true
-          python scrape_earthquakes.py || true
-          python scrape_water.py || true
-          python scrape_electricity.py || true
-          python scrape_events.py || true
-          python scrape_gas.py || true
-      - name: Commit if changed
+          echo "=== Scraping Pharmacies ==="
+          python scrape_nobetci.py --dry 2>&1 || echo "Pharmacy scraper failed (non-fatal)"
+          
+          echo "=== Scraping Weather ==="
+          python scrape_weather.py 2>&1 || echo "Weather scraper failed (non-fatal)"
+          
+          echo "=== Scraping Earthquakes ==="
+          python scrape_earthquakes.py 2>&1 || echo "Earthquake scraper failed (non-fatal)"
+          
+          echo "=== Scraping Water ==="
+          python scrape_water.py --dry 2>&1 || echo "Water scraper failed (non-fatal)"
+          
+          echo "=== Scraping Electricity ==="
+          python scrape_electricity.py --dry 2>&1 || echo "Electricity scraper failed (non-fatal)"
+          
+          echo "=== Scraping Events ==="
+          python scrape_events.py --dry 2>&1 || echo "Events scraper failed (non-fatal)"
+          
+          echo "=== Scraping Gas ==="
+          python scrape_gas.py --dry 2>&1 || echo "Gas scraper failed (non-fatal)"
+        continue-on-error: true
+        
+      - name: Check what changed
+        run: |
+          git status
+          git diff --stat
+          
+      - name: Commit and push if changes exist
         run: |
           git config user.name "Data Bot"
           git config user.email "bot@cityconcierge.io"
           git add backend/data/
-          git diff --staged --quiet || git commit -m "chore: auto-update data $(date -u +%Y-%m-%dT%H:%M)"
-          git push
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: auto-update data $(date -u +%Y-%m-%dT%H:%M)"
+            git push
+          fi
