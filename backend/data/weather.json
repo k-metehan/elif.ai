@@ -2,18 +2,18 @@
   "last_updated": "2026-03-27",
   "source": "open-meteo.com",
   "current": {
-    "temperature": 17.3,
-    "feels_like": 15.5,
+    "temperature": 17.1,
+    "feels_like": 14.4,
     "precipitation_mm": 0.0,
-    "weather_description": "Az bulutlu",
-    "weather_code": 1,
-    "wind_speed_kmh": 12.6
+    "weather_description": "Bulutlu",
+    "weather_code": 3,
+    "wind_speed_kmh": 10.7
   },
   "forecast": [
     {
       "date": "2026-03-28",
       "high": 15.5,
-      "low": 9.6,
+      "low": 10.3,
       "rain_probability": 98,
       "weather_description": "Orta yağmur",
       "weather_code": 63
