@@ -369,11 +369,25 @@ function weatherIcon(code) {
     return "thunderstorm";
 }
 
+// Fetch with timeout helper
+async function fetchWithTimeout(url, timeout = 5000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    try {
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        return response;
+    } catch (error) {
+        clearTimeout(timeoutId);
+        throw error;
+    }
+}
+
 // Load weather data
 async function loadWeather() {
     try {
         const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:8000' : '';
-        const response = await fetch(`${API_BASE_URL}/api/weather`);
+        const response = await fetchWithTimeout(`${API_BASE_URL}/api/weather`, 5000);
         if (!response.ok) throw new Error('Weather API error');
         
         const data = await response.json();
@@ -389,6 +403,7 @@ async function loadWeather() {
         document.getElementById('weather-desc').textContent = desc;
     } catch (e) {
         console.log('Weather load failed:', e);
+        // Keep default/placeholder values
     }
 }
 
@@ -398,18 +413,18 @@ async function loadDailySummary() {
     try {
         const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:8000' : '';
         
-        // Fetch all data in parallel
-        const [weatherRes, pharmaRes, waterRes, eqRes] = await Promise.all([
-            fetch(`${API_BASE_URL}/api/weather`).catch(() => null),
-            fetch(`${API_BASE_URL}/api/pharmacies`).catch(() => null),
-            fetch(`${API_BASE_URL}/api/water`).catch(() => null),
-            fetch(`${API_BASE_URL}/api/earthquakes`).catch(() => null),
+        // Fetch all data in parallel with timeout
+        const [weatherRes, pharmaRes, waterRes, eqRes] = await Promise.allSettled([
+            fetchWithTimeout(`${API_BASE_URL}/api/weather`, 5000).catch(() => null),
+            fetchWithTimeout(`${API_BASE_URL}/api/pharmacies`, 5000).catch(() => null),
+            fetchWithTimeout(`${API_BASE_URL}/api/water`, 5000).catch(() => null),
+            fetchWithTimeout(`${API_BASE_URL}/api/earthquakes`, 5000).catch(() => null),
         ]);
         
-        const weather = weatherRes ? await weatherRes.json() : null;
-        const pharma = pharmaRes ? await pharmaRes.json() : null;
-        const water = waterRes ? await waterRes.json() : null;
-        const eq = eqRes ? await eqRes.json() : null;
+        const weather = weatherRes.status === 'fulfilled' && weatherRes.value ? await weatherRes.value.json().catch(() => null) : null;
+        const pharma = pharmaRes.status === 'fulfilled' && pharmaRes.value ? await pharmaRes.value.json().catch(() => null) : null;
+        const water = waterRes.status === 'fulfilled' && waterRes.value ? await waterRes.value.json().catch(() => null) : null;
+        const eq = eqRes.status === 'fulfilled' && eqRes.value ? await eqRes.value.json().catch(() => null) : null;
         
         let html = '';
         

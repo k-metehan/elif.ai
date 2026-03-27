@@ -219,13 +219,27 @@ const API_BASE_URL = window.location.hostname === 'localhost'
     ? 'http://localhost:8000' 
     : '';
 
+// Fetch with timeout
+async function fetchWithTimeout(url, timeout = 5000) {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), timeout);
+    try {
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeoutId);
+        return response;
+    } catch (error) {
+        clearTimeout(timeoutId);
+        throw error;
+    }
+}
+
 async function loadPharmacies() {
     const container = document.getElementById('pharmacy-list');
     const periodEl = document.getElementById('scrape-period');
     
     try {
-        const response = await fetch(`${API_BASE_URL}/api/pharmacies`);
-        if (!response.ok) throw new Error('API error');
+        const response = await fetchWithTimeout(`${API_BASE_URL}/api/pharmacies`, 5000);
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
         
         const data = await response.json();
         
@@ -237,13 +251,7 @@ async function loadPharmacies() {
         const pharmacies = data.pharmacies || [];
         
         if (pharmacies.length === 0) {
-            container.innerHTML = `
-                <div class="col-span-full text-center py-12">
-                    <span class="material-symbols-outlined text-4xl text-outline">local_pharmacy</span>
-                    <p class="text-secondary mt-4">Şu an nöbetçi eczane bulunamadı.</p>
-                    <p class="text-sm text-outline mt-2">Lütfen daha sonra tekrar deneyin.</p>
-                </div>
-            `;
+            showFallback(container, periodEl);
             return;
         }
         
@@ -292,14 +300,74 @@ async function loadPharmacies() {
         
     } catch (error) {
         console.error('Failed to load pharmacies:', error);
-        container.innerHTML = `
-            <div class="col-span-full text-center py-12">
-                <span class="material-symbols-outlined text-4xl text-error">error</span>
-                <p class="text-secondary mt-4">Nöbetçi eczane verisi yüklenemedi.</p>
-                <p class="text-sm text-outline mt-2">Lütfen daha sonra tekrar deneyin.</p>
+        showFallback(container, periodEl);
+    }
+}
+
+function showFallback(container, periodEl) {
+    // Show fallback sample data so page isn't empty
+    periodEl.textContent = '⚠️ API bağlantı hatası - Örnek veriler gösteriliyor';
+    
+    const fallbackPharmacies = [
+        {
+            name: "Olimpa Eczanesi",
+            address: "Başakşehir Mahallesi, Şair Sokak No:5",
+            phone: "0212 488 62 06",
+            semt: "Başakşehir",
+            notes: "Nöbetçi eczane"
+        },
+        {
+            name: "Halise Eczanesi",
+            address: "Güvercintepe Mahallesi, Ahmet Yesevi Caddesi No:139",
+            phone: "0212 687 34 26",
+            semt: "Güvercintepe",
+            notes: "Nöbetçi eczane"
+        },
+        {
+            name: "Şelale Eczanesi",
+            address: "Bahçeşehir 2.Kısım Mahallesi, Şelale Caddesi No:15/U",
+            phone: "0212 669 09 11",
+            semt: "Bahçeşehir 2. Kısım",
+            notes: "Nöbetçi eczane"
+        }
+    ];
+    
+    container.innerHTML = fallbackPharmacies.map((pharmacy) => {
+        const phoneDigits = pharmacy.phone.replace(/\D/g, '');
+        const mapQuery = encodeURIComponent(`${pharmacy.address} Başakşehir İstanbul`);
+        
+        return `
+            <div class="bg-surface-container-lowest p-6 rounded-lg ambient-card-shadow border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300 opacity-75">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 class="text-xl font-bold text-on-secondary-fixed">${pharmacy.name}</h3>
+                    <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">${pharmacy.semt}</span>
+                </div>
+                <div class="space-y-3 mb-6">
+                    <div class="flex items-start gap-3 text-secondary text-sm">
+                        <span class="material-symbols-outlined text-sm mt-1">location_on</span>
+                        <p>${pharmacy.address}</p>
+                    </div>
+                    <div class="flex items-center gap-3 text-secondary text-sm">
+                        <span class="material-symbols-outlined text-sm">phone</span>
+                        <p>${pharmacy.phone}</p>
+                    </div>
+                </div>
+                ${pharmacy.notes ? `<p class="text-xs text-gray-400 mb-3 italic">${pharmacy.notes}</p>` : ''}
+                <div class="flex gap-3">
+                    <a href="https://www.google.com/maps/search/?api=1&query=${mapQuery}" 
+                       target="_blank"
+                       class="flex-1 py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95">
+                        <span class="material-symbols-outlined text-base">directions</span>
+                        Yol Tarifi
+                    </a>
+                    <a href="tel:${phoneDigits}" 
+                       class="px-4 py-3 border border-primary/20 text-primary rounded-full hover:bg-primary/5 transition-all active:scale-95 flex items-center justify-center">
+                        <span class="material-symbols-outlined">call</span>
+                    </a>
+                </div>
             </div>
         `;
-    }
+    }).join('');
 }
 
 // Load on page load
