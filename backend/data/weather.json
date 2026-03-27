@@ -2,12 +2,12 @@
   "last_updated": "2026-03-27",
   "source": "open-meteo.com",
   "current": {
-    "temperature": 13.3,
-    "feels_like": 11.9,
-    "precipitation_mm": 0.0,
-    "weather_description": "Bulutlu",
-    "weather_code": 3,
-    "wind_speed_kmh": 4.3
+    "temperature": 12.6,
+    "feels_like": 11.7,
+    "precipitation_mm": 0.1,
+    "weather_description": "Hafif yağmur",
+    "weather_code": 61,
+    "wind_speed_kmh": 2.7
   },
   "forecast": [
     {
