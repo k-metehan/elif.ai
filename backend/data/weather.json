@@ -2,18 +2,18 @@
   "last_updated": "2026-03-27",
   "source": "open-meteo.com",
   "current": {
-    "temperature": 15.4,
-    "feels_like": 13.7,
+    "temperature": 13.3,
+    "feels_like": 11.9,
     "precipitation_mm": 0.0,
     "weather_description": "Bulutlu",
     "weather_code": 3,
-    "wind_speed_kmh": 5.4
+    "wind_speed_kmh": 4.3
   },
   "forecast": [
     {
       "date": "2026-03-28",
-      "high": 15.9,
-      "low": 9.6,
+      "high": 15.4,
+      "low": 9.8,
       "rain_probability": 98,
       "weather_description": "Orta yağmur",
       "weather_code": 63
