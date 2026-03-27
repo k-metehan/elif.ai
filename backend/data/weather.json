@@ -2,12 +2,12 @@
   "last_updated": "2026-03-27",
   "source": "open-meteo.com",
   "current": {
-    "temperature": 17.1,
-    "feels_like": 14.4,
+    "temperature": 16.9,
+    "feels_like": 14.6,
     "precipitation_mm": 0.0,
     "weather_description": "Bulutlu",
     "weather_code": 3,
-    "wind_speed_kmh": 10.7
+    "wind_speed_kmh": 9.2
   },
   "forecast": [
     {
