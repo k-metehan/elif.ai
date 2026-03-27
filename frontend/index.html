@@ -210,15 +210,15 @@
             <!-- Bento grid action cards -->
             <div id="bento-cards" class="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <!-- Weather card -->
-                <div class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between h-48 border border-[#bec9c9]/10 group hover:bg-surface-container-low transition-all">
+                <div id="weather-card" class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between h-48 border border-[#bec9c9]/10 group hover:bg-surface-container-low transition-all">
                     <div class="flex justify-between items-start">
                         <div>
                             <p class="text-label text-secondary font-medium">Detaylı Hava</p>
-                            <h3 class="text-2xl font-bold text-on-surface">18°C</h3>
+                            <h3 id="weather-temp" class="text-2xl font-bold text-on-surface">--°C</h3>
                         </div>
-                        <span class="material-symbols-outlined text-primary text-3xl">cloud_queue</span>
+                        <span id="weather-icon" class="material-symbols-outlined text-primary text-3xl">cloud_queue</span>
                     </div>
-                    <p class="text-sm text-secondary">İstanbul, Başakşehir. Nem %65. Yarın yağmur bekleniyor.</p>
+                    <p id="weather-desc" class="text-sm text-secondary">Yükleniyor...</p>
                 </div>
                 <!-- Pharmacy card -->
                 <a href="eczaneler.html" class="bg-surface-container-lowest rounded-lg p-6 flex flex-col justify-between h-48 border border-[#bec9c9]/10 group hover:bg-surface-container-low transition-all">
@@ -239,23 +239,13 @@
 
         <!-- Right sidebar (4 cols) — hidden on mobile -->
         <div class="lg:col-span-4 flex flex-col gap-6">
-            <!-- Profile summary -->
+            <!-- Daily Summary -->
             <div class="bg-surface-container-low rounded-lg p-6 border border-[#bec9c9]/10">
-                <div class="flex items-center gap-4 mb-6">
-                    <img alt="Profile" class="w-14 h-14 rounded-full object-cover"
-                         src="https://lh3.googleusercontent.com/aida-public/AB6AXuBISVlIYh9B5C70p4OhAG8GWrfKjEvHzR2bRFab4kASGkAAtIbhXErJ_-E9B1Hsyec_jriCLEvthIOEDyISbPpHWwt0ZgVyXWbBGE1v-r-ztKY8zSqF54D_umJH-qBb_gGrf20ZX9RWJZRfIY37iyg1HGSGsNj2EQoZ8T184Oo88APMLPRIsWS_H4uwzREw8l9OOFkviDPtyfvdjyJfFPmq6kIJTxkwtiZUVyEjJfxwyWgW92SJI0Przqf6Ejf5RTuX3c4gI-Uwqvw">
-                    <div>
-                        <h4 class="font-bold text-on-secondary-fixed">Ahmet Yılmaz</h4>
-                        <p class="text-sm text-secondary">Civic Puan: 1,240</p>
-                    </div>
-                </div>
-                <div class="space-y-4">
-                    <div class="flex justify-between text-sm">
-                        <span class="text-secondary">Bekleyen İşlemler</span>
-                        <span class="font-semibold text-primary">2 Adet</span>
-                    </div>
-                    <div class="w-full bg-surface-container-highest h-1.5 rounded-full">
-                        <div class="bg-primary w-2/3 h-full rounded-full"></div>
+                <h4 class="font-bold text-on-secondary-fixed mb-4">📋 Bugünkü Durum</h4>
+                <div id="daily-summary" class="space-y-2 text-sm">
+                    <div class="flex items-center gap-2 text-secondary">
+                        <span class="material-symbols-outlined text-base">refresh</span>
+                        <span>Yükleniyor...</span>
                     </div>
                 </div>
             </div>
@@ -368,5 +358,118 @@
 </script>
 <script src="shared.js"></script>
 <script src="app.js?v=5"></script>
+<script>
+// Weather icon mapping
+function weatherIcon(code) {
+    if (code === 0) return "wb_sunny";
+    if (code <= 3) return "cloud_queue";
+    if (code <= 48) return "foggy";
+    if (code <= 67) return "water_drop";
+    if (code <= 77) return "ac_unit";
+    return "thunderstorm";
+}
+
+// Load weather data
+async function loadWeather() {
+    try {
+        const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:8000' : '';
+        const response = await fetch(`${API_BASE_URL}/api/weather`);
+        if (!response.ok) throw new Error('Weather API error');
+        
+        const data = await response.json();
+        if (!data.current) return;
+        
+        document.getElementById('weather-temp').textContent = `${data.current.temperature}°C`;
+        document.getElementById('weather-icon').textContent = weatherIcon(data.current.weather_code);
+        
+        let desc = `İstanbul, Başakşehir. Rüzgâr ${data.current.wind_speed_kmh} km/h.`;
+        if (data.forecast && data.forecast[0] && data.forecast[0].rain_probability > 50) {
+            desc += " Yarın yağmur bekleniyor.";
+        }
+        document.getElementById('weather-desc').textContent = desc;
+    } catch (e) {
+        console.log('Weather load failed:', e);
+    }
+}
+
+// Load daily summary
+async function loadDailySummary() {
+    const container = document.getElementById('daily-summary');
+    try {
+        const API_BASE_URL = window.location.hostname === 'localhost' ? 'http://localhost:8000' : '';
+        
+        // Fetch all data in parallel
+        const [weatherRes, pharmaRes, waterRes, eqRes] = await Promise.all([
+            fetch(`${API_BASE_URL}/api/weather`).catch(() => null),
+            fetch(`${API_BASE_URL}/api/pharmacies`).catch(() => null),
+            fetch(`${API_BASE_URL}/api/water`).catch(() => null),
+            fetch(`${API_BASE_URL}/api/earthquakes`).catch(() => null),
+        ]);
+        
+        const weather = weatherRes ? await weatherRes.json() : null;
+        const pharma = pharmaRes ? await pharmaRes.json() : null;
+        const water = waterRes ? await waterRes.json() : null;
+        const eq = eqRes ? await eqRes.json() : null;
+        
+        let html = '';
+        
+        // Weather
+        if (weather && weather.current) {
+            html += `<div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-base">thermostat</span>
+                <span class="text-secondary">${weather.current.temperature}°C, ${weather.current.weather_description}</span>
+            </div>`;
+        }
+        
+        // Pharmacies
+        if (pharma && pharma.pharmacies) {
+            const count = pharma.pharmacies.length;
+            html += `<div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-primary text-base">local_pharmacy</span>
+                <span class="text-secondary">${count} nöbetçi eczane</span>
+            </div>`;
+        }
+        
+        // Water outages
+        if (water && water.outages && water.outages.length > 0) {
+            const outage = water.outages[0];
+            html += `<div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-error text-base">water_drop</span>
+                <span class="text-error text-xs">Su kesintisi: ${outage.neighborhoods?.[0] || 'Bazı bölgeler'}</span>
+            </div>`;
+        } else {
+            html += `<div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-success text-base text-green-600">check_circle</span>
+                <span class="text-secondary text-xs">Su kesintisi yok</span>
+            </div>`;
+        }
+        
+        // Earthquakes
+        if (eq && eq.earthquakes && eq.earthquakes.length > 0) {
+            const count = eq.earthquakes.length;
+            html += `<div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-warning text-base text-orange-500">vibration</span>
+                <span class="text-secondary text-xs">${count} deprem kaydı (son 24s)</span>
+            </div>`;
+        } else {
+            html += `<div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-success text-base text-green-600">check_circle</span>
+                <span class="text-secondary text-xs">Deprem kaydı yok</span>
+            </div>`;
+        }
+        
+        container.innerHTML = html || '<p class="text-secondary">Veri alınamadı</p>';
+    } catch (e) {
+        console.log('Daily summary load failed:', e);
+        container.innerHTML = '<p class="text-secondary text-xs">Durum bilgisi yüklenemedi</p>';
+    }
+}
+
+// Load on page load
+document.addEventListener('DOMContentLoaded', () => {
+    loadWeather();
+    loadDailySummary();
+});
+</script>
 </body>
 </html>

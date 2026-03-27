@@ -141,7 +141,8 @@
     <!-- Header Section -->
     <header class="mb-8 lg:mb-12">
         <h1 class="text-[2.5rem] lg:text-[3.5rem] font-bold text-on-secondary-fixed tracking-tight leading-tight">Nöbetçi Eczaneler</h1>
-        <p class="text-secondary text-lg mt-4 max-w-2xl">Size en yakın açık olan nöbetçi eczaneleri listeledik. Sağlığınız için her an yanınızdayız.</p>
+        <p class="text-secondary text-lg mt-4 max-w-2xl">Size en yakın açık olan nöbetçi eczaneleri listeledik.</p>
+        <p id="scrape-period" class="text-sm text-primary mt-2"></p>
     </header>
 
     <!-- Layout Grid: Pharmacy List and Map -->
@@ -160,146 +161,32 @@
                 </button>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <!-- Pharmacy Card 1 -->
-                <div class="bg-surface-container-lowest p-6 rounded-lg ambient-card-shadow border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-on-secondary-fixed">Can Eczanesi</h3>
-                        <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">0.4 km</span>
-                    </div>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-start gap-3 text-secondary text-sm">
-                            <span class="material-symbols-outlined text-sm mt-1">location_on</span>
-                            <p>Siyami Ersek Sk. No:12, Kadıköy</p>
-                        </div>
-                        <div class="flex items-center gap-3 text-secondary text-sm">
-                            <span class="material-symbols-outlined text-sm">phone</span>
-                            <p>(0216) 444 00 00</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <button class="flex-1 py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95">
-                            <span class="material-symbols-outlined text-base">directions</span>
-                            Yol Tarifi
-                        </button>
-                        <button class="px-4 py-3 border border-primary/20 text-primary rounded-full hover:bg-primary/5 transition-all active:scale-95">
-                            <span class="material-symbols-outlined">call</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Pharmacy Card 2 -->
-                <div class="bg-surface-container-lowest p-6 rounded-lg ambient-card-shadow border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-on-secondary-fixed">Güneş Eczanesi</h3>
-                        <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">1.2 km</span>
-                    </div>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-start gap-3 text-secondary text-sm">
-                            <span class="material-symbols-outlined text-sm mt-1">location_on</span>
-                            <p>Moda Cd. No:45/A, Kadıköy</p>
-                        </div>
-                        <div class="flex items-center gap-3 text-secondary text-sm">
-                            <span class="material-symbols-outlined text-sm">phone</span>
-                            <p>(0216) 333 11 22</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <button class="flex-1 py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95">
-                            <span class="material-symbols-outlined text-base">directions</span>
-                            Yol Tarifi
-                        </button>
-                        <button class="px-4 py-3 border border-primary/20 text-primary rounded-full hover:bg-primary/5 transition-all active:scale-95">
-                            <span class="material-symbols-outlined">call</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Pharmacy Card 3 -->
-                <div class="bg-surface-container-lowest p-6 rounded-lg ambient-card-shadow border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-on-secondary-fixed">Akasya Eczanesi</h3>
-                        <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">2.8 km</span>
-                    </div>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-start gap-3 text-secondary text-sm">
-                            <span class="material-symbols-outlined text-sm mt-1">location_on</span>
-                            <p>Fahrettin Kerim Gökay Cd. No:88</p>
-                        </div>
-                        <div class="flex items-center gap-3 text-secondary text-sm">
-                            <span class="material-symbols-outlined text-sm">phone</span>
-                            <p>(0216) 222 33 44</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <button class="flex-1 py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95">
-                            <span class="material-symbols-outlined text-base">directions</span>
-                            Yol Tarifi
-                        </button>
-                        <button class="px-4 py-3 border border-primary/20 text-primary rounded-full hover:bg-primary/5 transition-all active:scale-95">
-                            <span class="material-symbols-outlined">call</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Pharmacy Card 4 -->
-                <div class="bg-surface-container-lowest p-6 rounded-lg ambient-card-shadow border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
-                    <div class="flex justify-between items-start mb-4">
-                        <h3 class="text-xl font-bold text-on-secondary-fixed">Bahar Eczanesi</h3>
-                        <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">3.1 km</span>
-                    </div>
-                    <div class="space-y-3 mb-6">
-                        <div class="flex items-start gap-3 text-secondary text-sm">
-                            <span class="material-symbols-outlined text-sm mt-1">location_on</span>
-                            <p>Bağdat Caddesi No:112, Erenköy</p>
-                        </div>
-                        <div class="flex items-center gap-3 text-secondary text-sm">
-                            <span class="material-symbols-outlined text-sm">phone</span>
-                            <p>(0216) 555 66 77</p>
-                        </div>
-                    </div>
-                    <div class="flex gap-3">
-                        <button class="flex-1 py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95">
-                            <span class="material-symbols-outlined text-base">directions</span>
-                            Yol Tarifi
-                        </button>
-                        <button class="px-4 py-3 border border-primary/20 text-primary rounded-full hover:bg-primary/5 transition-all active:scale-95">
-                            <span class="material-symbols-outlined">call</span>
-                        </button>
-                    </div>
+            <div id="pharmacy-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="col-span-full text-center py-12">
+                    <span class="material-symbols-outlined text-4xl text-outline animate-spin">refresh</span>
+                    <p class="text-secondary mt-4">Eczaneler yükleniyor...</p>
                 </div>
             </div>
         </div>
 
-        <!-- Right Column: Interactive Map -->
+        <!-- Right Column: Map -->
         <div class="lg:col-span-5 lg:sticky lg:top-32">
             <div class="bg-surface-container-lowest rounded-lg ambient-card-shadow overflow-hidden h-[400px] lg:h-[600px] relative border border-outline-variant/10">
-                <img alt="Map" class="w-full h-full object-cover grayscale-[20%] opacity-90"
-                     src="https://lh3.googleusercontent.com/aida-public/AB6AXuB58yuM5z_Ruh9PGCbF0RHa9YuEHVteR4HMJjRH1SiQswgoRpIdXXF2yUAJ2J4VM7HW0xjYaXQG68CLEktAtOhF88ys4G4FYz2z7MCe_dnJQPEoJOcnkDdntD0u4n9pveQWO79RmZ8tRFyQ3x3FIeEh5PxliMS23_QJFEH3I0kEZl4gsEBNSX3mfXc1vcWWsrJ7NGnSonma3Su8epP0WmKXC5tTBZtqwhPx36RF_W3vU0TMabvQmkjijXGm_GSFjTrUVXIOTFBzPE0"/>
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d19228.161687443383!2d28.6712!3d41.0742!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14b5201e1c0e47d5%3A0xa2a5e74d3b0d7e0d!2zQmHFn2FrxZ9laGlyLCDEsHN0YW5idWw!5e0!3m2!1str!2str!4v1700000000000!5m2!1str!2str"
+                    width="100%" 
+                    height="100%" 
+                    style="border:0;" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
                 <!-- Map Overlay UI -->
                 <div class="absolute top-4 left-4 right-4 flex justify-between items-start pointer-events-none">
                     <div class="bg-surface-container-lowest/90 backdrop-blur-md p-4 rounded-xl shadow-lg pointer-events-auto border border-outline-variant/20">
-                        <p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">Konumunuz</p>
-                        <p class="text-on-secondary-fixed font-medium">Kadıköy, İstanbul</p>
+                        <p class="text-xs font-bold text-primary uppercase tracking-widest mb-1">Bölge</p>
+                        <p class="text-on-secondary-fixed font-medium">Başakşehir, İstanbul</p>
                     </div>
-                    <div class="flex flex-col gap-2 pointer-events-auto">
-                        <button class="w-10 h-10 bg-surface-container-lowest shadow-md rounded-full flex items-center justify-center hover:bg-surface-container-low transition-all">
-                            <span class="material-symbols-outlined text-on-surface">add</span>
-                        </button>
-                        <button class="w-10 h-10 bg-surface-container-lowest shadow-md rounded-full flex items-center justify-center hover:bg-surface-container-low transition-all">
-                            <span class="material-symbols-outlined text-on-surface">remove</span>
-                        </button>
-                        <button class="w-10 h-10 bg-primary text-white shadow-md rounded-full flex items-center justify-center hover:shadow-xl transition-all">
-                            <span class="material-symbols-outlined">my_location</span>
-                        </button>
-                    </div>
-                </div>
-                <!-- Marker -->
-                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
-                    <div class="bg-primary text-white p-3 rounded-full shadow-2xl animate-bounce">
-                        <span class="material-symbols-outlined">medical_services</span>
-                    </div>
-                    <div class="bg-black/20 w-4 h-1 rounded-full blur-[2px] mt-1"></div>
                 </div>
             </div>
         </div>
@@ -326,5 +213,97 @@
 <div class="fixed bottom-0 left-0 w-1/3 h-1/3 bg-secondary-fixed/5 rounded-full blur-[100px] -z-10 -translate-x-1/4 translate-y-1/4 pointer-events-none"></div>
 
 <script src="shared.js"></script>
+<script>
+// API base URL pattern (same as app.js)
+const API_BASE_URL = window.location.hostname === 'localhost' 
+    ? 'http://localhost:8000' 
+    : '';
+
+async function loadPharmacies() {
+    const container = document.getElementById('pharmacy-list');
+    const periodEl = document.getElementById('scrape-period');
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/api/pharmacies`);
+        if (!response.ok) throw new Error('API error');
+        
+        const data = await response.json();
+        
+        // Show scrape period
+        if (data.scrape_period) {
+            periodEl.textContent = `📅 ${data.scrape_period}`;
+        }
+        
+        const pharmacies = data.pharmacies || [];
+        
+        if (pharmacies.length === 0) {
+            container.innerHTML = `
+                <div class="col-span-full text-center py-12">
+                    <span class="material-symbols-outlined text-4xl text-outline">local_pharmacy</span>
+                    <p class="text-secondary mt-4">Şu an nöbetçi eczane bulunamadı.</p>
+                    <p class="text-sm text-outline mt-2">Lütfen daha sonra tekrar deneyin.</p>
+                </div>
+            `;
+            return;
+        }
+        
+        container.innerHTML = pharmacies.map((pharmacy, index) => {
+            const address = pharmacy.address || 'Adres bilgisi yok';
+            const phone = pharmacy.phone || '';
+            const phoneDigits = phone.replace(/\D/g, '');
+            const semt = pharmacy.semt || pharmacy.district || 'Başakşehir';
+            const notes = pharmacy.notes || '';
+            const mapQuery = encodeURIComponent(`${address} Başakşehir İstanbul`);
+            
+            return `
+                <div class="bg-surface-container-lowest p-6 rounded-lg ambient-card-shadow border border-outline-variant/10 group hover:translate-y-[-4px] transition-all duration-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-on-secondary-fixed">${pharmacy.name}</h3>
+                        <span class="px-3 py-1 bg-primary/10 text-primary text-xs font-bold rounded-full">${semt}</span>
+                    </div>
+                    <div class="space-y-3 mb-6">
+                        <div class="flex items-start gap-3 text-secondary text-sm">
+                            <span class="material-symbols-outlined text-sm mt-1">location_on</span>
+                            <p>${address}</p>
+                        </div>
+                        <div class="flex items-center gap-3 text-secondary text-sm">
+                            <span class="material-symbols-outlined text-sm">phone</span>
+                            <p>${phone || 'Telefon bilgisi yok'}</p>
+                        </div>
+                    </div>
+                    ${notes ? `<p class="text-xs text-gray-400 mb-3 italic">${notes}</p>` : ''}
+                    <div class="flex gap-3">
+                        <a href="https://www.google.com/maps/search/?api=1&query=${mapQuery}" 
+                           target="_blank"
+                           class="flex-1 py-3 px-4 bg-gradient-to-br from-primary to-primary-container text-white rounded-full font-semibold text-sm flex items-center justify-center gap-2 hover:shadow-lg transition-all active:scale-95">
+                            <span class="material-symbols-outlined text-base">directions</span>
+                            Yol Tarifi
+                        </a>
+                        ${phone ? `
+                        <a href="tel:${phoneDigits}" 
+                           class="px-4 py-3 border border-primary/20 text-primary rounded-full hover:bg-primary/5 transition-all active:scale-95 flex items-center justify-center">
+                            <span class="material-symbols-outlined">call</span>
+                        </a>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+    } catch (error) {
+        console.error('Failed to load pharmacies:', error);
+        container.innerHTML = `
+            <div class="col-span-full text-center py-12">
+                <span class="material-symbols-outlined text-4xl text-error">error</span>
+                <p class="text-secondary mt-4">Nöbetçi eczane verisi yüklenemedi.</p>
+                <p class="text-sm text-outline mt-2">Lütfen daha sonra tekrar deneyin.</p>
+            </div>
+        `;
+    }
+}
+
+// Load on page load
+document.addEventListener('DOMContentLoaded', loadPharmacies);
+</script>
 </body>
 </html>

@@ -199,6 +199,42 @@ async def get_pharmacies():
     return PHARMACY_DATA
 
 
+@app.get("/api/weather")
+async def get_weather():
+    """Get weather data"""
+    return WEATHER_DATA
+
+
+@app.get("/api/earthquakes")
+async def get_earthquakes():
+    """Get earthquake data"""
+    return EARTHQUAKES_DATA
+
+
+@app.get("/api/events")
+async def get_events():
+    """Get events data"""
+    return EVENTS_DATA
+
+
+@app.get("/api/water")
+async def get_water():
+    """Get water outage data"""
+    return WATER_DATA
+
+
+@app.get("/api/electricity")
+async def get_electricity():
+    """Get electricity outage data"""
+    return ELECTRICITY_DATA
+
+
+@app.get("/api/gas")
+async def get_gas():
+    """Get gas outage data"""
+    return GAS_DATA
+
+
 @app.post("/api/voice")
 async def process_voice(
     background_tasks: BackgroundTasks,
