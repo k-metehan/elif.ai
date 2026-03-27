@@ -81,6 +81,7 @@ app = FastAPI(title="CityConcierge", version="0.1.0")
 ALLOWED_ORIGINS = [
     "https://elif.cityconcierge.io",
     "https://cityconcierge.io",
+    "https://elif-cityconcierge.fly.dev",
     "http://localhost:8080",
     "http://localhost:8000",
 ]
