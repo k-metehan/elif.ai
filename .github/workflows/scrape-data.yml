@@ -1,62 +1,61 @@
 name: Scrape Data
+
 on:
   schedule:
-    - cron: '30 5 * * *'    # Pharmacies — 08:30 Istanbul (daily)
-    - cron: '0 */2 * * *'   # Weather — every 2 hours
-    - cron: '*/15 * * * *'  # Earthquakes — every 15 minutes
-    - cron: '15 */4 * * *'  # Water — every 4 hours
-    - cron: '30 */6 * * *'  # Electricity — every 6 hours
-    - cron: '0 6 * * *'     # Events — daily 09:00 Istanbul
-    - cron: '45 */6 * * *'  # Gas — every 6 hours
+    - cron: '0 */2 * * *'   # Weather: every 2 hours
+    - cron: '*/15 * * * *'  # Earthquakes: every 15 minutes
   workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: scrape-data
+  cancel-in-progress: true
 
 jobs:
   scrape:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - run: pip install requests beautifulsoup4
-      
-      - name: Run scrapers
+
+      - name: Install scraper dependencies
+        run: pip install requests
+
+      - name: Run scheduled scraper
+        working-directory: backend
         run: |
-          cd backend
-          echo "=== Scraping Pharmacies ==="
-          python scrape_nobetci.py --dry 2>&1 || echo "Pharmacy scraper failed (non-fatal)"
-          
-          echo "=== Scraping Weather ==="
-          python scrape_weather.py 2>&1 || echo "Weather scraper failed (non-fatal)"
-          
-          echo "=== Scraping Earthquakes ==="
-          python scrape_earthquakes.py 2>&1 || echo "Earthquake scraper failed (non-fatal)"
-          
-          echo "=== Scraping Water ==="
-          python scrape_water.py --dry 2>&1 || echo "Water scraper failed (non-fatal)"
-          
-          echo "=== Scraping Electricity ==="
-          python scrape_electricity.py --dry 2>&1 || echo "Electricity scraper failed (non-fatal)"
-          
-          echo "=== Scraping Events ==="
-          python scrape_events.py --dry 2>&1 || echo "Events scraper failed (non-fatal)"
-          
-          echo "=== Scraping Gas ==="
-          python scrape_gas.py --dry 2>&1 || echo "Gas scraper failed (non-fatal)"
-        continue-on-error: true
-        
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Manual run: updating weather and earthquakes"
+            python scrape_weather.py
+            python scrape_earthquakes.py
+          elif [ "${{ github.event.schedule }}" = "0 */2 * * *" ]; then
+            echo "Scheduled run: updating weather"
+            python scrape_weather.py
+          elif [ "${{ github.event.schedule }}" = "*/15 * * * *" ]; then
+            echo "Scheduled run: updating earthquakes"
+            python scrape_earthquakes.py
+          else
+            echo "No scraper configured for schedule '${{ github.event.schedule }}'"
+            exit 1
+          fi
+
       - name: Check what changed
         run: |
-          git status
+          git status --short
           git diff --stat
-          
-      - name: Commit and push if changes exist
+
+      - name: Commit and push if data changed
         run: |
           git config user.name "Data Bot"
           git config user.email "bot@cityconcierge.io"
-          git add backend/data/
+          git add backend/data/weather.json backend/data/earthquakes.json
           if git diff --staged --quiet; then
-            echo "No changes to commit"
+            echo "No data changes to commit"
           else
             git commit -m "chore: auto-update data $(date -u +%Y-%m-%dT%H:%M)"
             git push
