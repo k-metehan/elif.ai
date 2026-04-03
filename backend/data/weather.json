@@ -1,30 +1,30 @@
 {
-  "last_updated": "2026-04-02",
+  "last_updated": "2026-04-03",
   "source": "open-meteo.com",
   "current": {
-    "temperature": 10.8,
-    "feels_like": 9.5,
-    "precipitation_mm": 0.1,
-    "weather_description": "Hafif yağmur",
-    "weather_code": 61,
-    "wind_speed_kmh": 8.2
+    "temperature": 12.6,
+    "feels_like": 10.7,
+    "precipitation_mm": 0.0,
+    "weather_description": "Bulutlu",
+    "weather_code": 3,
+    "wind_speed_kmh": 11.1
   },
   "forecast": [
     {
-      "date": "2026-04-03",
-      "high": 15.8,
-      "low": 9.4,
-      "rain_probability": 20,
-      "weather_description": "Bulutlu",
-      "weather_code": 3
+      "date": "2026-04-04",
+      "high": 13.4,
+      "low": 9.1,
+      "rain_probability": 83,
+      "weather_description": "Orta yağmur",
+      "weather_code": 63
     },
     {
-      "date": "2026-04-04",
-      "high": 12.5,
-      "low": 9.8,
-      "rain_probability": 58,
-      "weather_description": "Hafif sağanak",
-      "weather_code": 80
+      "date": "2026-04-05",
+      "high": 15.5,
+      "low": 8.5,
+      "rain_probability": 5,
+      "weather_description": "Bulutlu",
+      "weather_code": 3
     }
   ]
 }
