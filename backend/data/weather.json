@@ -1,30 +1,30 @@
 {
-  "last_updated": "2026-04-08",
+  "last_updated": "2026-04-09",
   "source": "open-meteo.com",
   "current": {
-    "temperature": 14.5,
-    "feels_like": 9.5,
+    "temperature": 9.9,
+    "feels_like": 7.5,
     "precipitation_mm": 0.0,
-    "weather_description": "Açık",
-    "weather_code": 0,
-    "wind_speed_kmh": 20.9
+    "weather_description": "Parçalı bulutlu",
+    "weather_code": 2,
+    "wind_speed_kmh": 2.3
   },
   "forecast": [
     {
-      "date": "2026-04-09",
-      "high": 11.5,
-      "low": 5.1,
-      "rain_probability": 88,
+      "date": "2026-04-10",
+      "high": 9.5,
+      "low": 4.3,
+      "rain_probability": 98,
       "weather_description": "Gök gürültülü fırtına",
       "weather_code": 95
     },
     {
-      "date": "2026-04-10",
-      "high": 9.9,
-      "low": 5.5,
-      "rain_probability": 90,
-      "weather_description": "Hafif sağanak",
-      "weather_code": 80
+      "date": "2026-04-11",
+      "high": 12.4,
+      "low": 3.0,
+      "rain_probability": 16,
+      "weather_description": "Sisli",
+      "weather_code": 45
     }
   ]
 }
