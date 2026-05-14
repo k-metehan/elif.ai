@@ -1,30 +1,30 @@
 {
-  "last_updated": "2026-05-13",
+  "last_updated": "2026-05-14",
   "source": "open-meteo.com",
   "current": {
-    "temperature": 22.3,
-    "feels_like": 21.9,
+    "temperature": 14.2,
+    "feels_like": 10.6,
     "precipitation_mm": 0.0,
-    "weather_description": "Az bulutlu",
-    "weather_code": 1,
-    "wind_speed_kmh": 14.8
+    "weather_description": "Bulutlu",
+    "weather_code": 3,
+    "wind_speed_kmh": 20.1
   },
   "forecast": [
     {
-      "date": "2026-05-14",
-      "high": 14.5,
-      "low": 11.4,
-      "rain_probability": 60,
-      "weather_description": "Hafif sağanak",
-      "weather_code": 80
-    },
-    {
       "date": "2026-05-15",
-      "high": 21.0,
-      "low": 7.9,
+      "high": 19.9,
+      "low": 8.4,
       "rain_probability": 0,
       "weather_description": "Sisli",
       "weather_code": 45
+    },
+    {
+      "date": "2026-05-16",
+      "high": 24.4,
+      "low": 12.7,
+      "rain_probability": 34,
+      "weather_description": "Bulutlu",
+      "weather_code": 3
     }
   ]
 }
