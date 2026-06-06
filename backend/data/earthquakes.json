@@ -1,7 +1,6 @@
 {
-  "last_updated": "2026-06-05",
+  "last_updated": "2026-06-06",
   "source": "deprem.afad.gov.tr",
   "earthquakes": [],
-  "summary": "Deprem verisi şu an alınamıyor.",
-  "error": "HTTPSConnectionPool(host='deprem.afad.gov.tr', port=443): Max retries exceeded with url: /apiv2/event/filter?start=2026-06-04T09%3A34%3A52&end=2026-06-05T09%3A34%3A52&lat=41.0&lon=28.7&maxrad=150000&magmin=2.0&limit=20&orderby=timedesc (Caused by NameResolutionError(\"HTTPSConnection(host='deprem.afad.gov.tr', port=443): Failed to resolve 'deprem.afad.gov.tr' ([Errno -3] Temporary failure in name resolution)\"))"
+  "summary": "Son 24 saatte İstanbul yakınında kayda değer deprem olmadı."
 }
