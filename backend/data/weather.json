@@ -1,27 +1,27 @@
 {
-  "last_updated": "2026-06-15",
+  "last_updated": "2026-06-16",
   "source": "open-meteo.com",
   "current": {
-    "temperature": 27.7,
-    "feels_like": 28.0,
+    "temperature": 24.1,
+    "feels_like": 24.3,
     "precipitation_mm": 0.0,
-    "weather_description": "Az bulutlu",
-    "weather_code": 1,
-    "wind_speed_kmh": 12.5
+    "weather_description": "Bulutlu",
+    "weather_code": 3,
+    "wind_speed_kmh": 20.6
   },
   "forecast": [
     {
-      "date": "2026-06-16",
-      "high": 27.6,
-      "low": 19.8,
+      "date": "2026-06-17",
+      "high": 24.9,
+      "low": 18.4,
       "rain_probability": 0,
       "weather_description": "Bulutlu",
       "weather_code": 3
     },
     {
-      "date": "2026-06-17",
-      "high": 26.6,
-      "low": 19.2,
+      "date": "2026-06-18",
+      "high": 24.7,
+      "low": 17.6,
       "rain_probability": 0,
       "weather_description": "Bulutlu",
       "weather_code": 3
