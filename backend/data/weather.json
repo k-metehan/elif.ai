@@ -1,28 +1,28 @@
 {
-  "last_updated": "2026-07-08",
+  "last_updated": "2026-07-09",
   "source": "open-meteo.com",
   "current": {
-    "temperature": 27.2,
-    "feels_like": 28.9,
+    "temperature": 21.4,
+    "feels_like": 20.1,
     "precipitation_mm": 0.0,
-    "weather_description": "Açık",
-    "weather_code": 0,
-    "wind_speed_kmh": 3.3
+    "weather_description": "Bulutlu",
+    "weather_code": 3,
+    "wind_speed_kmh": 21.5
   },
   "forecast": [
     {
-      "date": "2026-07-09",
-      "high": 23.6,
-      "low": 18.7,
-      "rain_probability": 75,
-      "weather_description": "Orta yağmur",
-      "weather_code": 63
-    },
-    {
       "date": "2026-07-10",
       "high": 26.6,
-      "low": 16.9,
-      "rain_probability": 3,
+      "low": 15.9,
+      "rain_probability": 8,
+      "weather_description": "Sisli",
+      "weather_code": 45
+    },
+    {
+      "date": "2026-07-11",
+      "high": 30.2,
+      "low": 16.2,
+      "rain_probability": 0,
       "weather_description": "Sisli",
       "weather_code": 45
     }
