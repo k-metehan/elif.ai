@@ -1,27 +1,27 @@
 {
-  "last_updated": "2026-07-16",
+  "last_updated": "2026-07-17",
   "source": "open-meteo.com",
   "current": {
-    "temperature": 27.4,
-    "feels_like": 29.8,
+    "temperature": 28.0,
+    "feels_like": 29.7,
     "precipitation_mm": 0.0,
-    "weather_description": "Az bulutlu",
-    "weather_code": 1,
-    "wind_speed_kmh": 10.9
+    "weather_description": "Bulutlu",
+    "weather_code": 3,
+    "wind_speed_kmh": 13.8
   },
   "forecast": [
     {
-      "date": "2026-07-17",
-      "high": 30.9,
-      "low": 21.6,
+      "date": "2026-07-18",
+      "high": 30.3,
+      "low": 21.9,
       "rain_probability": 0,
-      "weather_description": "Bulutlu",
-      "weather_code": 3
+      "weather_description": "Parçalı bulutlu",
+      "weather_code": 2
     },
     {
-      "date": "2026-07-18",
-      "high": 30.8,
-      "low": 21.6,
+      "date": "2026-07-19",
+      "high": 30.1,
+      "low": 20.7,
       "rain_probability": 0,
       "weather_description": "Parçalı bulutlu",
       "weather_code": 2
