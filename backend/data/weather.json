@@ -1,27 +1,27 @@
 {
-  "last_updated": "2026-09-16",
+  "last_updated": "2026-09-17",
   "source": "open-meteo.com",
   "current": {
-    "temperature": 20.0,
-    "feels_like": 19.5,
+    "temperature": 22.4,
+    "feels_like": 21.3,
     "precipitation_mm": 0.0,
     "weather_description": "Bulutlu",
     "weather_code": 3,
-    "wind_speed_kmh": 13.0
+    "wind_speed_kmh": 13.8
   },
   "forecast": [
     {
-      "date": "2026-09-17",
-      "high": 21.8,
-      "low": 16.6,
-      "rain_probability": 5,
+      "date": "2026-09-18",
+      "high": 23.5,
+      "low": 16.2,
+      "rain_probability": 0,
       "weather_description": "Bulutlu",
       "weather_code": 3
     },
     {
-      "date": "2026-09-18",
-      "high": 24.4,
-      "low": 16.1,
+      "date": "2026-09-19",
+      "high": 24.9,
+      "low": 16.7,
       "rain_probability": 0,
       "weather_description": "Bulutlu",
       "weather_code": 3
